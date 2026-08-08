@@ -52,8 +52,7 @@ const jsonLd = [
     <main style="min-width: 0;">
       <div class={s.tblHead}>
         <button id="sort-name" type="button">Program <span class="arrow"></span></button>
-        <button id="sort-award" class={s.taR} type="button">Award max <span class="arrow"></span></button>
-        <button id="sort-deadline" class={s.colDeadline} type="button">Deadline <span class="arrow"></span></button>
+        <button id="sort-award" class={s.taR} type="button">Award<span class={s.colWide}> max</span> <span class="arrow"></span></button>
         <span class={`${s.lblMuted} ${s.colWide}`}>Award type</span>
         <span class={`${s.lblMuted} ${s.colWide}`}>Focus</span>
       </div>
@@ -217,7 +216,6 @@ const jsonLd = [
             <span class="${s.deadlineInline}">${highlight(shortDeadline(p.deadline), t)}</span>
           </span>
           <span class="${s.award}">${fmtUSD(AWARD_MAX_USD[p.name])}</span>
-          <span class="${s.deadline} ${s.colDeadline}">${highlight(shortDeadline(p.deadline), t)}</span>
           <span class="${s.metaCol} ${s.colWide}">${esc(TYPE_LABELS[p.awardType] || "—")}</span>
           <span class="${s.metaCol} ${s.colWide}">${highlight((p.focus || []).map(f => FOCUS_LABELS[f]).join(" · "), t)}</span>
         </button>`;
@@ -230,7 +228,7 @@ const jsonLd = [
         };
       });
 
-      const arrows = { name: "sort-name", award: "sort-award", deadline: "sort-deadline" };
+      const arrows = { name: "sort-name", award: "sort-award" };
       for (const [key, id] of Object.entries(arrows)) {
         document.querySelector(`#${id} .arrow`).textContent =
           state.sort === key ? (state.dir === "asc" ? "↑" : "↓") : "";
@@ -245,7 +243,6 @@ const jsonLd = [
     }
     document.getElementById("sort-name").onclick = () => setSort("name");
     document.getElementById("sort-award").onclick = () => setSort("award");
-    document.getElementById("sort-deadline").onclick = () => setSort("deadline");
 
     qEl.addEventListener("input", () => { state.q = qEl.value; render(); });
     const initialQ = new URLSearchParams(location.search).get("q");

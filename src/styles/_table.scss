@@ -12,13 +12,18 @@
   padding-bottom: 8px;
   align-items: baseline;
 
-  span,
-  button { @include m.label; }
+  span {
+    @include m.label;
+    white-space: nowrap;
+  }
 
+  // bare-button's `all: unset` must come before the label styles it would wipe.
   button {
     @include m.bare-button;
     @include m.focus-ring;
+    @include m.label;
     display: block;
+    white-space: nowrap;
     &:hover { color: var(--accent); }
   }
 }
@@ -67,26 +72,13 @@
   padding-top: 2px;
 }
 
-.deadline {
-  font-size: 12px;
-  color: var(--ink-soft);
-  line-height: 1.45;
-  padding-top: 3px;
-}
-
-// Deadline moves under the program name once the column is dropped.
+// Deadline sits under the program name at every width.
 .deadlineInline {
-  display: none;
+  display: block;
   font-size: 12px;
   color: var(--ink-soft);
   line-height: 1.45;
   margin-top: 4px;
-
-  @media (max-width: t.$bp-narrow) { display: block; }
-}
-
-.colDeadline {
-  @media (max-width: t.$bp-narrow) { display: none; }
 }
 
 // Source code (GOV/FDN/CORP/GEN) shown inline after the program name.

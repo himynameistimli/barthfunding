@@ -219,6 +219,82 @@
   }
 }
 
+.brandRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.menuToggle {
+  display: none;
+
+  @media (max-width: t.$bp-stack) {
+    @include m.bare-button;
+    @include m.focus-ring;
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+    padding: 2px 4px;
+    border: 1px solid var(--ink);
+  }
+}
+
+// Site nav: inline in the rail on desktop; hamburger slide-over on mobile.
+.pagesGroup {
+  @media (max-width: t.$bp-stack) {
+    display: none;
+
+    &.open {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(300px, 82vw);
+      background: var(--surface);
+      border-left: 2px solid var(--ink);
+      z-index: 70;
+      overflow-y: auto;
+      padding: 20px;
+    }
+  }
+}
+
+.menuScrim {
+  display: none;
+
+  @media (max-width: t.$bp-stack) {
+    &.open {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 20, 20, .18);
+      z-index: 65;
+      border: none;
+    }
+  }
+}
+
+.menuClose {
+  display: none;
+
+  @media (max-width: t.$bp-stack) {
+    @include m.bare-button;
+    @include m.focus-ring;
+    display: block;
+    align-self: flex-end;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+
+    &:hover { color: var(--accent); }
+  }
+}
+
 .railFoot {
   margin-top: auto;
   border-top: 1px solid var(--line);

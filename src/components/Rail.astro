@@ -13,10 +13,13 @@ const NAV = [
 ---
 <aside class={s.rail}>
   <div>
-    <a href="/" class={s.brandLink}>
-      <div class={s.brandA}>Barth Syndrome</div>
-      <div class={s.brandB}>Research Funding Index</div>
-    </a>
+    <div class={s.brandRow}>
+      <a href="/" class={s.brandLink}>
+        <div class={s.brandA}>Barth Syndrome</div>
+        <div class={s.brandB}>Research Funding Index</div>
+      </a>
+      <button class={s.menuToggle} id="menu-toggle" type="button" aria-label="Menu" aria-controls="pages-group" aria-expanded="false">☰</button>
+    </div>
     {headline && (
       <>
         <div class={s.headline}>{headline}</div>
@@ -59,16 +62,38 @@ const NAV = [
     </>
   )}
 
-  <div>
-    <div class={s.railHead}>Pages</div>
-    <nav class={s.railNav} aria-label="Site">
-      {NAV.map(item => (
-        <a href={item.href} aria-current={path === item.href ? "page" : undefined}>{item.label}</a>
-      ))}
-    </nav>
+  <button class={s.menuScrim} id="menu-scrim" aria-label="Close menu" type="button"></button>
+  <div class={s.pagesGroup} id="pages-group">
+    <button class={s.menuClose} id="menu-close" type="button">Close ✕</button>
+    <div>
+      <div class={s.railHead}>Pages</div>
+      <nav class={s.railNav} aria-label="Site">
+        {NAV.map(item => (
+          <a href={item.href} aria-current={path === item.href ? "page" : undefined}>{item.label}</a>
+        ))}
+      </nav>
+    </div>
   </div>
 
   <div class={s.railFoot}>
     Last updated {LAST_UPDATED}.<br />Confirm details on the funder's site before applying.
   </div>
 </aside>
+
+<script define:vars={{ s }}>
+  const toggle = document.getElementById("menu-toggle");
+  const group = document.getElementById("pages-group");
+  const scrim = document.getElementById("menu-scrim");
+  const close = () => {
+    group.classList.remove(s.open);
+    scrim.classList.remove(s.open);
+    toggle.setAttribute("aria-expanded", "false");
+  };
+  toggle?.addEventListener("click", () => {
+    group.classList.add(s.open);
+    scrim.classList.add(s.open);
+    toggle.setAttribute("aria-expanded", "true");
+  });
+  scrim?.addEventListener("click", close);
+  document.getElementById("menu-close")?.addEventListener("click", close);
+</script>
