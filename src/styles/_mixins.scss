@@ -1,0 +1,44 @@
+@use "tokens" as t;
+
+// Small uppercase label used for column heads, rail headings, and field keys.
+@mixin label($size: 10px, $tracking: .14em) {
+  font-size: $size;
+  font-weight: 700;
+  letter-spacing: $tracking;
+  text-transform: uppercase;
+}
+
+@mixin mono($size: 12px) {
+  font-family: var(--mono);
+  font-size: $size;
+  font-variant-numeric: tabular-nums;
+}
+
+// Reset a <button> back to plain text so it can carry non-button styling.
+@mixin bare-button {
+  all: unset;
+  cursor: pointer;
+}
+
+@mixin focus-ring($offset: 2px) {
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: $offset;
+  }
+}
+
+// The index grid, shared by the header row and each data row so columns align.
+@mixin index-grid {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) 130px 220px 64px;
+  gap: 16px;
+  padding-left: 28px;
+  padding-right: 28px;
+
+  @media (max-width: t.$bp-narrow) {
+    grid-template-columns: 44px minmax(0, 1fr) 96px 52px;
+    gap: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

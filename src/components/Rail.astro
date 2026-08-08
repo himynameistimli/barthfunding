@@ -1,5 +1,7 @@
 ---
+import s from "../styles/app.module.scss";
 import { LAST_UPDATED } from "../data/programs.mjs";
+
 const { headline, showFilters = false } = Astro.props;
 const path = Astro.url.pathname;
 const NAV = [
@@ -9,16 +11,16 @@ const NAV = [
   { href: "/suggest-update/", label: "Suggest an update" }
 ];
 ---
-<aside class="rail">
+<aside class={s.rail}>
   <div>
-    <a href="/" style="border: none; color: inherit;">
-      <div class="brand-a">Barth Syndrome</div>
-      <div class="brand-b">Research Funding Index</div>
+    <a href="/" class={s.brandLink}>
+      <div class={s.brandA}>Barth Syndrome</div>
+      <div class={s.brandB}>Research Funding Index</div>
     </a>
     {headline && (
       <>
-        <div class="headline">{headline}</div>
-        <p class="headline-note">Max single-award total across capped programs still open. Uncapped and in-kind mechanisms add more.</p>
+        <div class={s.headline}>{headline}</div>
+        <p class={s.headlineNote}>Max single-award total across capped programs still open. Uncapped and in-kind mechanisms add more.</p>
       </>
     )}
   </div>
@@ -26,34 +28,34 @@ const NAV = [
   {showFilters && (
     <>
       <div>
-        <input type="search" id="q" placeholder="Search the index…" aria-label="Search funding programs" />
-        <p class="count" id="count"></p>
+        <input type="search" id="q" class={s.search} placeholder="Search the index…" aria-label="Search funding programs" />
+        <p class={s.count} id="count"></p>
       </div>
       <div>
-        <div class="rail-head">Funder</div>
-        <div class="rail-list" id="cat-filters"></div>
+        <div class={s.railHead}>Funder</div>
+        <div class={s.railList} id="cat-filters"></div>
       </div>
       <div>
-        <div class="rail-head">Audience</div>
-        <div class="rail-list" id="aud-filters"></div>
+        <div class={s.railHead}>Audience</div>
+        <div class={s.railList} id="aud-filters"></div>
       </div>
       <div>
-        <div class="rail-head">Status</div>
-        <div class="rail-list" id="status-filters"></div>
+        <div class={s.railHead}>Status</div>
+        <div class={s.railList} id="status-filters"></div>
       </div>
     </>
   )}
 
   <div>
-    <div class="rail-head">Pages</div>
-    <nav class="rail-nav" aria-label="Site">
+    <div class={s.railHead}>Pages</div>
+    <nav class={s.railNav} aria-label="Site">
       {NAV.map(item => (
         <a href={item.href} aria-current={path === item.href ? "page" : undefined}>{item.label}</a>
       ))}
     </nav>
   </div>
 
-  <div class="rail-foot">
+  <div class={s.railFoot}>
     Last updated {LAST_UPDATED}.<br />Confirm details on the funder's site before applying.
   </div>
 </aside>

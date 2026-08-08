@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
+import s from "../styles/app.module.scss";
 import { PROGRAMS, AWARD_MAX_USD, CAT_LABELS } from "../data/programs.mjs";
 
 // Headline counts only programs a researcher can still apply to.
@@ -21,16 +22,16 @@ const CAT_META = {
   title="Barth Syndrome Research Funding Index"
   description={`${headlineTotal} in grants, fellowships, and support programs open to researchers and organizations working on Barth syndrome.`}
 >
-  <div class="shell">
+  <div class={s.shell}>
     <Rail headline={headlineTotal} showFilters={true} />
 
     <main style="min-width: 0;">
-      <div class="tbl-head">
-        <span class="lbl-muted">No.</span>
+      <div class={s.tblHead}>
+        <span class={s.lblMuted}>No.</span>
         <button id="sort-name" type="button">Program <span class="arrow"></span></button>
-        <button id="sort-award" class="ta-r" type="button">Award max <span class="arrow"></span></button>
-        <button id="sort-deadline" class="col-deadline" type="button">Deadline <span class="arrow"></span></button>
-        <span class="lbl-muted ta-r">Src</span>
+        <button id="sort-award" class={s.taR} type="button">Award max <span class="arrow"></span></button>
+        <button id="sort-deadline" class={s.colDeadline} type="button">Deadline <span class="arrow"></span></button>
+        <span class={`${s.lblMuted} ${s.taR}`}>Src</span>
       </div>
       <div id="rows"></div>
     </main>
@@ -38,15 +39,18 @@ const CAT_META = {
 
   <div id="drawer-root"></div>
 
-  <script define:vars={{ PROGRAMS, AWARD_MAX_USD, CAT_META, CAT_LABELS }}>
+  <script define:vars={{ PROGRAMS, AWARD_MAX_USD, CAT_META, CAT_LABELS, s }}>
     const rowsEl = document.getElementById("rows");
     const countEl = document.getElementById("count");
     const qEl = document.getElementById("q");
     const drawerRoot = document.getElementById("drawer-root");
 
+    // Category → the module class carrying that category's colour.
+    const srcClass = cat => s["src" + cat.charAt(0).toUpperCase() + cat.slice(1)] || "";
+
     let state = { q: "", cat: "all", aud: null, showPast: false, sort: "award", dir: "desc" };
 
-    const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+    const esc = str => String(str ?? "").replace(/[&<>"']/g, c =>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
     function highlight(text, terms) {
@@ -68,11 +72,11 @@ const CAT_META = {
       return a === "orgs" ? isOrg : (!isOrg || tags.includes("for researchers"));
     };
 
-    function parseDeadline(s) {
-      if (!s) return Infinity;
-      const m = String(s).match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z.]*\s+(\d{1,2}),?\s+(\d{4})/);
+    function parseDeadline(str) {
+      if (!str) return Infinity;
+      const m = String(str).match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z.]*\s+(\d{1,2}),?\s+(\d{4})/);
       if (m) return new Date(m[3] + " " + m[1] + " " + m[2]).getTime();
-      const y = String(s).match(/\b(20\d\d)\b/);
+      const y = String(str).match(/\b(20\d\d)\b/);
       if (y) return new Date(y[1] + "-06-30").getTime();
       return Infinity;
     }
@@ -83,15 +87,15 @@ const CAT_META = {
       return "$" + Math.round(v / 1e3) + "K";
     }
 
-    const shortDeadline = s => {
-      if (!s) return "—";
-      const t = String(s);
+    const shortDeadline = str => {
+      if (!str) return "—";
+      const t = String(str);
       return t.length > 64 ? t.slice(0, 61).replace(/[,;\s]+\S*$/, "") + "…" : t;
     };
 
     const terms = () => state.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
 
-    // Programs passing everything except the facet being counted.
+    // Programs passing every facet except the one being counted.
     function pool(opts = {}) {
       const t = terms();
       return PROGRAMS.filter(p => {
@@ -101,8 +105,6 @@ const CAT_META = {
         return t.every(x => hay(p).includes(x));
       });
     }
-
-    function visible() { return pool(); }
 
     function sortRows(list) {
       const sgn = state.dir === "asc" ? 1 : -1;
@@ -121,26 +123,24 @@ const CAT_META = {
     }
 
     function renderRail() {
-      const t = terms();
       const catBase = pool({ ignoreCat: true });
       const cats = [["all", "All sources"], ["government", "Government"], ["nonprofit", "Foundations"],
         ["corporate", "Corporate"], ["general", "General biomedical"]];
       document.getElementById("cat-filters").innerHTML = cats.map(([key, label]) => `
-        <button class="rail-btn" data-cat="${key}" aria-pressed="${state.cat === key}" type="button">
-          <span>${label}</span><span class="n">${catBase.filter(p => key === "all" || p.cat === key).length}</span>
+        <button class="${s.railBtn}" data-cat="${key}" aria-pressed="${state.cat === key}" type="button">
+          <span>${label}</span><span class="${s.n}">${catBase.filter(p => key === "all" || p.cat === key).length}</span>
         </button>`).join("");
 
       const audBase = pool({ ignoreAud: true });
       const auds = [["", "Everyone"], ["researchers", "Researchers"], ["orgs", "Advocacy orgs"]];
       document.getElementById("aud-filters").innerHTML = auds.map(([key, label]) => `
-        <button class="rail-btn" data-aud="${key}" aria-pressed="${(state.aud || "") === key}" type="button">
-          <span>${label}</span><span class="n">${audBase.filter(p => audPass(p, key || null)).length}</span>
+        <button class="${s.railBtn}" data-aud="${key}" aria-pressed="${(state.aud || "") === key}" type="button">
+          <span>${label}</span><span class="${s.n}">${audBase.filter(p => audPass(p, key || null)).length}</span>
         </button>`).join("");
 
-      const pastCount = PROGRAMS.filter(p => p.expired).length;
       document.getElementById("status-filters").innerHTML = `
-        <button class="rail-btn" data-past="1" aria-pressed="${state.showPast}" type="button">
-          <span>Include past programs</span><span class="n">${pastCount}</span>
+        <button class="${s.railBtn}" data-past="1" aria-pressed="${state.showPast}" type="button">
+          <span>Include past programs</span><span class="${s.n}">${PROGRAMS.filter(p => p.expired).length}</span>
         </button>`;
 
       document.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { state.cat = b.dataset.cat; render(); });
@@ -150,7 +150,7 @@ const CAT_META = {
 
     function render() {
       const t = terms();
-      const list = sortRows(visible());
+      const list = sortRows(pool());
       const poolCount = PROGRAMS.filter(p => !p.expired || state.showPast).length;
 
       countEl.textContent = (list.length === poolCount
@@ -161,20 +161,20 @@ const CAT_META = {
       rowsEl.innerHTML = list.length ? list.map((p, i) => {
         const meta = CAT_META[p.cat] || { code: "—" };
         return `
-        <button class="row${p.expired ? " is-past" : ""}" data-slug="${esc(p.slug)}" type="button">
-          <span class="num">${String(i + 1).padStart(2, "0")}</span>
+        <button class="${s.row}${p.expired ? " " + s.isPast : ""}" data-slug="${esc(p.slug)}" type="button">
+          <span class="${s.num}">${String(i + 1).padStart(2, "0")}</span>
           <span style="min-width:0">
-            <span class="name">${highlight(p.name, t)}${p.expired ? '<span class="tag-past">PAST</span>' : ""}</span>
-            <span class="sponsor">${highlight(p.sponsor, t)}</span>
-            <span class="deadline-inline">${highlight(shortDeadline(p.deadline), t)}</span>
+            <span class="${s.name}">${highlight(p.name, t)}${p.expired ? `<span class="${s.tagPast}">PAST</span>` : ""}</span>
+            <span class="${s.sponsor}">${highlight(p.sponsor, t)}</span>
+            <span class="${s.deadlineInline}">${highlight(shortDeadline(p.deadline), t)}</span>
           </span>
-          <span class="award">${fmtUSD(AWARD_MAX_USD[p.name])}</span>
-          <span class="deadline col-deadline">${highlight(shortDeadline(p.deadline), t)}</span>
-          <span class="src src-${esc(p.cat)}">${meta.code}</span>
+          <span class="${s.award}">${fmtUSD(AWARD_MAX_USD[p.name])}</span>
+          <span class="${s.deadline} ${s.colDeadline}">${highlight(shortDeadline(p.deadline), t)}</span>
+          <span class="${s.src} ${srcClass(p.cat)}">${meta.code}</span>
         </button>`;
-      }).join("") : `<div class="empty"><strong>No programs match.</strong>Try a broader term — “mitochondrial”, “pilot”, or “fellowship”.</div>`;
+      }).join("") : `<div class="${s.empty}"><strong>No programs match.</strong>Try a broader term — “mitochondrial”, “pilot”, or “fellowship”.</div>`;
 
-      rowsEl.querySelectorAll(".row").forEach(r => {
+      rowsEl.querySelectorAll("[data-slug]").forEach(r => {
         r.onclick = () => { location.hash = r.dataset.slug; };
       });
 
@@ -186,9 +186,9 @@ const CAT_META = {
       renderRail();
     }
 
-    function setSort(s) {
-      if (state.sort === s) state.dir = state.dir === "asc" ? "desc" : "asc";
-      else { state.sort = s; state.dir = s === "award" ? "desc" : "asc"; }
+    function setSort(k) {
+      if (state.sort === k) state.dir = state.dir === "asc" ? "desc" : "asc";
+      else { state.sort = k; state.dir = k === "award" ? "desc" : "asc"; }
       render();
     }
     document.getElementById("sort-name").onclick = () => setSort("name");
@@ -206,25 +206,25 @@ const CAT_META = {
       if (!p) { drawerRoot.innerHTML = ""; document.body.style.overflow = ""; return; }
       const meta = CAT_META[p.cat] || { code: "—", label: "" };
       drawerRoot.innerHTML = `
-        <button class="scrim" id="scrim" aria-label="Close details" type="button"></button>
-        <div class="drawer" role="dialog" aria-modal="true" aria-label="${esc(p.name)}">
-          <div class="drawer-top">
-            <span class="drawer-cat src-${esc(p.cat)}">${meta.code} — ${esc(meta.label.toUpperCase())}</span>
-            <button class="drawer-close" id="drawer-close" type="button">Close ✕</button>
+        <button class="${s.scrim}" id="scrim" aria-label="Close details" type="button"></button>
+        <div class="${s.drawer}" role="dialog" aria-modal="true" aria-label="${esc(p.name)}">
+          <div class="${s.drawerTop}">
+            <span class="${s.drawerCat} ${srcClass(p.cat)}">${meta.code} — ${esc(meta.label.toUpperCase())}</span>
+            <button class="${s.drawerClose}" id="drawer-close" type="button">Close ✕</button>
           </div>
           <h2>${esc(p.name)}</h2>
-          <p class="sponsor">${esc(p.sponsor)}</p>
-          ${p.expired ? '<div class="past-banner">This application window has closed. Kept for reference — check the funder\'s page for a future cycle.</div>' : ""}
-          <div class="facts">
-            <div class="fact"><div class="fact-k">Award</div><div class="fact-v">${esc(p.amount || "—")}</div></div>
-            <div class="fact"><div class="fact-k">Deadline</div><div class="fact-v">${esc(p.deadline || "—")}</div></div>
+          <p class="${s.sponsor}">${esc(p.sponsor)}</p>
+          ${p.expired ? `<div class="${s.pastBanner}">This application window has closed. Kept for reference — check the funder's page for a future cycle.</div>` : ""}
+          <div class="${s.facts}">
+            <div class="${s.fact}"><div class="${s.factK}">Award</div><div class="${s.factV}">${esc(p.amount || "—")}</div></div>
+            <div class="${s.fact}"><div class="${s.factK}">Deadline</div><div class="${s.factV}">${esc(p.deadline || "—")}</div></div>
           </div>
-          <p class="lede">${esc(p.desc)}</p>
-          <div class="sec"><div class="sec-h">Who can apply</div><p>${esc(p.eligibility)}</p></div>
-          <div class="sec"><div class="sec-h">How to apply</div><p>${esc(p.apply)}</p></div>
-          <div class="sec">
-            <div class="sec-h">Links</div>
-            <div class="links">
+          <p class="${s.lede}">${esc(p.desc)}</p>
+          <div class="${s.sec}"><div class="${s.secH}">Who can apply</div><p>${esc(p.eligibility)}</p></div>
+          <div class="${s.sec}"><div class="${s.secH}">How to apply</div><p>${esc(p.apply)}</p></div>
+          <div class="${s.sec}">
+            <div class="${s.secH}">Links</div>
+            <div class="${s.links}">
               ${(p.links || []).map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}
               <a href="/grants/${esc(p.slug)}/">Open full page — permanent link</a>
             </div>
@@ -234,12 +234,14 @@ const CAT_META = {
       const close = () => { history.pushState("", document.title, location.pathname + location.search); renderDrawer(); };
       document.getElementById("scrim").onclick = close;
       document.getElementById("drawer-close").onclick = close;
-      document.querySelector(".drawer").focus?.();
     }
     window.addEventListener("hashchange", renderDrawer);
-    window.addEventListener("keydown", e => { if (e.key === "Escape" && location.hash) {
-      history.pushState("", document.title, location.pathname + location.search); renderDrawer();
-    }});
+    window.addEventListener("keydown", e => {
+      if (e.key === "Escape" && location.hash) {
+        history.pushState("", document.title, location.pathname + location.search);
+        renderDrawer();
+      }
+    });
 
     render();
     renderDrawer();

@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
+import s from "../styles/app.module.scss";
 import { CONTACT_EMAIL } from "../data/site.mjs";
 import { LAST_UPDATED } from "../data/programs.mjs";
 const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Funding index update request")}`;
@@ -9,14 +10,14 @@ const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Funding in
   title="Suggest an update"
   description="Report a changed deadline, broken link, or missing program in the Barth syndrome funding index."
 >
-  <div class="shell">
+  <div class={s.shell}>
     <Rail />
-    <main class="doc">
-      <p class="crumb"><a href="/">← Funding index</a></p>
+    <main class={s.doc}>
+      <p class={s.crumb}><a href="/">← Funding index</a></p>
       <h1>Suggest an update</h1>
-      <p class="sponsor">Help keep the index accurate</p>
+      <p class={s.sponsor}>Help keep the index accurate</p>
 
-      <p class="prose-p" style="margin-top: 20px;">Grant deadlines shift, programs pause, and new opportunities appear. If something here is wrong — or a program is missing — send it over and it will be corrected.</p>
+      <p class={s.proseP} style="margin-top: 20px;">Grant deadlines shift, programs pause, and new opportunities appear. If something here is wrong — or a program is missing — send it over and it will be corrected.</p>
 
       <h2>What to send</h2>
       <ul>
@@ -26,9 +27,9 @@ const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Funding in
       </ul>
 
       <h2>Where to send it</h2>
-      <p class="prose-p"><a href={mailto}>{CONTACT_EMAIL}</a> — every program page also carries a “Suggest an update to this entry” link that pre-fills the program name.</p>
+      <p class={s.proseP}><a href={mailto}>{CONTACT_EMAIL}</a> — every program page also carries a “Suggest an update to this entry” link that pre-fills the program name.</p>
 
-      <p class="doc-foot">Index last updated {LAST_UPDATED}.</p>
+      <p class={s.docFoot}>Index last updated {LAST_UPDATED}.</p>
     </main>
   </div>
 </Base>

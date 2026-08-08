@@ -1,0 +1,286 @@
+// Therapy-progress page. Full width: comparison tables and cards use the whole
+// column while running prose keeps a readable measure.
+@use "tokens" as t;
+@use "mixins" as m;
+
+.page {
+  max-width: none;
+
+  .proseP,
+  .note,
+  .takeaway,
+  .legend,
+  .srcNote { max-width: 88ch; }
+
+  dl.fields dd { max-width: 92ch; }
+  .refGroup li { max-width: 96ch; }
+}
+
+.pillUnpub,
+.pillApproved {
+  @include m.label(10px, .08em);
+  padding: 2px 7px;
+  white-space: nowrap;
+  margin-left: 6px;
+}
+
+.pillUnpub {
+  background: var(--gen);
+  color: var(--surface);
+}
+
+.pillApproved {
+  background: var(--npo);
+  color: var(--surface);
+}
+
+.familyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 20px 0 8px;
+}
+
+.familyCard {
+  border: 1px solid var(--line);
+  padding: 14px 18px;
+  background: var(--surface);
+
+  h3 {
+    font-size: 15px;
+    margin: 0 0 6px;
+  }
+
+  p {
+    font-size: 14.5px;
+    margin: 0;
+    color: var(--ink-soft);
+  }
+}
+
+.famCompHead { color: var(--npo); }
+.famRootHead { color: var(--gen); }
+
+.tableScroll {
+  overflow-x: auto;
+  margin: 14px 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.cmp {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  thead th {
+    @include m.label(11px, .09em);
+    color: var(--ink-faint);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody th {
+    font-weight: 700;
+    font-size: 14px;
+    min-width: 130px;
+
+    a {
+      color: inherit;
+      border-bottom: none;
+
+      &:hover { color: var(--accent); }
+    }
+  }
+}
+
+.small { font-size: 13.5px; }
+
+.taz02New {
+  color: var(--gen);
+  font-weight: 600;
+}
+
+.symUp {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.symFix {
+  color: var(--gen);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.symFlat,
+.symNa { color: var(--ink-faint); }
+
+.legend {
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-top: -4px;
+}
+
+.famTag {
+  @include m.label(10.5px, .06em);
+  padding: 3px 9px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.famCare { background: var(--gov); color: var(--surface); }
+.famCompensatory { background: var(--npo); color: var(--surface); }
+.famRootCause { background: var(--gen); color: var(--surface); }
+
+.card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 20px 22px;
+  margin: 18px 0;
+  scroll-margin-top: 70px;
+
+  h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+.cardCompensatory { border-left: 3px solid var(--npo); }
+.cardRootCause { border-left: 3px solid var(--gen); }
+.cardCare { border-left: 3px solid var(--gov); }
+
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.tagline {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  margin: 6px 0 14px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 10px 18px;
+  margin: 0 0 14px;
+
+  dt {
+    @include m.label(12.5px, .04em);
+    color: var(--ink-faint);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+    gap: 3px;
+
+    dd { margin-bottom: 10px; }
+  }
+}
+
+.taz02 {
+  border: 1px solid var(--line);
+  padding: 14px 16px;
+  margin: 4px 0 16px;
+  background: var(--paper);
+}
+
+.taz02Title {
+  @include m.label(12px, .08em);
+  color: var(--gen);
+  margin: 0 0 4px;
+}
+
+.taz02Note {
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+.stageLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 6px 0;
+}
+
+.stageBar {
+  height: 4px;
+  background: var(--line);
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+  }
+}
+
+.cardRootCause {
+  .stageBar span { background: var(--gen); }
+  .stageLabel { color: var(--gen); }
+}
+
+.stageTicks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 10.5px;
+  color: var(--ink-faint);
+}
+
+.takeaway {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: 15px;
+}
+
+.refGroup {
+  margin-bottom: 16px;
+
+  h3 {
+    @include m.label(11.5px, .09em);
+    color: var(--ink-faint);
+    margin: 0 0 6px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  li {
+    font-size: 14px;
+    margin-bottom: 7px;
+  }
+}
+
+.srcNote {
+  font-size: 13px;
+  color: var(--ink-faint);
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 26px;
+}

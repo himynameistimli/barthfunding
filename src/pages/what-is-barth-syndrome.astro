@@ -1,22 +1,23 @@
 ---
 import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
+import s from "../styles/app.module.scss";
 import { LAST_UPDATED } from "../data/programs.mjs";
 ---
 <Base
   title="What is Barth syndrome?"
   description="Barth syndrome is a rare X-linked genetic disease caused by TAFAZZIN mutations, affecting the heart, immune system, and muscles."
 >
-  <div class="shell">
+  <div class={s.shell}>
     <Rail />
-    <main class="doc">
-      <p class="crumb"><a href="/">← Funding index</a></p>
+    <main class={s.doc}>
+      <p class={s.crumb}><a href="/">← Funding index</a></p>
       <h1>What is Barth syndrome?</h1>
-      <p class="sponsor">A rare genetic disease of the mitochondria</p>
+      <p class={s.sponsor}>A rare genetic disease of the mitochondria</p>
 
-      <p class="prose-p" style="margin-top: 20px;">Barth syndrome (BTHS) is a rare, life-threatening genetic disease caused by mutations in the <strong>TAFAZZIN</strong> gene on the X chromosome. Because of that X-linkage it almost exclusively affects males. Only a few hundred individuals are diagnosed worldwide, though the condition is believed to be underdiagnosed.</p>
+      <p class={s.proseP} style="margin-top: 20px;">Barth syndrome (BTHS) is a rare, life-threatening genetic disease caused by mutations in the <strong>TAFAZZIN</strong> gene on the X chromosome. Because of that X-linkage it almost exclusively affects males. Only a few hundred individuals are diagnosed worldwide, though the condition is believed to be underdiagnosed.</p>
 
-      <p class="prose-p">The TAFAZZIN gene encodes tafazzin, an enzyme that remodels <strong>cardiolipin</strong> — a lipid unique to the inner mitochondrial membrane that mitochondria need to produce energy efficiently. When tafazzin doesn't work, cells accumulate an immature form of the lipid (monolysocardiolipin) and mitochondrial energy production suffers, hitting the body's most energy-hungry tissues hardest.</p>
+      <p class={s.proseP}>The TAFAZZIN gene encodes tafazzin, an enzyme that remodels <strong>cardiolipin</strong> — a lipid unique to the inner mitochondrial membrane that mitochondria need to produce energy efficiently. When tafazzin doesn't work, cells accumulate an immature form of the lipid (monolysocardiolipin) and mitochondrial energy production suffers, hitting the body's most energy-hungry tissues hardest.</p>
 
       <h2>How it presents</h2>
       <ul>
@@ -25,16 +26,16 @@ import { LAST_UPDATED } from "../data/programs.mjs";
         <li><strong>Skeletal myopathy and fatigue</strong> — muscle weakness and profound exercise intolerance that shape daily life.</li>
         <li><strong>Growth delay</strong> — slowed growth in childhood, often with a later catch-up phase, along with feeding difficulties in infancy.</li>
       </ul>
-      <p class="prose-p">Severity varies widely between individuals — even within the same family — and no two courses look alike.</p>
+      <p class={s.proseP}>Severity varies widely between individuals — even within the same family — and no two courses look alike.</p>
 
       <h2>How it's diagnosed</h2>
-      <p class="prose-p">The diagnostic biomarker is the <strong>monolysocardiolipin-to-cardiolipin (MLCL/CL) ratio</strong>, measurable from a dried blood spot: an elevated ratio separates Barth syndrome from controls with essentially complete accuracy, and it stays reliable even in atypical cases where individual cardiolipin species look normal. Diagnosis is confirmed by TAFAZZIN gene sequencing.</p>
-      <div class="note">
+      <p class={s.proseP}>The diagnostic biomarker is the <strong>monolysocardiolipin-to-cardiolipin (MLCL/CL) ratio</strong>, measurable from a dried blood spot: an elevated ratio separates Barth syndrome from controls with essentially complete accuracy, and it stays reliable even in atypical cases where individual cardiolipin species look normal. Diagnosis is confirmed by TAFAZZIN gene sequencing.</p>
+      <div class={s.note}>
         <strong>Testing access is a bottleneck.</strong> Only two laboratories worldwide are known to offer the clinical MLCL/CL assay (Amsterdam UMC, and UCLH Queen Square in London since 2023), and no newborn-screening study of the biomarker has ever been run — one reason diagnosis is often delayed and the true prevalence is uncertain.
       </div>
 
       <h2>Living with Barth syndrome</h2>
-      <p class="prose-p">Care is multidisciplinary: cardiology (heart-failure management, and transplant in severe cases), immunology and hematology (including G-CSF for neutropenia), nutrition, and physical therapy. The first disease-specific therapy was approved in 2025 — see <a href="/therapies/">therapy progress</a> for the current treatment landscape.</p>
+      <p class={s.proseP}>Care is multidisciplinary: cardiology (heart-failure management, and transplant in severe cases), immunology and hematology (including G-CSF for neutropenia), nutrition, and physical therapy. The first disease-specific therapy was approved in 2025 — see <a href="/therapies/">therapy progress</a> for the current treatment landscape.</p>
 
       <h2>Learn more</h2>
       <ul>
@@ -43,7 +44,7 @@ import { LAST_UPDATED } from "../data/programs.mjs";
         <li><a href="/">Funding index</a> — grants open to BTHS researchers</li>
       </ul>
 
-      <p class="doc-foot">Last updated {LAST_UPDATED}.</p>
+      <p class={s.docFoot}>Last updated {LAST_UPDATED}.</p>
     </main>
   </div>
 </Base>

@@ -1,0 +1,119 @@
+// Shared by the index drawer and the grant detail pages — same field furniture,
+// different container.
+@use "tokens" as t;
+@use "mixins" as m;
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 20, .18);
+  z-index: 40;
+  border: none;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(560px, 92vw);
+  background: var(--surface);
+  border-left: 2px solid var(--ink);
+  z-index: 50;
+  overflow-y: auto;
+  padding: 32px 36px 48px;
+
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin: 14px 0 4px;
+  }
+}
+
+.drawerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.drawerCat {
+  @include m.mono(11px);
+}
+
+.drawerClose {
+  @include m.bare-button;
+  @include m.focus-ring;
+  @include m.label(12px, .12em);
+
+  &:hover { color: var(--accent); }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+  border-top: 2px solid var(--ink);
+  margin-top: 20px;
+}
+
+.fact {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.factK {
+  @include m.label;
+  color: var(--ink-faint);
+}
+
+.factV {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 3px;
+}
+
+.lede {
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 18px 0 0;
+}
+
+.sec {
+  margin-top: 20px;
+
+  p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+}
+
+.secH {
+  @include m.label;
+  border-top: 1px solid var(--ink);
+  padding-top: 8px;
+  margin-bottom: 6px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+
+  a { font-size: 13px; }
+}
+
+.pastBanner {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--faint);
+  background: var(--hover);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 16px;
+}

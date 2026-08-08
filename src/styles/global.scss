@@ -1,0 +1,57 @@
+// Global layer: tokens, reset, and bare element defaults.
+// Everything else lives in *.module.scss and is scoped per component.
+@use "tokens" as t;
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(190, 58, 29, .35);
+
+  &:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+input::placeholder { color: var(--faint); }
+
+button { font-family: inherit; }
+
+// Search-result highlighting is injected as raw <mark> by the client script,
+// so it has to be styled globally rather than through a module class.
+mark {
+  background: var(--accent-soft);
+  color: inherit;
+  padding: 0 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

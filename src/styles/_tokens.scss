@@ -1,0 +1,51 @@
+// Design tokens for the funding index.
+// Emitted as CSS custom properties so they cross module boundaries and are
+// readable at runtime; Sass variables mirror them for use in mixins/math.
+
+$paper: #FCFCFB;
+$surface: #FFFFFF;
+$ink: #141414;
+$ink-soft: #44443F;
+$ink-faint: #6E6E68;
+$faint: #9A9A94;
+$line: #D8D8D2;
+$line-soft: #ECECE6;
+$hover: #F3F3EF;
+$accent: #BE3A1D;
+$accent-soft: #F7EDE9;
+
+$gov: #46608C;
+$npo: #2E7D5B;
+$corp: #B0512E;
+$gen: #6B4A78;
+
+$sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+// Breakpoints
+$bp-narrow: 1080px;
+$bp-stack: 760px;
+
+:root {
+  --paper: #{$paper};
+  --surface: #{$surface};
+  --ink: #{$ink};
+  --ink-soft: #{$ink-soft};
+  --ink-faint: #{$ink-faint};
+  --faint: #{$faint};
+  --line: #{$line};
+  --line-soft: #{$line-soft};
+  --hover: #{$hover};
+  --accent: #{$accent};
+  --accent-soft: #{$accent-soft};
+
+  --gov: #{$gov};
+  --npo: #{$npo};
+  --corp: #{$corp};
+  --gen: #{$gen};
+
+  --sans: #{$sans};
+  --mono: #{$mono};
+
+  --ground: #{$paper}; // alias retained for older rules
+}

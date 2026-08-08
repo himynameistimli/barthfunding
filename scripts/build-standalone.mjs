@@ -9,6 +9,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import * as sass from "sass";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "..");
@@ -17,7 +18,12 @@ const out = process.argv[2]
   : resolve(root, "..", "bsf-funding.html");
 
 const data = JSON.parse(readFileSync(resolve(root, "src/data/programs.json"), "utf8"));
-const css = readFileSync(resolve(root, "src/styles/site.css"), "utf8");
+// Compile the same SCSS partials the Astro modules use, but unhashed so the
+// markup generated below can reference the class names literally.
+const css = sass.compile(resolve(root, "src/styles/standalone.scss"), {
+  loadPaths: [resolve(root, "src/styles")],
+  style: "compressed"
+}).css;
 
 const page = `<title>Barth Syndrome Research Funding Index</title>
 <style>
@@ -29,42 +35,42 @@ ${css}
 <div class="shell">
   <aside class="rail">
     <div>
-      <div class="brand-a">Barth Syndrome</div>
-      <div class="brand-b">Research Funding Index</div>
+      <div class="brandA">Barth Syndrome</div>
+      <div class="brandB">Research Funding Index</div>
       <div class="headline" id="headline">$0M+</div>
-      <p class="headline-note">Max single-award total across capped programs still open. Uncapped and in-kind mechanisms add more.</p>
+      <p class="headlineNote">Max single-award total across capped programs still open. Uncapped and in-kind mechanisms add more.</p>
     </div>
 
     <div>
-      <input type="search" id="q" placeholder="Search the index&hellip;" aria-label="Search funding programs" />
+      <input type="search" id="q" class="search" placeholder="Search the index&hellip;" aria-label="Search funding programs" />
       <p class="count" id="count"></p>
     </div>
 
     <div>
-      <div class="rail-head">Funder</div>
-      <div class="rail-list" id="cat-filters"></div>
+      <div class="railHead">Funder</div>
+      <div class="railList" id="cat-filters"></div>
     </div>
     <div>
-      <div class="rail-head">Audience</div>
-      <div class="rail-list" id="aud-filters"></div>
+      <div class="railHead">Audience</div>
+      <div class="railList" id="aud-filters"></div>
     </div>
     <div>
-      <div class="rail-head">Status</div>
-      <div class="rail-list" id="status-filters"></div>
+      <div class="railHead">Status</div>
+      <div class="railList" id="status-filters"></div>
     </div>
 
-    <div class="rail-foot">
+    <div class="railFoot">
       Last updated <span id="last-updated"></span>.<br />Confirm details on the funder's site before applying.
     </div>
   </aside>
 
   <main style="min-width: 0;">
-    <div class="tbl-head">
-      <span class="lbl-muted">No.</span>
+    <div class="tblHead">
+      <span class="lblMuted">No.</span>
       <button id="sort-name" type="button">Program <span class="arrow"></span></button>
-      <button id="sort-award" class="ta-r" type="button">Award max <span class="arrow"></span></button>
-      <button id="sort-deadline" class="col-deadline" type="button">Deadline <span class="arrow"></span></button>
-      <span class="lbl-muted ta-r">Src</span>
+      <button id="sort-award" class="taR" type="button">Award max <span class="arrow"></span></button>
+      <button id="sort-deadline" class="colDeadline" type="button">Deadline <span class="arrow"></span></button>
+      <span class="lblMuted taR">Src</span>
     </div>
     <div id="rows"></div>
   </main>
@@ -91,6 +97,8 @@ function slugify(name) {
     .replace(/^-+|-+$/g, "").slice(0, 80).replace(/-+$/g, "");
 }
 for (const p of PROGRAMS) p.slug = slugify(p.name);
+
+const srcClass = cat => "src" + cat.charAt(0).toUpperCase() + cat.slice(1);
 
 const rowsEl = document.getElementById("rows");
 const countEl = document.getElementById("count");
@@ -174,19 +182,19 @@ function renderRail() {
   const cats = [["all", "All sources"], ["government", "Government"], ["nonprofit", "Foundations"],
     ["corporate", "Corporate"], ["general", "General biomedical"]];
   document.getElementById("cat-filters").innerHTML = cats.map(([key, label]) => \`
-    <button class="rail-btn" data-cat="\${key}" aria-pressed="\${state.cat === key}" type="button">
+    <button class="railBtn" data-cat="\${key}" aria-pressed="\${state.cat === key}" type="button">
       <span>\${label}</span><span class="n">\${catBase.filter(p => key === "all" || p.cat === key).length}</span>
     </button>\`).join("");
 
   const audBase = pool({ ignoreAud: true });
   const auds = [["", "Everyone"], ["researchers", "Researchers"], ["orgs", "Advocacy orgs"]];
   document.getElementById("aud-filters").innerHTML = auds.map(([key, label]) => \`
-    <button class="rail-btn" data-aud="\${key}" aria-pressed="\${(state.aud || "") === key}" type="button">
+    <button class="railBtn" data-aud="\${key}" aria-pressed="\${(state.aud || "") === key}" type="button">
       <span>\${label}</span><span class="n">\${audBase.filter(p => audPass(p, key || null)).length}</span>
     </button>\`).join("");
 
   document.getElementById("status-filters").innerHTML = \`
-    <button class="rail-btn" data-past="1" aria-pressed="\${state.showPast}" type="button">
+    <button class="railBtn" data-past="1" aria-pressed="\${state.showPast}" type="button">
       <span>Include past programs</span><span class="n">\${PROGRAMS.filter(p => p.expired).length}</span>
     </button>\`;
 
@@ -208,16 +216,16 @@ function render() {
   rowsEl.innerHTML = list.length ? list.map((p, i) => {
     const meta = CAT_META[p.cat] || { code: "\\u2014" };
     return \`
-    <button class="row\${p.expired ? " is-past" : ""}" data-slug="\${esc(p.slug)}" type="button">
+    <button class="row\${p.expired ? " isPast" : ""}" data-slug="\${esc(p.slug)}" type="button">
       <span class="num">\${String(i + 1).padStart(2, "0")}</span>
       <span style="min-width:0">
-        <span class="name">\${highlight(p.name, t)}\${p.expired ? '<span class="tag-past">PAST</span>' : ""}</span>
+        <span class="name">\${highlight(p.name, t)}\${p.expired ? '<span class="tagPast">PAST</span>' : ""}</span>
         <span class="sponsor">\${highlight(p.sponsor, t)}</span>
-        <span class="deadline-inline">\${highlight(shortDeadline(p.deadline), t)}</span>
+        <span class="deadlineInline">\${highlight(shortDeadline(p.deadline), t)}</span>
       </span>
       <span class="award">\${fmtUSD(AWARD_MAX_USD[p.name])}</span>
-      <span class="deadline col-deadline">\${highlight(shortDeadline(p.deadline), t)}</span>
-      <span class="src src-\${esc(p.cat)}">\${meta.code}</span>
+      <span class="deadline colDeadline">\${highlight(shortDeadline(p.deadline), t)}</span>
+      <span class="src \${srcClass(p.cat)}">\${meta.code}</span>
     </button>\`;
   }).join("") : '<div class="empty"><strong>No programs match.</strong>Try a broader term \\u2014 \\u201cmitochondrial\\u201d, \\u201cpilot\\u201d, or \\u201cfellowship\\u201d.</div>';
 
@@ -249,22 +257,22 @@ function renderDrawer() {
   drawerRoot.innerHTML = \`
     <button class="scrim" id="scrim" aria-label="Close details" type="button"></button>
     <div class="drawer" role="dialog" aria-modal="true" aria-label="\${esc(p.name)}">
-      <div class="drawer-top">
-        <span class="drawer-cat src-\${esc(p.cat)}">\${meta.code} \\u2014 \${esc(meta.label.toUpperCase())}</span>
-        <button class="drawer-close" id="drawer-close" type="button">Close \\u2715</button>
+      <div class="drawerTop">
+        <span class="drawerCat \${srcClass(p.cat)}">\${meta.code} \\u2014 \${esc(meta.label.toUpperCase())}</span>
+        <button class="drawerClose" id="drawer-close" type="button">Close \\u2715</button>
       </div>
       <h2>\${esc(p.name)}</h2>
       <p class="sponsor">\${esc(p.sponsor)}</p>
-      \${p.expired ? '<div class="past-banner">This application window has closed. Kept for reference \\u2014 check the funder\\'s page for a future cycle.</div>' : ""}
+      \${p.expired ? '<div class="pastBanner">This application window has closed. Kept for reference \\u2014 check the funder\\'s page for a future cycle.</div>' : ""}
       <div class="facts">
-        <div class="fact"><div class="fact-k">Award</div><div class="fact-v">\${esc(p.amount || "\\u2014")}</div></div>
-        <div class="fact"><div class="fact-k">Deadline</div><div class="fact-v">\${esc(p.deadline || "\\u2014")}</div></div>
+        <div class="fact"><div class="factK">Award</div><div class="factV">\${esc(p.amount || "\\u2014")}</div></div>
+        <div class="fact"><div class="factK">Deadline</div><div class="factV">\${esc(p.deadline || "\\u2014")}</div></div>
       </div>
       <p class="lede">\${esc(p.desc)}</p>
-      <div class="sec"><div class="sec-h">Who can apply</div><p>\${esc(p.eligibility)}</p></div>
-      <div class="sec"><div class="sec-h">How to apply</div><p>\${esc(p.apply)}</p></div>
+      <div class="sec"><div class="secH">Who can apply</div><p>\${esc(p.eligibility)}</p></div>
+      <div class="sec"><div class="secH">How to apply</div><p>\${esc(p.apply)}</p></div>
       <div class="sec">
-        <div class="sec-h">Links</div>
+        <div class="secH">Links</div>
         <div class="links">
           \${(p.links || []).map(l => \`<a href="\${esc(l.url)}" target="_blank" rel="noopener">\${esc(l.label)} \\u2197</a>\`).join("")}
         </div>

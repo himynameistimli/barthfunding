@@ -3,55 +3,61 @@ import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
 import { THERAPIES, DELIVERY, WHO, REFERENCES, STAGE_LABELS } from "../data/therapies.mjs";
 import { LAST_UPDATED } from "../data/programs.mjs";
+import a from "../styles/app.module.scss";
+import th from "../styles/therapies.module.scss";
 
 const FAMILY_LABEL = { care: "Care", compensatory: "Compensatory", "root-cause": "Root-cause" };
 const CELL = {
-  none: { text: "→", cls: "sym-flat", title: "essentially unchanged" },
-  up: { text: "↑", cls: "sym-up", title: "improves / increases" },
-  na: { text: "—", cls: "sym-na", title: "not a direct effect" },
-  corrects: { text: "↓ corrects", cls: "sym-fix", title: "fixes the lipid defect" },
-  normalizes: { text: "✓ normalizes", cls: "sym-fix", title: "fixes the lipid defect" },
-  restores: { text: "✓ restores", cls: "sym-fix", title: "fixes the lipid defect" },
-  principle: { text: "✓ in principle", cls: "sym-fix", title: "corrects in principle" }
+  none: { text: "→", cls: th.symFlat, title: "essentially unchanged" },
+  up: { text: "↑", cls: th.symUp, title: "improves / increases" },
+  na: { text: "—", cls: th.symNa, title: "not a direct effect" },
+  corrects: { text: "↓ corrects", cls: th.symFix, title: "fixes the lipid defect" },
+  normalizes: { text: "✓ normalizes", cls: th.symFix, title: "fixes the lipid defect" },
+  restores: { text: "✓ restores", cls: th.symFix, title: "fixes the lipid defect" },
+  principle: { text: "✓ in principle", cls: th.symFix, title: "corrects in principle" }
 };
+
+// family key -> module classes (dynamic names can't be looked up by string)
+const FAM_TAG = { care: th.famCare, compensatory: th.famCompensatory, "root-cause": th.famRootCause };
+const CARD_MOD = { care: th.cardCare, compensatory: th.cardCompensatory, "root-cause": th.cardRootCause };
 const pct = stage => Math.max(3, Math.min(100, (stage / 4) * 100));
 ---
 <Base
   title="Therapy progress in Barth syndrome"
   description="Every current and emerging Barth syndrome therapy — by mechanism, by what it does to the cardiolipin defect, by delivery route, and by how close it is to real use."
 >
-  <div class="shell">
+  <div class={a.shell}>
     <Rail />
-    <main class="doc therapy-page">
-    <p class="crumb"><a href="/">← Funding index</a></p>
+    <main class={`${a.doc} ${th.page}`}>
+    <p class={a.crumb}><a href="/">← Funding index</a></p>
     <h1>Therapy progress</h1>
-    <p class="sponsor">Every current and emerging approach — by mechanism, by what it does to the cardiolipin defect, by how it's delivered, and by how close it is to real use.</p>
+    <p class={a.sponsor}>Every current and emerging approach — by mechanism, by what it does to the cardiolipin defect, by how it's delivered, and by how close it is to real use.</p>
 
-    <div class="note note-alt">
+    <div class={`${a.note} ${a.noteAlt} ${th.note}`}>
       <strong>There is now an approved drug.</strong> On <strong>September 19, 2025</strong> the FDA granted accelerated approval to <strong>elamipretide</strong> (brand name <strong>Forzinity</strong>, Stealth BioTherapeutics) — the first treatment ever approved for Barth syndrome, and the first approved mitochondria-targeted drug. It is approved for patients weighing <strong>at least 30 kg</strong>, with important caveats spelled out in its card below.
     </div>
 
-    <div class="note note-alt2">
-      <p style="margin:0 0 8px"><strong>And the gene therapy has moved further than the literature shows.</strong> <span class="pill-unpub">Unpublished</span></p>
+    <div class={`${a.note} ${a.noteAlt2} ${th.note}`}>
+      <p style="margin:0 0 8px"><strong>And the gene therapy has moved further than the literature shows.</strong> <span class={th.pillUnpub}>Unpublished</span></p>
       <p style="margin:0">At the <strong>2026 Barth Syndrome Foundation conference</strong> (July 19–26, Bonita Springs, FL), <strong>Bill Pu's lab</strong> presented an optimized vector called <strong>TAZ-02</strong> — a rebuilt version of the 2020 proof-of-concept therapy with a myotropic capsid, a codon-optimized TAZΔ5 transgene, a muscle-specific promoter, and a <strong>6.7-fold lower dose</strong>. Stated next steps: a pre-IND meeting with the FDA and large-animal toxicity testing. None of it is published — it exists as conference slides.</p>
     </div>
 
-    <p class="prose-p">Every therapy here is trying to solve the same core problem: broken tafazzin (TAZ) means cardiolipin can't be remodeled, so mature cardiolipin falls, the toxic intermediate <strong>MLCL</strong> builds up, the mitochondrial energy machinery destabilizes, and ATP-hungry tissues (heart, skeletal muscle) suffer. What separates the approaches is <strong>where in that chain they intervene</strong> — which splits them into two families — plus a separate question that turns out to matter just as much: <strong>how you physically get the fix into the right cells</strong>.</p>
+    <p class={th.proseP}>Every therapy here is trying to solve the same core problem: broken tafazzin (TAZ) means cardiolipin can't be remodeled, so mature cardiolipin falls, the toxic intermediate <strong>MLCL</strong> builds up, the mitochondrial energy machinery destabilizes, and ATP-hungry tissues (heart, skeletal muscle) suffer. What separates the approaches is <strong>where in that chain they intervene</strong> — which splits them into two families — plus a separate question that turns out to matter just as much: <strong>how you physically get the fix into the right cells</strong>.</p>
 
-    <div class="family-grid">
-      <div class="family-card fam-comp">
-        <h3>● Compensatory strategies</h3>
+    <div class={th.familyGrid}>
+      <div class={th.familyCard}>
+        <h3 class={th.famCompHead}>● Compensatory strategies</h3>
         <p>Leave the broken cardiolipin as-is, but help the surviving mitochondria work better — prop up the machinery, or build more of it, to restore ATP. Treats the consequence, not the cause. Faster to develop; symptomatic. <em>This is where today's only approved drug sits.</em></p>
       </div>
-      <div class="family-card fam-root">
-        <h3>● Root-cause strategies</h3>
+      <div class={th.familyCard}>
+        <h3 class={th.famRootHead}>● Root-cause strategies</h3>
         <p>Fix the lipid or the gene itself — restore functional cardiolipin (or working tafazzin) so the machinery is built correctly. Treats the cause. More curative in concept; earlier and harder to develop.</p>
       </div>
     </div>
 
     <h2>The eight approaches side by side</h2>
-    <div class="table-scroll">
-      <table class="cmp">
+    <div class={th.tableScroll}>
+      <table class={th.cmp}>
         <thead>
           <tr><th>Therapy</th><th>Family</th><th>How it works</th><th>Route</th><th>Cardiolipin</th><th>MLCL</th><th>ATP</th></tr>
         </thead>
@@ -60,9 +66,9 @@ const pct = stage => Math.max(3, Math.min(100, (stage / 4) * 100));
             <tr>
               <th scope="row">
                 <a href={`#${t.slug}`}>{t.name}</a>
-                {t.badge && <span class="pill-approved">{t.badge}</span>}
+                {t.badge && <span class={th.pillApproved}>{t.badge}</span>}
               </th>
-              <td><span class={`fam-tag fam-${t.family}`}>{FAMILY_LABEL[t.family]}</span></td>
+              <td><span class={`${th.famTag} ${FAM_TAG[t.family]}`}>{FAMILY_LABEL[t.family]}</span></td>
               <td>{t.how}</td>
               <td>{t.route}</td>
               <td class={CELL[t.cl].cls} title={CELL[t.cl].title}>{CELL[t.cl].text}</td>
@@ -73,18 +79,18 @@ const pct = stage => Math.max(3, Math.min(100, (stage / 4) * 100));
         </tbody>
       </table>
     </div>
-    <p class="legend"><span class="sym-up">↑</span> improves · <span class="sym-flat">→</span> essentially unchanged · <span class="sym-fix">✓ / ↓</span> fixes the lipid defect · <span class="sym-na">—</span> not a direct effect</p>
+    <p class={th.legend}><span class={th.symUp}>↑</span> improves · <span class={th.symFlat}>→</span> essentially unchanged · <span class={th.symFix}>✓ / ↓</span> fixes the lipid defect · <span class={th.symNa}>—</span> not a direct effect</p>
 
     <h2>The therapies in depth</h2>
     {THERAPIES.map(t => (
-      <section class={`t-card t-${t.family}`} id={t.slug}>
-        <div class="t-head">
+      <section class={`${th.card} ${CARD_MOD[t.family]}`} id={t.slug}>
+        <div class={th.cardHead}>
           <h3>{t.name}</h3>
-          <span class={`fam-tag fam-${t.family}`}>{FAMILY_LABEL[t.family]}{t.badge ? ` · ${t.badge}` : ""}</span>
+          <span class={`${th.famTag} ${FAM_TAG[t.family]}`}>{FAMILY_LABEL[t.family]}{t.badge ? ` · ${t.badge}` : ""}</span>
         </div>
-        <p class="t-tagline">{t.tagline}</p>
+        <p class={th.tagline}>{t.tagline}</p>
 
-        <dl class="t-fields">
+        <dl class={th.fields}>
           <dt>Who leads it</dt><dd>{t.leads}</dd>
           <dt>Mechanism</dt><dd>{t.mechanism}</dd>
           {t.evidence && <><dt>Evidence</dt><dd>{t.evidence}</dd></>}
@@ -95,38 +101,38 @@ const pct = stage => Math.max(3, Math.min(100, (stage / 4) * 100));
         </dl>
 
         {t.taz02 && (
-          <div class="taz02">
-            <p class="taz02-title">TAZ-02 — the rebuilt vector, component by component <span class="pill-unpub">Conference data, unpublished</span></p>
-            <div class="table-scroll">
-              <table class="cmp small">
+          <div class={th.taz02}>
+            <p class={th.taz02Title}>TAZ-02 — the rebuilt vector, component by component <span class={th.pillUnpub}>Conference data, unpublished</span></p>
+            <div class={th.tableScroll}>
+              <table class={`${th.cmp} ${th.small}`}>
                 <thead><tr><th>Component</th><th>Proof-of-concept (2020)</th><th>TAZ-02 (presented 2026)</th></tr></thead>
                 <tbody>
                   {t.taz02.rows.map(r => (
-                    <tr><th scope="row">{r[0]}</th><td>{r[1]}</td><td class="taz02-new">{r[2]}</td></tr>
+                    <tr><th scope="row">{r[0]}</th><td>{r[1]}</td><td class={th.taz02New}>{r[2]}</td></tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <dl class="t-fields">
+            <dl class={th.fields}>
               <dt>TAZ-02 results</dt><dd>{t.taz02.results}</dd>
               <dt>Next steps</dt><dd>{t.taz02.nextSteps}</dd>
             </dl>
-            <p class="taz02-note">{t.taz02.note}</p>
+            <p class={th.taz02Note}>{t.taz02.note}</p>
           </div>
         )}
 
-        <p class="stage-label">Stage: {t.stageNote}</p>
-        <div class="stage-bar"><span style={`width:${pct(t.stage)}%`}></span></div>
-        <div class="stage-ticks">{STAGE_LABELS.map(s => <span>{s}</span>)}</div>
+        <p class={th.stageLabel}>Stage: {t.stageNote}</p>
+        <div class={th.stageBar}><span style={`width:${pct(t.stage)}%`}></span></div>
+        <div class={th.stageTicks}>{STAGE_LABELS.map(s => <span>{s}</span>)}</div>
 
-        <p class="t-takeaway">{t.takeaway}</p>
+        <p class={th.takeaway}>{t.takeaway}</p>
       </section>
     ))}
 
     <h2>The other axis: delivery</h2>
-    <p class="prose-p">Across this whole pipeline, <strong>the payload is usually the easy part; getting it into heart and skeletal muscle is the hard part.</strong> The four below aren't therapies — they're the vehicles the therapies ride in, and a better vehicle can rescue a payload that already works.</p>
-    <div class="table-scroll">
-      <table class="cmp">
+    <p class={th.proseP}>Across this whole pipeline, <strong>the payload is usually the easy part; getting it into heart and skeletal muscle is the hard part.</strong> The four below aren't therapies — they're the vehicles the therapies ride in, and a better vehicle can rescue a payload that already works.</p>
+    <div class={th.tableScroll}>
+      <table class={th.cmp}>
         <thead><tr><th>Delivery vehicle</th><th>What it carries</th><th>Barth relevance</th><th>Stage</th></tr></thead>
         <tbody>
           {DELIVERY.map(d => (
@@ -137,9 +143,9 @@ const pct = stage => Math.max(3, Math.min(100, (stage / 4) * 100));
     </div>
 
     <h2>Who's working on what</h2>
-    <p class="prose-p">The labs and companies behind each approach, collapsed into one scannable list.</p>
-    <div class="table-scroll">
-      <table class="cmp">
+    <p class={th.proseP}>The labs and companies behind each approach, collapsed into one scannable list.</p>
+    <div class={th.tableScroll}>
+      <table class={th.cmp}>
         <thead><tr><th>Therapy</th><th>People</th><th>Where</th></tr></thead>
         <tbody>
           {WHO.map(w => (
@@ -150,20 +156,20 @@ const pct = stage => Math.max(3, Math.min(100, (stage / 4) * 100));
     </div>
 
     <h2>Where this leaves things</h2>
-    <p class="prose-p">File the therapies by <strong>where they act</strong>. <strong>Compensatory</strong> approaches (elamipretide, MA-5, NR) leave the cardiolipin defect in place and raise ATP by different tricks — stabilizing the machinery or renewing the mitochondrial population. They're closer to use and lower-risk, but symptomatic, and this is the family that produced the first approved drug. <strong>Root-cause</strong> approaches (ABHD18 inhibition, gene therapy, base editing, enzyme replacement) actually correct the lipid or the gene, so cardiolipin and MLCL move back toward normal — more curative in concept, but earlier and harder, and each is gated by a delivery problem more than a payload problem. Gene therapy is the first of them to have visibly solved its delivery problem.</p>
-    <p class="prose-p">Whether a therapy moves the MLCL:CL ratio sorts it into a family — unchanged means compensatory, corrected means root-cause — but that test alone is not enough to judge one. The Chin-lab penetratin result showed why: plain gene delivery corrected the ratio and still did not improve heart function, so fixing the lipid is <strong>necessary but not always sufficient</strong>. Assessing a therapy takes two questions: <strong>does it move MLCL:CL, and does it move a functional endpoint</strong> — ejection fraction, strain, or muscle strength? The strongest candidates do both.</p>
-    <p class="prose-p">Where that lands today: <strong>supportive care</strong> is the foundation; <strong>elamipretide (Forzinity) is approved</strong> for patients ≥30 kg, on an accelerated pathway with an uneven evidence base behind it; <strong>MA-5</strong> may be next to reach patients, on thin Barth-specific evidence; and among root-cause approaches <strong>gene therapy has pulled clearly ahead</strong>, with an optimized vector characterized in mice and pre-IND work stated as the next step. ABHD18 remains the most mechanistically elegant approach and still has no molecule. Nothing in the root-cause column is in a human yet.</p>
+    <p class={th.proseP}>File the therapies by <strong>where they act</strong>. <strong>Compensatory</strong> approaches (elamipretide, MA-5, NR) leave the cardiolipin defect in place and raise ATP by different tricks — stabilizing the machinery or renewing the mitochondrial population. They're closer to use and lower-risk, but symptomatic, and this is the family that produced the first approved drug. <strong>Root-cause</strong> approaches (ABHD18 inhibition, gene therapy, base editing, enzyme replacement) actually correct the lipid or the gene, so cardiolipin and MLCL move back toward normal — more curative in concept, but earlier and harder, and each is gated by a delivery problem more than a payload problem. Gene therapy is the first of them to have visibly solved its delivery problem.</p>
+    <p class={th.proseP}>Whether a therapy moves the MLCL:CL ratio sorts it into a family — unchanged means compensatory, corrected means root-cause — but that test alone is not enough to judge one. The Chin-lab penetratin result showed why: plain gene delivery corrected the ratio and still did not improve heart function, so fixing the lipid is <strong>necessary but not always sufficient</strong>. Assessing a therapy takes two questions: <strong>does it move MLCL:CL, and does it move a functional endpoint</strong> — ejection fraction, strain, or muscle strength? The strongest candidates do both.</p>
+    <p class={th.proseP}>Where that lands today: <strong>supportive care</strong> is the foundation; <strong>elamipretide (Forzinity) is approved</strong> for patients ≥30 kg, on an accelerated pathway with an uneven evidence base behind it; <strong>MA-5</strong> may be next to reach patients, on thin Barth-specific evidence; and among root-cause approaches <strong>gene therapy has pulled clearly ahead</strong>, with an optimized vector characterized in mice and pre-IND work stated as the next step. ABHD18 remains the most mechanistically elegant approach and still has no molecule. Nothing in the root-cause column is in a human yet.</p>
 
-    <div class="note note-warn">
+    <div class={`${a.note} ${a.noteWarn} ${th.note}`}>
       This is an educational synthesis of the published science, <strong>not medical advice</strong>, and preclinical results in cells, flies, and mice do not reliably predict what helps a patient. Even the approved drug carries real nuance — an accelerated approval on a surrogate endpoint, a ≥30 kg weight limit, and daily injections. Several items here, including over-the-counter NR, are not proven for Barth. Any decision about care belongs with a metabolic specialist and cardiologist who know the specific mutation, weight, and clinical picture.
     </div>
 
     <h2>References</h2>
-    <div class="note">
+    <div class={`${a.note} ${th.note}`}>
       <strong>The capsid swap is real, but it is not in the literature.</strong> Pu's <em>published</em> gene therapy used AAV9 — the 2020 <em>Circulation Research</em> paper below — and the lab's most recent Barth <em>publication</em> (2025) is a new mouse model, not a therapy. The optimized TAZ-02 vector was presented at the 2026 BSF conference and has not been published, so a literature search alone will place the program where it stood in 2020. It should be cited as conference data, not as peer-reviewed work.
     </div>
     {REFERENCES.map(g => (
-      <div class="ref-group">
+      <div class={th.refGroup}>
         <h3>{g.group}</h3>
         <ul>
           {g.items.map(i => (
@@ -173,118 +179,7 @@ const pct = stage => Math.max(3, Math.min(100, (stage / 4) * 100));
       </div>
     ))}
 
-    <p class="src-note">Synthesized from the August 2026 Barth therapy comparative review. Preclinical items are lab-stage, not available treatments. Spot something out of date? <a href="/suggest-update/">Suggest an update</a>.</p>
+    <p class={th.srcNote}>Synthesized from the August 2026 Barth therapy comparative review. Preclinical items are lab-stage, not available treatments. Spot something out of date? <a href="/suggest-update/">Suggest an update</a>.</p>
     </main>
   </div>
-</Base>
-
-<style is:global>
-  .therapy-page { max-width: 880px; }
-  .therapy-page p { max-width: 68ch; }
-  .pill-unpub, .pill-approved {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    padding: 2px 7px; border-radius: 0; white-space: nowrap; margin-left: 6px;
-  }
-  .pill-unpub { background: var(--gen-bg); color: var(--gen); }
-  .pill-approved { background: var(--npo-bg); color: var(--npo); }
-
-  .family-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 20px 0 8px; }
-  .family-card { border: 1px solid var(--line); border-radius: 0; padding: 14px 18px; background: var(--surface); }
-  .family-card h3 {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 15px; margin: 0 0 6px;
-  }
-  .family-card p { font-size: 14.5px; margin: 0; color: var(--ink-soft); }
-  .fam-comp h3 { color: var(--npo); }
-  .fam-root h3 { color: var(--gen); }
-
-  .table-scroll { overflow-x: auto; margin: 14px 0; border: 1px solid var(--line); border-radius: 0; background: var(--surface); }
-  table.cmp { border-collapse: collapse; width: 100%; font-size: 14px; }
-  table.cmp.small { font-size: 13.5px; }
-  table.cmp th, table.cmp td {
-    text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line);
-  }
-  table.cmp thead th {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
-    color: var(--ink-faint); background: var(--ground); position: sticky; top: 0;
-  }
-  table.cmp tbody tr:last-child th, table.cmp tbody tr:last-child td { border-bottom: none; }
-  table.cmp tbody th {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-weight: 700; font-size: 14px; min-width: 130px;
-  }
-  table.cmp tbody th a { color: inherit; text-decoration: none; }
-  table.cmp tbody th a:hover { color: var(--accent); }
-  .taz02-new { color: var(--gen); font-weight: 600; }
-  .sym-up { color: var(--accent); font-weight: 700; }
-  .sym-fix { color: var(--gen); font-weight: 700; white-space: nowrap; }
-  .sym-flat, .sym-na { color: var(--ink-faint); }
-  .legend { font-size: 13px; color: var(--ink-faint); margin-top: -4px; }
-
-  .fam-tag {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
-    padding: 3px 9px; border-radius: 0; white-space: nowrap; display: inline-block;
-  }
-  .fam-care { background: var(--gov-bg); color: var(--gov); }
-  .fam-compensatory { background: var(--npo-bg); color: var(--npo); }
-  .fam-root-cause { background: var(--gen-bg); color: var(--gen); }
-
-  .t-card {
-    border: 1px solid var(--line); border-radius: 0; background: var(--surface);
-    padding: 20px 22px; margin: 18px 0; scroll-margin-top: 70px;
-  }
-  .t-compensatory { border-left: 3px solid var(--npo); }
-  .t-root-cause { border-left: 3px solid var(--gen); }
-  .t-care { border-left: 3px solid var(--gov); }
-  .t-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-  .t-card h3 {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 19px; font-weight: 700; margin: 0;
-  }
-  .t-tagline { color: var(--ink-soft); font-size: 14.5px; margin: 6px 0 14px; }
-  dl.t-fields { display: grid; grid-template-columns: 132px 1fr; gap: 10px 18px; margin: 0 0 14px; }
-  dl.t-fields dt {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 12.5px; font-weight: 700; color: var(--ink-faint);
-  }
-  dl.t-fields dd { margin: 0; font-size: 15px; }
-  @media (max-width: 560px) {
-    dl.t-fields { grid-template-columns: 1fr; gap: 3px; }
-    dl.t-fields dd { margin-bottom: 10px; }
-  }
-  .taz02 { border: 1px solid var(--line); border-radius: 0; padding: 14px 16px; margin: 4px 0 16px; background: var(--ground); }
-  .taz02-title {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--gen); margin: 0 0 4px;
-  }
-  .taz02-note { font-size: 13px; color: var(--ink-faint); margin: 0; }
-  .stage-label {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 13px; font-weight: 600; color: var(--accent); margin: 6px 0 6px;
-  }
-  .stage-bar { height: 4px; border-radius: 0; background: var(--line); overflow: hidden; }
-  .stage-bar span { display: block; height: 100%; background: var(--accent); border-radius: 0; }
-  .t-root-cause .stage-bar span { background: var(--gen); }
-  .t-root-cause .stage-label { color: var(--gen); }
-  .stage-ticks {
-    display: flex; justify-content: space-between; margin-top: 5px;
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 10.5px; color: var(--ink-faint);
-  }
-  .t-takeaway { margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 15px; }
-
-  .ref-group { margin-bottom: 16px; }
-  .ref-group h3 {
-    font-family: "Avenir Next", Avenir, Seravek, -apple-system, "Segoe UI", sans-serif;
-    font-size: 11.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
-    color: var(--ink-faint); margin: 0 0 6px;
-  }
-  .ref-group ul { margin: 0; padding-left: 20px; }
-  .ref-group li { font-size: 14px; margin-bottom: 7px; }
-  .src-note { font-size: 13px; color: var(--ink-faint); border-top: 1px solid var(--line); padding-top: 14px; margin-top: 26px; }
-</style>
 </Base>

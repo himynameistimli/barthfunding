@@ -1,0 +1,9 @@
+// Unhashed build of the same rules, for the generated single-file page.
+// Compiled by scripts/build-standalone.mjs — class names stay literal so the
+// standalone's own markup generator can use them directly.
+@use "tokens";
+@use "global";
+@use "shell";
+@use "table";
+@use "panel";
+@use "doc";

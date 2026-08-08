@@ -1,0 +1,106 @@
+// Document pages: grant detail and the written content pages.
+@use "tokens" as t;
+@use "mixins" as m;
+
+.doc {
+  padding: 32px 40px 64px;
+  max-width: 760px;
+  min-width: 0;
+
+  @media (max-width: t.$bp-narrow) { padding: 24px 16px 56px; }
+
+  h1 {
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.12;
+    margin: 12px 0 4px;
+    text-wrap: balance;
+  }
+
+  h2 {
+    @include m.label;
+    border-top: 1px solid var(--ink);
+    padding-top: 8px;
+    margin: 30px 0 8px;
+  }
+
+  p { max-width: 68ch; }
+
+  ul {
+    margin: 0 0 14px;
+    padding-left: 20px;
+    max-width: 68ch;
+  }
+
+  li {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+}
+
+// Full-bleed variant: wide tables use the whole column, prose keeps a measure.
+.docWide {
+  max-width: none;
+}
+
+.crumb {
+  font-size: 12px;
+  margin: 0 0 18px;
+
+  a {
+    border: none;
+    font-weight: 600;
+  }
+}
+
+.proseP {
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  a {
+    @include m.mono(11px);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    padding: 2px 7px;
+
+    &:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  }
+}
+
+.docFoot {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 32px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.note {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  padding: 12px 16px;
+  margin: 18px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.noteAlt { border-left-color: var(--npo); }
+.noteAlt2 { border-left-color: var(--gen); }
+.noteWarn { border-left-color: var(--corp); }
+
+.mono {
+  @include m.mono(12px);
+}
