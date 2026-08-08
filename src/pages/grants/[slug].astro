@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import Rail from "../../components/Rail.astro";
 import s from "../../styles/app.module.scss";
 import { PROGRAMS, LAST_UPDATED, TYPE_LABELS, FOCUS_LABELS } from "../../data/programs.mjs";
-import { CONTACT_EMAIL } from "../../data/site.mjs";
+import { CONTACT_EMAIL, SITE_URL } from "../../data/site.mjs";
 
 export function getStaticPaths() {
   return PROGRAMS.map(p => ({ params: { slug: p.slug }, props: { program: p } }));
@@ -21,8 +21,18 @@ const meta = CAT_META[p.cat] || { code: "—", label: "" };
 const srcClass = s["src" + p.cat.charAt(0).toUpperCase() + p.cat.slice(1)];
 const permalinkPath = `/grants/${p.slug}/`;
 const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Funding directory update: ${p.name}`)}`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MonetaryGrant",
+  name: p.name,
+  description: p.desc,
+  url: `${SITE_URL}${permalinkPath}`,
+  funder: { "@type": "Organization", name: p.sponsor },
+  ...(p.links?.[0] ? { sameAs: p.links.map(l => l.url) } : {})
+};
 ---
-<Base title={`${p.name} — Barth Syndrome Research Funding`} description={p.desc.slice(0, 155)}>
+<Base title={`${p.name} — Barth Syndrome Research Funding`} description={p.desc.slice(0, 155)} jsonLd={jsonLd}>
   <div class={s.shell}>
     <Rail />
     <main class={s.doc}>

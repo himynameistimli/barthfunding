@@ -4,11 +4,19 @@ import Rail from "../components/Rail.astro";
 import s from "../styles/app.module.scss";
 import { CONTACT_EMAIL } from "../data/site.mjs";
 import { LAST_UPDATED } from "../data/programs.mjs";
+import { SITE_URL } from "../data/site.mjs";
 const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Funding index update request")}`;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Suggest an update",
+  url: `${SITE_URL}/suggest-update/`
+};
 ---
 <Base
   title="Suggest an update"
   description="Report a changed deadline, broken link, or missing program in the Barth syndrome funding index."
+  jsonLd={jsonLd}
 >
   <div class={s.shell}>
     <Rail />

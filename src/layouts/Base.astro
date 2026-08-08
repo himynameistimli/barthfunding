@@ -1,6 +1,11 @@
 ---
 import "../styles/global.scss";
-const { title, description } = Astro.props;
+import { SITE_URL, SITE_NAME } from "../data/site.mjs";
+
+// jsonLd: an object or array of schema.org objects, serialized into the head.
+const { title, description, jsonLd } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const blocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 <!doctype html>
 <html lang="en">
@@ -9,7 +14,17 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧬</text></svg>" />
+    {blocks.map(b => (
+      <script type="application/ld+json" set:html={JSON.stringify(b)} />
+    ))}
   </head>
   <body>
     <slot />

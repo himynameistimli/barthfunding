@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
 import s from "../styles/app.module.scss";
 import { PROGRAMS, AWARD_MAX_USD, CAT_LABELS, TYPE_LABELS, FOCUS_LABELS } from "../data/programs.mjs";
+import { SITE_URL, SITE_NAME } from "../data/site.mjs";
 
 // Headline counts only programs a researcher can still apply to.
 const expiredNames = new Set(PROGRAMS.filter(p => p.expired).map(p => p.name));
@@ -17,10 +18,33 @@ const CAT_META = {
   corporate: { code: "CORP", label: "Corporate / industry" },
   general: { code: "GEN", label: "General biomedical" }
 };
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: `A maintained index of ${PROGRAMS.length} funding programs open to researchers and organizations working on Barth syndrome.`
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Barth syndrome research funding programs",
+    numberOfItems: PROGRAMS.length,
+    itemListElement: PROGRAMS.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: p.name,
+      url: `${SITE_URL}/grants/${p.slug}/`
+    }))
+  }
+];
 ---
 <Base
   title="Barth Syndrome Research Funding Index"
   description={`${headlineTotal} in grants, fellowships, and support programs open to researchers and organizations working on Barth syndrome.`}
+  jsonLd={jsonLd}
 >
   <div class={s.shell}>
     <Rail headline={headlineTotal} showFilters={true} />

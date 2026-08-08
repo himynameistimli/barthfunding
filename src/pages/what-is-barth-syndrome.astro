@@ -3,10 +3,66 @@ import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
 import s from "../styles/app.module.scss";
 import { LAST_UPDATED } from "../data/programs.mjs";
+import { SITE_URL } from "../data/site.mjs";
+
+const FAQ = [
+  {
+    q: "What causes Barth syndrome?",
+    a: "Mutations in the TAFAZZIN gene on the X chromosome. The gene encodes tafazzin, an enzyme that remodels cardiolipin, a lipid the inner mitochondrial membrane needs for efficient energy production. Without working tafazzin, cells accumulate monolysocardiolipin and mitochondrial energy output drops."
+  },
+  {
+    q: "How is Barth syndrome inherited?",
+    a: "It is X-linked. Mothers who carry a TAFAZZIN variant have a 50% chance of passing it to each child; sons who inherit it are affected, daughters who inherit it are carriers. It almost exclusively affects males."
+  },
+  {
+    q: "How is it diagnosed?",
+    a: "Two routes: sequencing that covers the TAFAZZIN gene (targeted test, gene panel, or exome/genome), and the monolysocardiolipin-to-cardiolipin (MLCL/CL) ratio measured from a dried blood spot, which is elevated in Barth syndrome with near-complete sensitivity and specificity. Elevated urine 3-methylglutaconic acid can be an early clue but fluctuates."
+  },
+  {
+    q: "Is there a treatment?",
+    a: "The first disease-specific therapy, FORZINITY (elamipretide), received FDA accelerated approval in September 2025 for patients weighing at least 30 kg. Care otherwise centers on managing the heart, infection risk from neutropenia, nutrition, and physical therapy. Several further therapies, including gene therapy, are in development."
+  },
+  {
+    q: "How rare is it?",
+    a: "Only a few hundred individuals are diagnosed worldwide. The condition is believed to be underdiagnosed, partly because only two laboratories worldwide are known to offer the clinical MLCL/CL assay."
+  },
+  {
+    q: "Where can families find support?",
+    a: "The Barth Syndrome Foundation (barthsyndrome.org) connects families, clinicians, and researchers, runs a registry and a biennial conference, and funds research."
+  }
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalCondition",
+    name: "Barth syndrome",
+    alternateName: ["BTHS", "3-methylglutaconic aciduria type II", "TAFAZZIN deficiency"],
+    description: "A rare X-linked genetic disease caused by TAFAZZIN mutations affecting cardiolipin remodeling in mitochondria, presenting with cardiomyopathy, neutropenia, skeletal myopathy, growth delay, and 3-methylglutaconic aciduria.",
+    url: `${SITE_URL}/what-is-barth-syndrome/`,
+    signOrSymptom: [
+      { "@type": "MedicalSignOrSymptom", name: "Cardiomyopathy" },
+      { "@type": "MedicalSignOrSymptom", name: "Neutropenia" },
+      { "@type": "MedicalSignOrSymptom", name: "Skeletal myopathy" },
+      { "@type": "MedicalSignOrSymptom", name: "Growth delay" },
+      { "@type": "MedicalSignOrSymptom", name: "3-methylglutaconic aciduria" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map(f => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a }
+    }))
+  }
+];
 ---
 <Base
   title="What is Barth syndrome?"
   description="Barth syndrome is a rare X-linked genetic disease caused by TAFAZZIN mutations, affecting the heart, immune system, and muscles."
+  jsonLd={jsonLd}
 >
   <div class={s.shell}>
     <Rail />
@@ -39,6 +95,14 @@ import { LAST_UPDATED } from "../data/programs.mjs";
 
       <h2>Living with Barth syndrome</h2>
       <p class={s.proseP}>Care is multidisciplinary: cardiology (heart-failure management, and transplant in severe cases), immunology and hematology (including G-CSF for neutropenia), nutrition, and physical therapy. The first disease-specific therapy was approved in 2025 — see <a href="/therapies/">therapy progress</a> for the current treatment landscape.</p>
+
+      <h2>Frequently asked questions</h2>
+      {FAQ.map(f => (
+        <div>
+          <p class={s.proseP} style="margin-bottom: 4px;"><strong>{f.q}</strong></p>
+          <p class={s.proseP}>{f.a}</p>
+        </div>
+      ))}
 
       <h2>Learn more</h2>
       <ul>
