@@ -1,8 +1,5 @@
 // The app's scoped stylesheet. Components import this and reference
 // `styles.className`; class names are hashed at build time.
-//
-// The same partials are compiled unhashed by standalone.scss for the
-// single-file build, so rules are authored once.
 @use "shell";
 @use "table";
 @use "panel";

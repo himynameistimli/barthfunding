@@ -1,7 +1,6 @@
 // Program data lives in programs.json — that file is the single source of truth.
 // This module loads it, derives slugs, and validates them.
-// To change program data, edit programs.json (then optionally regenerate the
-// standalone HTML with `npm run build:standalone`).
+// To change program data, edit programs.json.
 import data from "./programs.json";
 
 export const LAST_UPDATED = data.lastUpdated;
