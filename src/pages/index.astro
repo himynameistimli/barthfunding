@@ -72,6 +72,9 @@ const jsonLd = [
     // Category → the module class carrying that category's colour.
     const srcClass = cat => s["src" + cat.charAt(0).toUpperCase() + cat.slice(1)] || "";
 
+    // On stacked/mobile layouts the drawer is cramped — go straight to the page.
+    const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
+
     let state = { q: "", cat: "all", aud: null, type: null, focus: null, showPast: false, sort: "award", dir: "desc" };
 
     const esc = str => String(str ?? "").replace(/[&<>"']/g, c =>
@@ -182,6 +185,11 @@ const jsonLd = [
           <span>Include past programs</span><span class="${s.n}">${PROGRAMS.filter(p => p.expired).length}</span>
         </button>`;
 
+      const activeCount = (state.cat !== "all" ? 1 : 0) + (state.aud ? 1 : 0) + (state.type ? 1 : 0)
+        + (state.focus ? 1 : 0) + (state.showPast ? 1 : 0);
+      const ft = document.getElementById("filters-toggle");
+      if (ft) ft.textContent = activeCount ? `Filters · ${activeCount}` : "Filters";
+
       document.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { state.cat = b.dataset.cat; render(); });
       document.querySelectorAll("[data-aud]").forEach(b => b.onclick = () => { state.aud = b.dataset.aud || null; render(); });
       document.querySelectorAll("[data-type]").forEach(b => b.onclick = () => { state.type = state.type === b.dataset.type ? null : b.dataset.type; render(); });
@@ -216,7 +224,10 @@ const jsonLd = [
       }).join("") : `<div class="${s.empty}"><strong>No programs match.</strong>Try a broader term — “mitochondrial”, “pilot”, or “fellowship”.</div>`;
 
       rowsEl.querySelectorAll("[data-slug]").forEach(r => {
-        r.onclick = () => { location.hash = r.dataset.slug; };
+        r.onclick = () => {
+          if (isMobile()) location.href = "/grants/" + r.dataset.slug + "/";
+          else location.hash = r.dataset.slug;
+        };
       });
 
       const arrows = { name: "sort-name", award: "sort-award", deadline: "sort-deadline" };
@@ -245,6 +256,7 @@ const jsonLd = [
       const slug = decodeURIComponent(location.hash.replace(/^#/, ""));
       const p = PROGRAMS.find(x => x.slug === slug);
       if (!p) { drawerRoot.innerHTML = ""; document.body.style.overflow = ""; return; }
+      if (isMobile()) { location.replace("/grants/" + p.slug + "/"); return; }
       const meta = CAT_META[p.cat] || { code: "—", label: "" };
       drawerRoot.innerHTML = `
         <button class="${s.scrim}" id="scrim" aria-label="Close details" type="button"></button>
@@ -285,6 +297,23 @@ const jsonLd = [
         renderDrawer();
       }
     });
+
+    /* ---------- mobile filter slide-over ---------- */
+    const filterGroups = document.getElementById("filter-groups");
+    const filterScrim = document.getElementById("filter-scrim");
+    const filtersToggle = document.getElementById("filters-toggle");
+    const closeFilters = () => {
+      filterGroups.classList.remove(s.open);
+      filterScrim.classList.remove(s.open);
+      filtersToggle.setAttribute("aria-expanded", "false");
+    };
+    filtersToggle?.addEventListener("click", () => {
+      filterGroups.classList.add(s.open);
+      filterScrim.classList.add(s.open);
+      filtersToggle.setAttribute("aria-expanded", "true");
+    });
+    filterScrim?.addEventListener("click", closeFilters);
+    document.getElementById("filters-close")?.addEventListener("click", closeFilters);
 
     render();
     renderDrawer();

@@ -30,26 +30,31 @@ const NAV = [
       <div>
         <input type="search" id="q" class={s.search} placeholder="Search the index…" aria-label="Search funding programs" />
         <p class={s.count} id="count"></p>
+        <button class={s.filtersToggle} id="filters-toggle" type="button" aria-controls="filter-groups" aria-expanded="false">Filters</button>
       </div>
-      <div>
-        <div class={s.railHead}>Funder</div>
-        <div class={s.railList} id="cat-filters"></div>
-      </div>
-      <div>
-        <div class={s.railHead}>Audience</div>
-        <div class={s.railList} id="aud-filters"></div>
-      </div>
-      <div>
-        <div class={s.railHead}>Award</div>
-        <div class={s.railList} id="type-filters"></div>
-      </div>
-      <div>
-        <div class={s.railHead}>Focus</div>
-        <div class={s.railList} id="focus-filters"></div>
-      </div>
-      <div>
-        <div class={s.railHead}>Status</div>
-        <div class={s.railList} id="status-filters"></div>
+      <button class={s.filterScrim} id="filter-scrim" aria-label="Close filters" type="button"></button>
+      <div class={s.filterGroups} id="filter-groups">
+        <button class={s.filtersClose} id="filters-close" type="button">Done ✕</button>
+        <div>
+          <div class={s.railHead}>Funder</div>
+          <div class={s.railList} id="cat-filters"></div>
+        </div>
+        <div>
+          <div class={s.railHead}>Audience</div>
+          <div class={s.railList} id="aud-filters"></div>
+        </div>
+        <div>
+          <div class={s.railHead}>Award</div>
+          <div class={s.railList} id="type-filters"></div>
+        </div>
+        <div>
+          <div class={s.railHead}>Focus</div>
+          <div class={s.railList} id="focus-filters"></div>
+        </div>
+        <div>
+          <div class={s.railHead}>Status</div>
+          <div class={s.railList} id="status-filters"></div>
+        </div>
       </div>
     </>
   )}
