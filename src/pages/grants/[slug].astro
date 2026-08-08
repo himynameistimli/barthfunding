@@ -2,7 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import Rail from "../../components/Rail.astro";
 import s from "../../styles/app.module.scss";
-import { PROGRAMS, LAST_UPDATED } from "../../data/programs.mjs";
+import { PROGRAMS, LAST_UPDATED, TYPE_LABELS, FOCUS_LABELS } from "../../data/programs.mjs";
 import { CONTACT_EMAIL } from "../../data/site.mjs";
 
 export function getStaticPaths() {
@@ -40,6 +40,8 @@ const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Funding di
       <div class={s.facts}>
         <div class={s.fact}><div class={s.factK}>Award</div><div class={s.factV}>{p.amount || "—"}</div></div>
         <div class={s.fact}><div class={s.factK}>Deadline</div><div class={s.factV}>{p.deadline || "—"}</div></div>
+        <div class={s.fact}><div class={s.factK}>Award type</div><div class={s.factV}>{TYPE_LABELS[p.awardType] || "—"}</div></div>
+        <div class={s.fact}><div class={s.factK}>Focus</div><div class={s.factV}>{(p.focus || []).map(f => FOCUS_LABELS[f]).join(" · ") || "—"}</div></div>
       </div>
 
       <p class={s.lede}>{p.desc}</p>

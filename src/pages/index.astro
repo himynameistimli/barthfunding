@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
 import s from "../styles/app.module.scss";
-import { PROGRAMS, AWARD_MAX_USD, CAT_LABELS } from "../data/programs.mjs";
+import { PROGRAMS, AWARD_MAX_USD, CAT_LABELS, TYPE_LABELS, FOCUS_LABELS } from "../data/programs.mjs";
 
 // Headline counts only programs a researcher can still apply to.
 const expiredNames = new Set(PROGRAMS.filter(p => p.expired).map(p => p.name));
@@ -39,7 +39,7 @@ const CAT_META = {
 
   <div id="drawer-root"></div>
 
-  <script define:vars={{ PROGRAMS, AWARD_MAX_USD, CAT_META, CAT_LABELS, s }}>
+  <script define:vars={{ PROGRAMS, AWARD_MAX_USD, CAT_META, CAT_LABELS, TYPE_LABELS, FOCUS_LABELS, s }}>
     const rowsEl = document.getElementById("rows");
     const countEl = document.getElementById("count");
     const qEl = document.getElementById("q");
@@ -48,7 +48,7 @@ const CAT_META = {
     // Category → the module class carrying that category's colour.
     const srcClass = cat => s["src" + cat.charAt(0).toUpperCase() + cat.slice(1)] || "";
 
-    let state = { q: "", cat: "all", aud: null, showPast: false, sort: "award", dir: "desc" };
+    let state = { q: "", cat: "all", aud: null, type: null, focus: null, showPast: false, sort: "award", dir: "desc" };
 
     const esc = str => String(str ?? "").replace(/[&<>"']/g, c =>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -63,7 +63,8 @@ const CAT_META = {
     }
 
     const hay = p => [p.name, p.sponsor, p.desc, p.eligibility, p.apply, p.amount, p.deadline,
-      (p.tags || []).join(" "), CAT_LABELS[p.cat] || ""].join(" ").toLowerCase();
+      (p.tags || []).join(" "), CAT_LABELS[p.cat] || "", TYPE_LABELS[p.awardType] || "",
+      (p.focus || []).map(f => FOCUS_LABELS[f]).join(" ")].join(" ").toLowerCase();
 
     const audPass = (p, a) => {
       if (!a) return true;
@@ -102,6 +103,8 @@ const CAT_META = {
         if (p.expired && !state.showPast && !opts.ignorePast) return false;
         if (!opts.ignoreCat && state.cat !== "all" && p.cat !== state.cat) return false;
         if (!opts.ignoreAud && !audPass(p, state.aud)) return false;
+        if (!opts.ignoreType && state.type && p.awardType !== state.type) return false;
+        if (!opts.ignoreFocus && state.focus && !(p.focus || []).includes(state.focus)) return false;
         return t.every(x => hay(p).includes(x));
       });
     }
@@ -138,6 +141,18 @@ const CAT_META = {
           <span>${label}</span><span class="${s.n}">${audBase.filter(p => audPass(p, key || null)).length}</span>
         </button>`).join("");
 
+      const typeBase = pool({ ignoreType: true });
+      document.getElementById("type-filters").innerHTML = Object.entries(TYPE_LABELS).map(([key, label]) => `
+        <button class="${s.railBtn}" data-type="${key}" aria-pressed="${state.type === key}" type="button">
+          <span>${label}</span><span class="${s.n}">${typeBase.filter(p => p.awardType === key).length}</span>
+        </button>`).join("");
+
+      const focusBase = pool({ ignoreFocus: true });
+      document.getElementById("focus-filters").innerHTML = Object.entries(FOCUS_LABELS).map(([key, label]) => `
+        <button class="${s.railBtn}" data-focus="${key}" aria-pressed="${state.focus === key}" type="button">
+          <span>${label}</span><span class="${s.n}">${focusBase.filter(p => (p.focus || []).includes(key)).length}</span>
+        </button>`).join("");
+
       document.getElementById("status-filters").innerHTML = `
         <button class="${s.railBtn}" data-past="1" aria-pressed="${state.showPast}" type="button">
           <span>Include past programs</span><span class="${s.n}">${PROGRAMS.filter(p => p.expired).length}</span>
@@ -145,6 +160,8 @@ const CAT_META = {
 
       document.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { state.cat = b.dataset.cat; render(); });
       document.querySelectorAll("[data-aud]").forEach(b => b.onclick = () => { state.aud = b.dataset.aud || null; render(); });
+      document.querySelectorAll("[data-type]").forEach(b => b.onclick = () => { state.type = state.type === b.dataset.type ? null : b.dataset.type; render(); });
+      document.querySelectorAll("[data-focus]").forEach(b => b.onclick = () => { state.focus = state.focus === b.dataset.focus ? null : b.dataset.focus; render(); });
       document.querySelector("[data-past]").onclick = () => { state.showPast = !state.showPast; render(); };
     }
 
@@ -218,6 +235,8 @@ const CAT_META = {
           <div class="${s.facts}">
             <div class="${s.fact}"><div class="${s.factK}">Award</div><div class="${s.factV}">${esc(p.amount || "—")}</div></div>
             <div class="${s.fact}"><div class="${s.factK}">Deadline</div><div class="${s.factV}">${esc(p.deadline || "—")}</div></div>
+            <div class="${s.fact}"><div class="${s.factK}">Award type</div><div class="${s.factV}">${esc(TYPE_LABELS[p.awardType] || "—")}</div></div>
+            <div class="${s.fact}"><div class="${s.factK}">Focus</div><div class="${s.factV}">${esc((p.focus || []).map(f => FOCUS_LABELS[f]).join(" · ") || "—")}</div></div>
           </div>
           <p class="${s.lede}">${esc(p.desc)}</p>
           <div class="${s.sec}"><div class="${s.secH}">Who can apply</div><p>${esc(p.eligibility)}</p></div>

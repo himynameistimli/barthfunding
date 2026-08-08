@@ -79,6 +79,12 @@
           "label": "BSF research home",
           "url": "https://barthsyndrome.org/research/research-home.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical",
+        "clinical"
       ]
     },
     {
@@ -102,6 +108,12 @@
           "label": "SIP page",
           "url": "https://www.barthsyndrome.org/research/sip.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "preclinical",
+        "clinical",
+        "natural-history"
       ]
     },
     {
@@ -136,6 +148,11 @@
           "label": "AHA co-funded research",
           "url": "https://professional.heart.org/en/research-programs/aha-funded-research/co-funded-research"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "training",
+        "basic"
       ]
     },
     {
@@ -163,6 +180,12 @@
           "label": "Application portal",
           "url": "https://umdf.smapply.org/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical",
+        "training"
       ]
     },
     {
@@ -190,6 +213,12 @@
           "label": "Incubator grants",
           "url": "https://www.mito.org.au/amdf-incubator-grants/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical",
+        "clinical"
       ]
     },
     {
@@ -218,6 +247,12 @@
           "label": "Research grants",
           "url": "https://www.mda.org/science/research-grants"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical",
+        "training"
       ]
     },
     {
@@ -246,6 +281,12 @@
           "label": "2026 call (PDF)",
           "url": "https://www.afm-telethon.fr/sites/default/files/media/documents/SCIENTIFIC%20CALL%20FOR%20PROPOSALS%20AFM-TELETHON%202026.pdf"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical",
+        "training"
       ]
     },
     {
@@ -269,6 +310,11 @@
           "label": "NORD research grant programs",
           "url": "https://rarediseases.org/advancing-research/research-grant-programs/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical"
       ]
     },
     {
@@ -297,6 +343,11 @@
           "label": "MDBR site",
           "url": "https://www.milliondollarbikeride.org/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical"
       ]
     },
     {
@@ -320,6 +371,10 @@
           "label": "CCF research programs",
           "url": "https://www.childrenscardiomyopathy.org/pages/physician-resources/research-programs/"
         }
+      ],
+      "awardType": "access",
+      "focus": [
+        "natural-history"
       ]
     },
     {
@@ -352,6 +407,11 @@
           "label": "BioBank",
           "url": "https://geneticalliance.org/biobank"
         }
+      ],
+      "awardType": "access",
+      "focus": [
+        "natural-history",
+        "capacity"
       ]
     },
     {
@@ -380,6 +440,11 @@
           "label": "Submit a data request",
           "url": "https://globalgenes.org/rare-x-submit-data-request/"
         }
+      ],
+      "awardType": "access",
+      "focus": [
+        "natural-history",
+        "capacity"
       ]
     },
     {
@@ -407,6 +472,10 @@
           "label": "Drug Development Symposium support",
           "url": "https://globalgenes.org/rare-drug-development-symposium-advocate-support/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -434,6 +503,10 @@
           "label": "Claim Candid profile",
           "url": "https://candid.org/claim-nonprofit-profile/"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -456,6 +529,10 @@
           "label": "SPARC rare disease",
           "url": "https://sciencephilanthropy.org/focus-areas/rare-disease/"
         }
+      ],
+      "awardType": "partnership",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -484,6 +561,12 @@
           "label": "PA-25-305 (clinical trial required)",
           "url": "https://grants.nih.gov/grants/guide/pa-files/PA-25-305.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical",
+        "clinical"
       ]
     },
     {
@@ -512,6 +595,11 @@
           "label": "R03 PA-25-302",
           "url": "https://grants.nih.gov/grants/guide/pa-files/PA-25-302.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical"
       ]
     },
     {
@@ -536,6 +624,10 @@
           "label": "RFA-TR-25-002",
           "url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-TR-25-002.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "preclinical"
       ]
     },
     {
@@ -560,6 +652,11 @@
           "label": "PAR-25-450",
           "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-450.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "natural-history",
+        "clinical"
       ]
     },
     {
@@ -588,6 +685,11 @@
           "label": "NAMDC",
           "url": "https://namdc.rarediseasesnetwork.org/"
         }
+      ],
+      "awardType": "access",
+      "focus": [
+        "natural-history",
+        "clinical"
       ]
     },
     {
@@ -616,6 +718,10 @@
           "label": "BrIDGs",
           "url": "https://ncats.nih.gov/research/research-activities/bridgs"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "preclinical"
       ]
     },
     {
@@ -643,6 +749,10 @@
           "label": "FDA rare disease programs",
           "url": "https://www.fda.gov/industry/medical-products-rare-diseases-and-conditions"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "clinical"
       ]
     },
     {
@@ -666,6 +776,10 @@
           "label": "Grants.gov listing",
           "url": "https://simpler.grants.gov/opportunity/aeb92aa0-a323-4b96-aa21-0250c6c37a24"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "natural-history"
       ]
     },
     {
@@ -694,6 +808,11 @@
           "label": "PRV reauthorization analysis",
           "url": "https://www.wsgr.com/en/insights/congress-reauthorizes-the-rare-pediatric-disease-priority-review-voucher-program-and-clarifies-orphan-drug-exclusivity.html"
         }
+      ],
+      "awardType": "incentive",
+      "focus": [
+        "preclinical",
+        "clinical"
       ]
     },
     {
@@ -726,6 +845,11 @@
           "label": "eBRAP",
           "url": "https://ebrap.org"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "preclinical",
+        "clinical"
       ]
     },
     {
@@ -751,6 +875,10 @@
           "label": "NIH SEED portal",
           "url": "https://seed.nih.gov"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "preclinical"
       ]
     },
     {
@@ -783,6 +911,10 @@
           "label": "RFA-HL-26-017",
           "url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-HL-26-017.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "preclinical"
       ]
     },
     {
@@ -807,6 +939,11 @@
           "label": "ERDERA calls",
           "url": "https://erdera.org/call/joint-transnational-call-2026/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical"
       ]
     },
     {
@@ -830,6 +967,12 @@
           "label": "MRC applicant-led grants",
           "url": "https://www.ukri.org/opportunity/mrc-research-grant-applicant-led/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical",
+        "clinical"
       ]
     },
     {
@@ -856,6 +999,11 @@
           "label": "Rare Disease Research Initiative",
           "url": "https://cihr-irsc.gc.ca/e/53511.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "clinical"
       ]
     },
     {
@@ -883,6 +1031,10 @@
           "label": "Small organizations track (Fall 2026)",
           "url": "https://www.pcori.org/funding-opportunities/announcement/engagement-award-building-capacity-small-organizations-engage-patient-centered-comparative-clinical-effectiveness-research-cer-fall-2026-cycle"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -910,6 +1062,10 @@
           "label": "Permission change (NOT-OD-26-040)",
           "url": "https://www.grants.nih.gov/grants/guide/notice-files/NOT-OD-26-040.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -946,6 +1102,10 @@
           "label": "EAP protocol (ClinicalTrials.gov)",
           "url": "https://clinicaltrials.gov/study/NCT04689360"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "clinical"
       ]
     },
     {
@@ -973,6 +1133,11 @@
           "label": "US ESR page",
           "url": "https://alexion.us/externally-sponsored-research"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "preclinical",
+        "clinical"
       ]
     },
     {
@@ -999,6 +1164,11 @@
           "label": "Rare disease areas",
           "url": "https://www.pfizer.com/about/programs-policies/grants/investigator-sponsored-research/rare-disease"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "preclinical",
+        "clinical"
       ]
     },
     {
@@ -1026,6 +1196,10 @@
           "label": "Current RFPs / areas of interest",
           "url": "https://www.bms.com/researchers-and-partners/independent-research/competitive-research-grants.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "clinical"
       ]
     },
     {
@@ -1054,6 +1228,10 @@
           "label": "Clinical site engagement",
           "url": "https://ihopegenetichealth.org/clinical-partners/clinical-site-engagement"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "tools"
       ]
     },
     {
@@ -1080,6 +1258,11 @@
           "label": "Local SMRT Grants",
           "url": "https://www.pacb.com/engage/smrt-grant/local-smrt-grant/"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "tools",
+        "basic"
       ]
     },
     {
@@ -1107,6 +1290,10 @@
           "label": "UMDF genetic testing",
           "url": "https://umdf.org/genetictesting/"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "tools"
       ]
     },
     {
@@ -1130,6 +1317,10 @@
           "label": "Charles River rare disease",
           "url": "https://www.criver.com/therapeutic-area/rare-disease"
         }
+      ],
+      "awardType": "partnership",
+      "focus": [
+        "preclinical"
       ]
     },
     {
@@ -1162,6 +1353,10 @@
           "label": "BSF gene replacement overview",
           "url": "https://www.barthsyndrome.org/research/clinicaltrials/genereplacementtherapy.html"
         }
+      ],
+      "awardType": "partnership",
+      "focus": [
+        "preclinical"
       ]
     },
     {
@@ -1194,6 +1389,10 @@
           "label": "NVIDIA academic grants",
           "url": "https://developer.nvidia.com/higher-education-and-research"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "tools"
       ]
     },
     {
@@ -1225,6 +1424,10 @@
           "label": "Clinical Research Pavilion",
           "url": "https://umdfconference.org/clinical-research-pavilion/"
         }
+      ],
+      "awardType": "access",
+      "focus": [
+        "natural-history"
       ]
     },
     {
@@ -1248,6 +1451,11 @@
           "label": "Young Investigator Draft",
           "url": "https://www.upliftingathletes.org/young-investigator-draft/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "training"
       ]
     },
     {
@@ -1272,6 +1480,11 @@
           "label": "Sanofi iAwards",
           "url": "https://www.sanofi.com/en/our-science/external-innovation/north-america/iawards"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "preclinical"
       ]
     },
     {
@@ -1297,6 +1510,12 @@
           "label": "Grants & studies",
           "url": "https://www.rarediseases.sanofimedical.com/resources/grants-studies"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "training",
+        "capacity",
+        "clinical"
       ]
     },
     {
@@ -1320,6 +1539,11 @@
           "label": "Takeda IIR",
           "url": "https://www.takeda.com/science/research-and-development/partnerships/iir/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "clinical"
       ]
     },
     {
@@ -1343,6 +1567,11 @@
           "label": "Astellas external funding",
           "url": "https://www.astellas.com/en/science/research-and-development/external-funding"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "clinical",
+        "natural-history"
       ]
     },
     {
@@ -1367,6 +1596,11 @@
           "label": "opnMe.com",
           "url": "https://www.opnme.com/"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "basic",
+        "preclinical"
       ]
     },
     {
@@ -1390,6 +1624,10 @@
           "label": "BioMarin external research",
           "url": "https://www.biomarin.com/science/external-scientific-support/external-research/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "clinical"
       ]
     },
     {
@@ -1419,6 +1657,11 @@
           "label": "Alnylam IIS",
           "url": "https://www.alnylam.com/about-alnylam/investigator-initiated-studies"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity",
+        "clinical"
       ]
     },
     {
@@ -1448,6 +1691,11 @@
           "label": "Ultragenyx bootcamp page",
           "url": "https://www.ultragenyx.com/rare-entrepreneur-bootcamp/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "clinical",
+        "capacity"
       ]
     },
     {
@@ -1473,6 +1721,10 @@
           "label": "Healx RTA",
           "url": "https://healx.ai/healx-rta-2-0-opens/"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "preclinical"
       ]
     },
     {
@@ -1497,6 +1749,10 @@
           "label": "Physician application",
           "url": "https://www.nlorem.org/physicians/application-for-treatment/"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "clinical"
       ]
     },
     {
@@ -1520,6 +1776,10 @@
           "label": "IGI announcement",
           "url": "https://innovativegenomics.org/news/igi-danaher-crispr-cures/"
         }
+      ],
+      "awardType": "partnership",
+      "focus": [
+        "preclinical"
       ]
     },
     {
@@ -1542,6 +1802,10 @@
           "label": "Oxford Nanopore",
           "url": "https://nanoporetech.com"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "tools"
       ]
     },
     {
@@ -1565,6 +1829,11 @@
           "label": "Agilent ECPA",
           "url": "https://www.agilent.com/univ_relation/profaward/index.shtml"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "tools"
       ]
     },
     {
@@ -1592,6 +1861,11 @@
           "label": "Announcement & application",
           "url": "https://www.anthropic.com/news/rare-disease-research-grants"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "basic",
+        "tools"
       ]
     },
     {
@@ -1619,6 +1893,10 @@
           "label": "Grant guidelines (PDF)",
           "url": "https://alexion.com/-/media/alexion_global/documents/community/global/all/2024/english/acfrarebelongingguidelines2024.pdf"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -1646,6 +1924,10 @@
           "label": "#RAREis Scholarship",
           "url": "https://everylifefoundation.org/rare-scholarship/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -1673,6 +1955,10 @@
           "label": "RFPs",
           "url": "https://www.gene.com/good/giving/corporate-giving/requests-for-proposals"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -1699,6 +1985,10 @@
           "label": "Competitive grants",
           "url": "https://www.pfizer.com/about/programs-policies/grants/competitive-grants"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -1734,6 +2024,10 @@
           "label": "Recordati educational grants",
           "url": "https://medical.recordatirarediseases.com/educational-grants/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -1758,6 +2052,11 @@
           "label": "AWS Imagine Grant",
           "url": "https://aws.amazon.com/government-education/nonprofits/aws-imagine-grant-program/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity",
+        "tools"
       ]
     },
     {
@@ -1794,6 +2093,11 @@
           "label": "TechSoup",
           "url": "https://www.techsoup.org"
         }
+      ],
+      "awardType": "in-kind",
+      "focus": [
+        "capacity",
+        "tools"
       ]
     },
     {
@@ -1827,6 +2131,10 @@
           "label": "K99/R00 parent announcement",
           "url": "https://grants.nih.gov/grants/guide/pa-files/PA-24-193.html"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "training"
       ]
     },
     {
@@ -1854,6 +2162,11 @@
           "label": "Hartwell Postdoc Fellowships",
           "url": "https://thehartwellfoundation.com/Biomedical_Research_Fellowships.shtml"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "preclinical",
+        "basic"
       ]
     },
     {
@@ -1876,6 +2189,11 @@
           "label": "Hood Foundation research grants",
           "url": "https://charleshoodfoundation.org/research-grants/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "clinical"
       ]
     },
     {
@@ -1899,6 +2217,11 @@
           "label": "Gerber research grants",
           "url": "https://www.gerberfoundation.org/research-grants/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "clinical"
       ]
     },
     {
@@ -1928,6 +2251,11 @@
           "label": "Rare As One RFA",
           "url": "https://chanzuckerberg.com/rfa/rare-as-one/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "capacity"
       ]
     },
     {
@@ -1955,6 +2283,11 @@
           "label": "2026 RFP (PDF)",
           "url": "https://www.bwfund.org/wp-content/uploads/2020/10/BWF-CASI-RFP-2026_Final.pdf"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "training",
+        "basic"
       ]
     },
     {
@@ -1982,6 +2315,10 @@
           "label": "PDEP RFP (PDF)",
           "url": "https://www.bwfund.org/wp-content/uploads/2020/10/BWF_PDEP-RFP-2026_v2.pdf"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "training"
       ]
     },
     {
@@ -2004,6 +2341,11 @@
           "label": "Pew Biomedical Scholars",
           "url": "https://www.pew.org/en/projects/pew-biomedical-scholars"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "training"
       ]
     },
     {
@@ -2030,6 +2372,11 @@
           "label": "Process & eligibility",
           "url": "https://searlescholars.org/application-information/award-information/process-and-eligibility/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "training"
       ]
     },
     {
@@ -2062,6 +2409,11 @@
           "label": "FAQ (PDF)",
           "url": "https://www.beckman-foundation.org/documents/514/2026_FAQ_BYI_Program.pdf"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "tools"
       ]
     },
     {
@@ -2088,6 +2440,11 @@
           "label": "Applicant guide (PDF)",
           "url": "https://www.hhmi.org/sites/default/files/2026-05/2028-FHS-HGF-Competition-Applicant-Guide.pdf"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "training"
       ]
     },
     {
@@ -2109,6 +2466,10 @@
           "label": "HHMI Investigator Program",
           "url": "https://www.hhmi.org/programs/investigators"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic"
       ]
     },
     {
@@ -2130,6 +2491,11 @@
           "label": "Vallee Foundation",
           "url": "https://thevalleefoundation.org/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "training"
       ]
     },
     {
@@ -2153,6 +2519,11 @@
           "label": "Rita Allen Scholars",
           "url": "https://ritaallen.org/scholars/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "training"
       ]
     },
     {
@@ -2176,6 +2547,11 @@
           "label": "Doris Duke medical research",
           "url": "https://www.dorisduke.org/funding-areas/medical-research/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "clinical",
+        "training"
       ]
     },
     {
@@ -2207,6 +2583,12 @@
           "label": "Career Development Awards",
           "url": "https://wellcome.org/research-funding/schemes/wellcome-career-development-awards"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "clinical",
+        "training"
       ]
     },
     {
@@ -2235,6 +2617,10 @@
           "label": "2027 competitions overview",
           "url": "https://erc.europa.eu/news-events/news/applying-erc-grant-2027-competitions-what-you-need-know"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic"
       ]
     },
     {
@@ -2263,6 +2649,11 @@
           "label": "HFSP Fellowships",
           "url": "https://www.hfsp.org/funding/hfsp-funding/postdoctoral-fellowships"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic",
+        "training"
       ]
     },
     {
@@ -2290,6 +2681,10 @@
           "label": "How it works",
           "url": "https://experiment.com/how-it-works"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "basic"
       ]
     },
     {
@@ -2312,6 +2707,10 @@
           "label": "RARE Impact Grants",
           "url": "https://globalgenes.org/rare-impact-grant-opportunities/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     },
     {
@@ -2335,6 +2734,10 @@
           "label": "EveryLife Foundation",
           "url": "https://everylifefoundation.org/"
         }
+      ],
+      "awardType": "cash",
+      "focus": [
+        "capacity"
       ]
     }
   ]
