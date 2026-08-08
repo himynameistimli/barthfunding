@@ -55,7 +55,7 @@
       "sponsor": "Barth Syndrome Foundation & International Affiliates",
       "cat": "nonprofit",
       "amount": "IDEA up to $50,000 (1–2 yrs); DEVELOPMENT up to $100,000 (2–3 yrs)",
-      "deadline": "2027 cycle opens ~Jul 31, 2026; full applications due ~Oct 31, 2026",
+      "deadline": "2027 cycle stated to open Jul 31, 2026 — portal still showed closed in early Aug; check",
       "desc": "BSF's grant program for Barth-specific research: seed grants for basic, translational, and clinical research on BTHS — natural history, biochemical basis, and treatment — intended to generate preliminary data for follow-on NIH-scale funding. Indirects are capped at 10%. Young/non-tenured investigators may put up to 75% of funds toward PI salary. Research-participant travel for clinical studies is budgeted outside the cap. BSF affiliates (Canada, UK/Barth Syndrome Trust, Barth Italia, Association Barth France) co-fund through this single program.",
       "eligibility": "Independent investigators with faculty appointments, worldwide — no geographic restrictions. Postdocs cannot apply as PI (they are directed to the AHA/BSF co-funded fellowships instead).",
       "apply": "Apply via BSF's SurveyMonkey Apply portal. An LOI is required for DEVELOPMENT-grant applications and optional for IDEA grants. Annual cycle: opens ~July 31, full applications due Oct 31, awards announced ~March. Guidelines, budget table, and grant policies are downloadable inside the portal. Contacts: Lindsay Marjoram, PhD, Director of Research (lindsay.marjoram@barthsyndrome.org); applications: Melissa Huang, PhD (melissa.huang@barthsyndrome.org).",
@@ -456,7 +456,7 @@
       "sponsor": "Global Genes",
       "cat": "nonprofit",
       "amount": "Up to $800 domestic / $1,200 international per advocate",
-      "deadline": "Per-event applications",
+      "deadline": "Per-event windows; 2026 cycles have passed",
       "desc": "Travel assistance (flights, ground transport, hotel, meals) for in-person attendance at Global Genes events — the RARE Advocacy Summit, RARE Drug Development Symposium, and Week in RARE. First-time recipients are prioritized. Covers attendance costs for BSF staff and community members at advocacy and drug-development training events.",
       "eligibility": "Rare disease advocates; individual application per event; funds contingent on sponsor participation.",
       "apply": "Apply through each event's advocate-support page.",
@@ -779,8 +779,8 @@
       ],
       "links": [
         {
-          "label": "Grants.gov listing",
-          "url": "https://simpler.grants.gov/opportunity/aeb92aa0-a323-4b96-aa21-0250c6c37a24"
+          "label": "RFA-FD-25-017",
+          "url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-FD-25-017.html"
         }
       ],
       "awardType": "cash",
@@ -807,8 +807,8 @@
       ],
       "links": [
         {
-          "label": "FDA rare disease designations",
-          "url": "https://www.fda.gov/industry/medical-products-rare-diseases-and-conditions"
+          "label": "FDA: developing products for rare diseases",
+          "url": "https://www.fda.gov/industry/developing-products-rare-diseases-conditions"
         },
         {
           "label": "PRV reauthorization analysis",
@@ -1154,7 +1154,7 @@
       "sponsor": "Pfizer",
       "cat": "corporate",
       "amount": "Funding and/or drug, project-based",
-      "deadline": "Batched review cycles (windows posted on site)",
+      "deadline": "Portal paused for system migration — reopens after Aug 19, 2026",
       "desc": "Funding and/or drug for investigator-sponsored preclinical and clinical studies involving a Pfizer asset, plus general research projects. Rare-disease areas include ATTR cardiac amyloidosis / rare cardiomyopathy (tafamidis). Pfizer has no active rare-DCM asset; a BTHS proposal would need to connect to the rare-cardiomyopathy areas, for example heart-failure phenotyping methodology.",
       "eligibility": "Qualified researchers at eligible institutions; country lists apply per therapeutic area.",
       "apply": "Via the Pfizer ISR portal (pfizer.com/ISR); applications are reviewed in batched cycles published on the site, with contracting targeted within 60 days of approval.",
@@ -1185,7 +1185,7 @@
       "sponsor": "Bristol Myers Squibb",
       "cat": "corporate",
       "amount": "Funding and/or drug via posted RFPs",
-      "deadline": "RFP-based — check current postings",
+      "deadline": "No RFPs open at present; FastTrack portal stays available",
       "desc": "BMS has moved from rolling submissions to an RFP model with defined areas of interest, including cardiovascular (the mavacamten/Camzyos cardiac-myosin franchise in HCM). A BTHS skeletal/cardiac muscle physiology proposal is eligible only if a current RFP's scope covers inherited cardiomyopathy phenotyping.",
       "eligibility": "External investigators responding to posted RFPs; a profile and CV are required in the portal.",
       "apply": "Register in the FastTrack Investigator Portal and respond to a matching RFP from the competitive research grants listing.",
@@ -1234,10 +1234,6 @@
         {
           "label": "iHope Genetic Health",
           "url": "https://ihopegenetichealth.org"
-        },
-        {
-          "label": "Clinical site engagement",
-          "url": "https://ihopegenetichealth.org/clinical-partners/clinical-site-engagement"
         }
       ],
       "awardType": "in-kind",
@@ -1251,7 +1247,7 @@
       "sponsor": "PacBio",
       "cat": "corporate",
       "amount": "Free long-read sequencing packages (Revio) + bioinformatics",
-      "deadline": "Rolling themed rounds; decisions ~2 months",
+      "deadline": "Themed rounds recur; 2026 metagenomics round closed",
       "desc": "Free long-read sequencing — consumables, library prep, Revio sequencing, and initial bioinformatics via certified service providers — through continually running themed grant rounds plus local/regional SMRT grants. Rounds relevant to BTHS (rare disease / human genetics themes) appear periodically; the application is a 100-word proposal.",
       "eligibility": "Scientists at any level; short-form application.",
       "apply": "Themed windows are posted on the SMRT Grant page; the application is the short proposal, and decisions come ~2 months from submission.",
@@ -1644,12 +1640,12 @@
       ]
     },
     {
-      "name": "Alnylam Advocacy for Impact Grants & IIS",
+      "name": "Alnylam Investigator-Initiated Studies & Grants",
       "sponsor": "Alnylam Pharmaceuticals",
       "cat": "corporate",
-      "amount": "Competitive advocacy grants; IIS funding/drug",
-      "deadline": "Advocacy grants annual cycle; IIS rolling",
-      "desc": "Two routes: Advocacy for Impact Grants are global competitive grants for patient advocacy groups solving unmet needs in rare disease communities (an application guide is published), and an investigator-initiated studies program supports research in Alnylam's areas (ATTR amyloidosis, acute hepatic porphyria, PH1). The IIS areas do not cover mitochondrial disease; the advocacy grants are open to any rare-disease community, including BTHS.",
+      "amount": "IIS funding/drug; educational grants",
+      "deadline": "IIS rolling; advocacy grants no longer listed",
+      "desc": "The investigator-initiated studies program supports research in Alnylam's areas (ATTR amyloidosis, acute hepatic porphyria, PH1) with funding and drug; proposals go through the SteepRock platform. The Advocacy for Impact grants formerly offered to patient advocacy groups are no longer listed on Alnylam's grants pages, with no cycle announced since about 2020; the grants-and-giving page now covers educational grants, sponsorships, and fellowships.",
       "eligibility": "Advocacy grants: patient advocacy organizations. IIS: physicians, pharmacists, and researchers qualified by training.",
       "apply": "Advocacy grants via the annual cycle on Alnylam's site; IIS via the SteepRock platform.",
       "tags": [
@@ -1663,8 +1659,8 @@
       ],
       "links": [
         {
-          "label": "Advocacy for Impact Grants",
-          "url": "https://www.alnylam.com/about-alnylam/grants-and-giving/advocacy-for-impact-grants"
+          "label": "Grants & giving",
+          "url": "https://www.alnylam.com/about-alnylam/grants-and-giving"
         },
         {
           "label": "Alnylam IIS",
@@ -1684,7 +1680,7 @@
       "amount": "IST funding/drug; Bootcamp training (no cash)",
       "deadline": "Rolling (IST); Bootcamp annual",
       "desc": "Ultragenyx has supported 80+ investigator-sponsored trials globally in rare metabolic/genetic disease (funding and drug). Its annual Rare Entrepreneur Bootcamp, run with the EveryLife Foundation, trains patient advocates who fund rare-disease research in drug development, trial design, IP, and pitching.",
-      "eligibility": "ISTs: qualified investigators aligned with Ultragenyx's rare metabolic/genetic focus. Bootcamp: patient advocates and foundation leaders.",
+      "eligibility": "ISTs: qualified investigators aligned with Ultragenyx's rare metabolic/genetic focus. Bootcamp: patient advocates and foundation leaders; attendance is invitation-based for a small number of organizations per cohort.",
       "apply": "Bootcamp applications via rarebootcamp.com; IST inquiries through Ultragenyx medical affairs (no public portal).",
       "tags": [
         "pharma",
@@ -1716,7 +1712,7 @@
       "sponsor": "Healx",
       "cat": "corporate",
       "amount": "Up to ~$1M in-kind AI drug-discovery resources per project",
-      "deadline": "Registration of interest — verify current call",
+      "deadline": "Status unconfirmed — call page dates from 2020",
       "desc": "AI-driven drug-repurposing partnerships with rare-disease patient groups, academics, and early-stage biotechs, aiming to advance repurposed candidates toward the clinic in ~24 months ($20M committed; prior partners include FAST/Angelman and FARA). BSF would apply as a patient-group partner. The 2026 call cadence could not be verified; current status is posted at healx.ai.",
       "eligibility": "Rare-disease patient groups and foundations; expanded to academic groups and biotechs under RTA 2.0.",
       "apply": "Register interest via healx.ai.",
@@ -1829,7 +1825,7 @@
       "sponsor": "Agilent Technologies",
       "cat": "corporate",
       "amount": "$120,000 over 2 years unrestricted (+ product discount)",
-      "deadline": "Annual themed cycle — check current topic",
+      "deadline": "Annual; 2026 nominations closed (internal deadlines ~Feb)",
       "desc": "Unrestricted award for tenure-track faculty on an annual themed topic aligned to measurement science and instrumentation; some years cover metabolomics or cell analysis, the areas relevant to cardiolipin lipidomics method development. A separate invitation-only Thought Leader Award funds research personnel and instrumentation.",
       "eligibility": "Tenure-track faculty within 12 years of PhD/MD; universities may run limited-submission internal competitions.",
       "apply": "Applications go through the Agilent university-relations page when the annual topic is posted; institutions may run limited-submission internal competitions first.",
@@ -1984,7 +1980,7 @@
       "sponsor": "Pfizer",
       "cat": "corporate",
       "amount": "IME ~$10K–$150K; RFPs $5K–$250K",
-      "deadline": "Rolling (general IME); per-RFP deadlines",
+      "deadline": "Portal paused for system migration — reopens after Aug 19, 2026",
       "desc": "Cash grants for independent medical education and quality improvement, with patient advocacy groups explicitly listed as eligible applicants. Grants track posted RFP topics plus a general request channel; rare disease is a Pfizer area, though not BTHS specifically — fit depends on broader cardiomyopathy/rare-disease education RFPs.",
       "eligibility": "Patient advocacy groups, medical societies, med-ed companies, and academic institutions; must align with Pfizer therapeutic areas.",
       "apply": "Respond to posted RFPs or submit a general IME request through Pfizer's online grant portal.",
@@ -2192,7 +2188,7 @@
       "sponsor": "Charles H. Hood Foundation",
       "cat": "general",
       "amount": "$200,000 over 2 years",
-      "deadline": "Two cycles/year; September 2026 cycle open now",
+      "deadline": "Next opportunity posted September 2026",
       "desc": "Hypothesis-driven basic, clinical, public-health, or epidemiological research on child health, aimed at junior investigators; early-career Barth syndrome projects in pediatric cardiomyopathy, neutropenia, or metabolism qualify. Award includes 10% indirects.",
       "eligibility": "Geographically restricted to nonprofit academic, medical, and research institutions in the six New England states. Applicants must be within 5 years (PhD) or 7 years (physician-scientist) of completing training. Open application — no nomination needed.",
       "apply": "Direct application via the foundation's site; two funding cycles per year (January and September). The September 2026 cycle is open; the exact deadline (typically ~April) is posted on the site.",
@@ -2219,7 +2215,7 @@
       "sponsor": "The Gerber Foundation",
       "cat": "general",
       "amount": "Up to $350,000 (Major); up to $30,000 (Novice)",
-      "deadline": "Concept papers ~Feb annually; full proposals Jul 15",
+      "deadline": "2027 cycle announced; dates TBD (concept papers historically ~Feb)",
       "desc": "Health and nutrition research benefiting infants and young children from birth to age 3. Barth-relevant scope: infantile cardiomyopathy and neutropenia diagnosis and management projects. The Novice track (up to $30,000) targets fellows and junior faculty seeking pilot funding.",
       "eligibility": "US nonprofit and academic institutions; open application, no nomination. Novice awards target early-career researchers and fellows.",
       "apply": "Two-stage process: submit a concept paper (2026 deadline was Feb 2; next cycle ~Dec 2026–Feb 2027), then invited full proposals due July 15 with decisions in late November.",
@@ -2521,7 +2517,7 @@
       "sponsor": "Rita Allen Foundation",
       "cat": "general",
       "amount": "Up to $550,000 over 5 years",
-      "deadline": "Institutional nominations ~September annually",
+      "deadline": "Application period Jul 9 – Oct 14, 2026; awards Apr 2027",
       "desc": "Early-career support restricted to cancer, immunology, neuroscience, or pain. Barth syndrome work qualifies only under a neuroscience or innate-immunity/neutropenia framing.",
       "eligibility": "Nomination only — one candidate per selected institution. Independent investigators, preferably within the first 3 years of a tenure-track appointment, at US institutions (citizenship not required). Cannot stack with Beckman/Pew/Searle/Vallee awards starting the same year.",
       "apply": "Nomination runs through each institution's limited-submissions process, ~September for the following year's class.",
@@ -2710,7 +2706,7 @@
       "sponsor": "Global Genes",
       "cat": "general",
       "amount": "Varies by cycle",
-      "deadline": "Cycles announced on site",
+      "deadline": "No cycle announced since 2024",
       "desc": "Grants to patient advocacy organizations in Global Genes' Global Advocacy Alliance for education, patient support, and research-advocacy capacity. Not investigator-initiated science — relevant to the Barth Syndrome Foundation as an organization rather than to individual labs.",
       "eligibility": "Rare-disease patient advocacy organizations that are members of the Global Advocacy Alliance.",
       "apply": "Via the Global Genes prospectus/application when cycles open.",
@@ -2729,7 +2725,8 @@
       "awardType": "cash",
       "focus": [
         "capacity"
-      ]
+      ],
+      "expired": true
     },
     {
       "name": "EveryLife Foundation Programs (advocacy & policy)",
@@ -2929,8 +2926,8 @@
       "apply": "Call 1-833-458-9099 or start with the Patient Enrollment Form on the AnovoRx site, typically initiated with the prescriber.",
       "links": [
         {
-          "label": "Mito Assist announcement",
-          "url": "https://stealthbt.com/stealth-biotherapeutics-announces-mito-assist-patient-support-program-and-specialty-pharmacy-partnership-with-anovorx-to-distribute-forzinityelamipretide-injection/"
+          "label": "Mighty Therapeutics",
+          "url": "https://mightytx.com/"
         }
       ]
     },
