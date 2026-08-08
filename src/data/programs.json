@@ -45,7 +45,6 @@
     "Amgen #RAREis Advocate Grant": 5000,
     "AWS Imagine Grant": 200000,
     "HealthWell Cardiomyopathy — Medicare Access Fund": 7500,
-    "CCF Family Assistance Program": 2000,
     "#RAREis Scholarship": 5000,
     "Mitochondrial Disease & Neuromuscular Student Scholarships": 5000,
     "Marcel's Way Family Fund & Mito411": 500
@@ -178,8 +177,8 @@
       ],
       "links": [
         {
-          "label": "UMDF research grants",
-          "url": "https://www.umdf.org/researchgrants/"
+          "label": "2026 research grant awards",
+          "url": "https://umdf.org/research-grant-award-2026/"
         },
         {
           "label": "Application portal",
@@ -342,11 +341,11 @@
       "links": [
         {
           "label": "Million Dollar Bike Ride",
-          "url": "https://www.orphandiseasecenter.med.upenn.edu/million-dollar-bike-ride"
+          "url": "https://www.milliondollarbikeride.org/"
         },
         {
-          "label": "MDBR site",
-          "url": "https://www.milliondollarbikeride.org/"
+          "label": "Penn Orphan Disease Center",
+          "url": "https://orphandiseasecenter.org/million-dollar-bike-ride"
         }
       ],
       "awardType": "cash",
@@ -405,8 +404,8 @@
           "url": "https://geneticalliance.org/irb"
         },
         {
-          "label": "PEER platform",
-          "url": "https://geneticalliance.org/programs/biotrust/peer"
+          "label": "Registry program (PEER)",
+          "url": "https://geneticalliance.org/programs/g-a-registry"
         },
         {
           "label": "BioBank",
@@ -2895,29 +2894,6 @@
       "focus": [
         "patient-support"
       ],
-      "name": "CCF Family Assistance Program",
-      "sponsor": "Children's Cardiomyopathy Foundation",
-      "cat": "nonprofit",
-      "awardType": "cash",
-      "amount": "Up to $2,000",
-      "deadline": "Rolling",
-      "desc": "Financial assistance up to $2,000 for cardiomyopathy-related expenses incurred within 6 months of receipt, for families of children with cardiomyopathy — which includes Barth syndrome's cardiac presentation.",
-      "eligibility": "US families of pediatric cardiomyopathy patients under a pediatric cardiologist's care; free CCF membership required.",
-      "apply": "Apply through the CCF family assistance page.",
-      "links": [
-        {
-          "label": "CCF Family Assistance",
-          "url": "https://www.childrenscardiomyopathy.org/pages/family-resources/family-assistance-program/"
-        }
-      ]
-    },
-    {
-      "tags": [
-        "for patients"
-      ],
-      "focus": [
-        "patient-support"
-      ],
       "name": "Marcel's Way Family Fund & Mito411",
       "sponsor": "MitoAction",
       "cat": "nonprofit",
@@ -3071,8 +3047,8 @@
           "url": "https://www.mercymedical.org/patients"
         },
         {
-          "label": "Ronald McDonald House",
-          "url": "https://ronaldmcdonaldhouse.org/our-core-programs/ronald-mcdonald-house-programs"
+          "label": "Ronald McDonald House Charities",
+          "url": "https://rmhc.org/"
         }
       ]
     },
