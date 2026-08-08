@@ -22,6 +22,23 @@ const srcClass = s["src" + p.cat.charAt(0).toUpperCase() + p.cat.slice(1)];
 const permalinkPath = `/grants/${p.slug}/`;
 const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Funding directory update: ${p.name}`)}`;
 
+// Related programs: shared focus counts double, then same funder and shared tags.
+// Active programs outrank expired ones at equal score.
+const related = PROGRAMS
+  .filter(x => x.slug !== p.slug)
+  .map(x => {
+    const focusOverlap = (x.focus || []).filter(f => (p.focus || []).includes(f)).length;
+    const tagOverlap = (x.tags || []).filter(t => (p.tags || []).includes(t)).length;
+    const score = focusOverlap * 2 + (x.cat === p.cat ? 1 : 0) + tagOverlap;
+    return { x, score };
+  })
+  .filter(r => r.score > 1)
+  .sort((a, b) => b.score - a.score || (a.x.expired ? 1 : 0) - (b.x.expired ? 1 : 0))
+  .slice(0, 4)
+  .map(r => r.x);
+
+const primaryFocus = (p.focus || [])[0];
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MonetaryGrant",
@@ -70,6 +87,20 @@ const jsonLd = {
           <div class={s.secH}>Tags</div>
           <div class={s.tagRow}>
             {p.tags.map(t => <a href={`/?q=${encodeURIComponent(t)}`}>{t}</a>)}
+          </div>
+        </div>
+      )}
+
+      {related.length > 0 && (
+        <div class={s.sec}>
+          <div class={s.secH}>Related programs</div>
+          <div class={s.links}>
+            {related.map(r => (
+              <a href={`/grants/${r.slug}/`}>{r.name}{r.expired ? " (past)" : ""}</a>
+            ))}
+            {primaryFocus && (
+              <a href={`/?q=${encodeURIComponent(FOCUS_LABELS[primaryFocus])}`}>All {FOCUS_LABELS[primaryFocus].toLowerCase()} programs →</a>
+            )}
           </div>
         </div>
       )}

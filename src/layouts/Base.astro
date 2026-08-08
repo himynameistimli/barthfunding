@@ -25,14 +25,19 @@ const blocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     {blocks.map(b => (
       <script type="application/ld+json" set:html={JSON.stringify(b)} />
     ))}
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQ1FXC6L6Q"></script>
+    <!-- Google tag (gtag.js) — loader injected after window load so it never
+         competes with page rendering; gtag() queues into dataLayer until then. -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-MQ1FXC6L6Q');
+      window.addEventListener('load', function () {
+        var el = document.createElement('script');
+        el.async = true;
+        el.src = 'https://www.googletagmanager.com/gtag/js?id=G-MQ1FXC6L6Q';
+        document.head.appendChild(el);
+      });
     </script>
   </head>
   <body>

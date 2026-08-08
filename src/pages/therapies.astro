@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
 import { THERAPIES, DELIVERY, WHO, REFERENCES, STAGE_LABELS } from "../data/therapies.mjs";
-import { LAST_UPDATED } from "../data/programs.mjs";
+import { LAST_UPDATED, PROGRAMS } from "../data/programs.mjs";
 import { SITE_URL } from "../data/site.mjs";
 import a from "../styles/app.module.scss";
 import th from "../styles/therapies.module.scss";
@@ -22,6 +22,21 @@ const CELL = {
 const FAM_TAG = { care: th.famCare, compensatory: th.famCompensatory, "root-cause": th.famRootCause };
 const CARD_MOD = { care: th.cardCare, compensatory: th.cardCompensatory, "root-cause": th.cardRootCause };
 const pct = stage => Math.max(3, Math.min(100, (stage / 4) * 100));
+
+// Funding programs relevant to each therapy approach, linked from its card.
+const FUNDING = {
+  "supportive-care": ["clinical-trial-readiness-for-rare-diseases-r21", "rare-diseases-clinical-research-network-namdc-collaboration"],
+  "elamipretide": ["forzinity-elamipretide-eap-phase-iv-sites-and-investigator-studies", "fda-orphan-products-grants-clinical-trials-rfa-fd-25-020"],
+  "nr-nad-boosting": ["umdf-research-grant-program", "bsf-research-grant-program-idea-and-development-grants"],
+  "abhd18-inhibition": ["ncats-preclinical-proof-of-concept-studies-for-rare-diseases-r21", "bsf-research-grant-program-idea-and-development-grants"],
+  "gene-therapy-taz-replacement": ["gene-therapy-partnering-routes-rocket-forge-andelyn-askbio", "ncats-trnd-and-bridgs-in-kind-preclinical-development", "nhlbi-catalyze-program-translational-product-development"],
+  "gene-correction-base-editing": ["danaher-igi-beacon-for-crispr-cures-partnering-route"],
+  "enzyme-replacement": ["bsf-research-grant-program-idea-and-development-grants"]
+};
+const grantBySlug = Object.fromEntries(PROGRAMS.map(g => [g.slug, g]));
+for (const [t, slugs] of Object.entries(FUNDING)) {
+  for (const g of slugs) if (!grantBySlug[g]) throw new Error(`FUNDING: unknown grant slug ${g} on ${t}`);
+}
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -142,6 +157,15 @@ const jsonLd = {
         <div class={th.stageTicks}>{STAGE_LABELS.map(s => <span>{s}</span>)}</div>
 
         <p class={th.takeaway}>{t.takeaway}</p>
+
+        {FUNDING[t.slug] && (
+          <p class={th.fundingLine}>
+            Funding for this work:{" "}
+            {FUNDING[t.slug].map((g, i) => (
+              <>{i > 0 && " · "}<a href={`/grants/${g}/`}>{grantBySlug[g].name}</a></>
+            ))}
+          </p>
+        )}
       </section>
     ))}
 
