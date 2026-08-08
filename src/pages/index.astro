@@ -96,7 +96,11 @@ const jsonLd = [
       if (!a) return true;
       const tags = p.tags || [];
       const isOrg = tags.includes("for organizations");
-      return a === "orgs" ? isOrg : (!isOrg || tags.includes("for researchers"));
+      const isPatient = tags.includes("for patients");
+      if (a === "orgs") return isOrg;
+      if (a === "patients") return isPatient;
+      // researchers: explicitly tagged, or not aimed at orgs/patients specifically
+      return tags.includes("for researchers") || (!isOrg && !isPatient);
     };
 
     function parseDeadline(str) {
@@ -161,7 +165,7 @@ const jsonLd = [
         </button>`).join("");
 
       const audBase = pool({ ignoreAud: true });
-      const auds = [["", "Everyone"], ["researchers", "Researchers"], ["orgs", "Advocacy orgs"]];
+      const auds = [["", "Everyone"], ["researchers", "Researchers"], ["orgs", "Advocacy orgs"], ["patients", "Patients & families"]];
       document.getElementById("aud-filters").innerHTML = auds.map(([key, label]) => `
         <button class="${s.railBtn}" data-aud="${key}" aria-pressed="${(state.aud || "") === key}" type="button">
           <span>${label}</span><span class="${s.n}">${audBase.filter(p => audPass(p, key || null)).length}</span>

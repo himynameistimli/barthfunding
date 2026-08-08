@@ -29,7 +29,8 @@ export const FOCUS_LABELS = {
   "natural-history": "Registries & biomarkers",
   training: "Training & careers",
   capacity: "Org capacity",
-  tools: "Tools & compute"
+  tools: "Tools & compute",
+  "patient-support": "Patient & family support"
 };
 
 export function slugify(name) {

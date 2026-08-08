@@ -43,7 +43,12 @@
     "PCORI Eugene Washington Engagement Awards": 300000,
     "NIH R13 Conference Grants (PA-25-080)": 50000,
     "Amgen #RAREis Advocate Grant": 5000,
-    "AWS Imagine Grant": 200000
+    "AWS Imagine Grant": 200000,
+    "HealthWell Cardiomyopathy — Medicare Access Fund": 7500,
+    "CCF Family Assistance Program": 2000,
+    "#RAREis Scholarship": 5000,
+    "Mitochondrial Disease & Neuromuscular Student Scholarships": 5000,
+    "Marcel's Way Family Fund & Mito411": 500
   },
   "programs": [
     {
@@ -461,7 +466,8 @@
         "travel",
         "conference",
         "advocacy",
-        "patients"
+        "patients",
+        "for patients"
       ],
       "links": [
         {
@@ -475,7 +481,8 @@
       ],
       "awardType": "cash",
       "focus": [
-        "capacity"
+        "capacity",
+        "patient-support"
       ]
     },
     {
@@ -1083,7 +1090,9 @@
         "expanded access",
         "clinical trial",
         "elamipretide",
-        "investigator-initiated"
+        "investigator-initiated",
+        "for patients",
+        "for researchers"
       ],
       "links": [
         {
@@ -1105,7 +1114,8 @@
       ],
       "awardType": "in-kind",
       "focus": [
-        "clinical"
+        "clinical",
+        "patient-support"
       ]
     },
     {
@@ -1217,7 +1227,9 @@
         "diagnosis",
         "in-kind",
         "pediatric",
-        "undiagnosed"
+        "undiagnosed",
+        "for patients",
+        "for researchers"
       ],
       "links": [
         {
@@ -1231,7 +1243,8 @@
       ],
       "awardType": "in-kind",
       "focus": [
-        "tools"
+        "tools",
+        "patient-support"
       ]
     },
     {
@@ -1270,8 +1283,8 @@
       "sponsor": "Probably Genetic + UMDF (industry-sponsored)",
       "cat": "corporate",
       "amount": "Free at-home WGS (incl. mtDNA) + genetic counseling",
-      "deadline": "Rolling — verify current status before relying on it",
-      "desc": "Patient-initiated free whole-genome sequencing with genetic counseling for US patients with suspected mitochondrial disease, applicable to BTHS case-finding and diagnosis. The mito-specific portal still exists, but the current sponsor and 2026 program status could not be verified; confirmation is needed before citing the program as active.",
+      "deadline": "Rolling",
+      "desc": "Patient-initiated free testing: a short online symptom quiz, then an at-home saliva kit with whole-genome sequencing including mitochondrial DNA, physician-ordered, with results in about 6–8 weeks and a free genetic counseling appointment. Probably Genetic states it conducts and funds the program itself; UMDF's patient-enabled no-cost testing program with Probably Genetic is also live. Whole-genome sequencing covers TAFAZZIN, but the program does not name it — families should confirm before relying on it for Barth confirmation, and carrier testing of asymptomatic relatives may fall outside the symptom-based eligibility.",
       "eligibility": "US patients and families, initiated via a symptom questionnaire with physician follow-up.",
       "apply": "Through the Probably Genetic mito portal or UMDF's genetic testing page.",
       "tags": [
@@ -1279,7 +1292,7 @@
         "diagnosis",
         "patients",
         "mitochondrial",
-        "unverified"
+        "for patients"
       ],
       "links": [
         {
@@ -1293,7 +1306,8 @@
       ],
       "awardType": "in-kind",
       "focus": [
-        "tools"
+        "tools",
+        "patient-support"
       ]
     },
     {
@@ -1742,7 +1756,9 @@
         "nano-rare",
         "in-kind",
         "clinician",
-        "marginal fit"
+        "marginal fit",
+        "for patients",
+        "for researchers"
       ],
       "links": [
         {
@@ -1752,7 +1768,8 @@
       ],
       "awardType": "in-kind",
       "focus": [
-        "clinical"
+        "clinical",
+        "patient-support"
       ]
     },
     {
@@ -1913,7 +1930,8 @@
         "advocacy",
         "rare disease",
         "education",
-        "scholarship"
+        "scholarship",
+        "for patients"
       ],
       "links": [
         {
@@ -1927,7 +1945,8 @@
       ],
       "awardType": "cash",
       "focus": [
-        "capacity"
+        "capacity",
+        "patient-support"
       ]
     },
     {
@@ -2727,7 +2746,8 @@
         "advocacy",
         "policy",
         "scholarship",
-        "patients"
+        "patients",
+        "for patients"
       ],
       "links": [
         {
@@ -2737,7 +2757,381 @@
       ],
       "awardType": "cash",
       "focus": [
-        "capacity"
+        "capacity",
+        "patient-support"
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "BSF Emergency Relief Program",
+      "sponsor": "Barth Syndrome Foundation, administered by NORD",
+      "cat": "nonprofit",
+      "awardType": "cash",
+      "amount": "Short-term emergency assistance (fund sized for ~20 families/yr)",
+      "deadline": "Rolling",
+      "desc": "Short-term cash assistance for unexpected, non-medical emergency expenses of families affected by Barth syndrome. Established 2022. BSF funds the program; NORD administers it so families can apply privately, with eligibility screened by NORD patient services.",
+      "eligibility": "Families affected by Barth syndrome who meet NORD's eligibility screening.",
+      "apply": "Call NORD Patient Services at 1-203-292-0293 (Mon–Thu 8:30–7 ET, Fri 8:30–6 ET) or email barthsyndrome_assist@rarediseases.org.",
+      "links": [
+        {
+          "label": "BSF Emergency Relief",
+          "url": "https://www.barthsyndrome.org/barthsyndrome/emergencyrelief.html"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "BSF Family Services & Conference Support",
+      "sponsor": "Barth Syndrome Foundation",
+      "cat": "nonprofit",
+      "awardType": "in-kind",
+      "amount": "Support services; subsidized conference registration + limited scholarships",
+      "deadline": "Services rolling; next conference 2028",
+      "desc": "BSF's family services include information and guidance, one-on-one emotional support, private family communities, and the membership registry. The biennial International Scientific, Medical & Family Conference offers heavily subsidized family registration ($50–150/person in 2026), free Camp Barth childcare during sessions, and a limited number of family scholarships each cycle. The 2026 conference ran July 19–26; the next is in 2028, with scholarship details published per cycle.",
+      "eligibility": "Families affected by Barth syndrome. Barth Syndrome UK offers free membership, private groups, and weekly online meet-ups for UK families.",
+      "apply": "Contact BSF through barthsyndrome.org; watch barthsyndromeconference.org and the BSF newsletter for the next conference cycle.",
+      "links": [
+        {
+          "label": "Contact BSF",
+          "url": "https://www.barthsyndrome.org/contactbsf.html"
+        },
+        {
+          "label": "Conference site",
+          "url": "https://barthsyndromeconference.org/"
+        },
+        {
+          "label": "Barth Syndrome UK",
+          "url": "https://www.barthsyndrome.org.uk/"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "NORD RareCare Patient Assistance Programs",
+      "sponsor": "National Organization for Rare Disorders",
+      "cat": "nonprofit",
+      "awardType": "cash",
+      "amount": "Varies by fund; first-come while funds last",
+      "deadline": "Rolling",
+      "desc": "NORD's assistance portfolio covers medication costs, insurance premium and copay assistance, diagnostic testing, travel for clinical trials or specialist consultations, and limited travel and lodging for rare-disease educational conferences. Barth families also have the dedicated BSF-funded emergency fund listed separately.",
+      "eligibility": "US residents of all states and territories; per-fund financial screening applies.",
+      "apply": "Call 1-800-999-6673; a RareCare Patient Services Representative walks applicants through the process.",
+      "links": [
+        {
+          "label": "NORD patient assistance",
+          "url": "https://rarediseases.org/patient-assistance-programs/"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "Patient Advocate Foundation — TotalAssist & Case Management",
+      "sponsor": "Patient Advocate Foundation (merged with PAN Foundation 2026)",
+      "cat": "nonprofit",
+      "awardType": "cash",
+      "amount": "~150 disease funds; grants for copays, premiums, visit costs",
+      "deadline": "Rolling; fund availability changes weekly",
+      "desc": "Following the PAF–PAN merger, new financial applications route through TotalAssist (since July 1, 2026): roughly 150 disease-specific and health-equity funds covering medication copays, coinsurance, deductibles, insurance premiums, office visits, and treatment administration. Separately, PAF case management is free to any US patient with a chronic or debilitating illness — the main free help available for insurance denials, prior-authorization fights, appeals, and billing negotiation. Whether an open fund currently matches Barth syndrome changes weekly; check the fund finder.",
+      "eligibility": "US patients; per-fund financial and diagnosis criteria. Case management has no fund requirement.",
+      "apply": "Apply online at patientadvocate.org or by phone via the site.",
+      "links": [
+        {
+          "label": "Patient Advocate Foundation",
+          "url": "https://www.patientadvocate.org/"
+        },
+        {
+          "label": "Financial aid funds",
+          "url": "https://www.patientadvocate.org/connect-with-services/financial-aid-funds/"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "HealthWell Cardiomyopathy — Medicare Access Fund",
+      "sponsor": "HealthWell Foundation",
+      "cat": "nonprofit",
+      "awardType": "cash",
+      "amount": "Up to $7,500 per 12-month grant",
+      "deadline": "Open while funded",
+      "desc": "Covers prescription copays or Medicare Part B premiums for cardiomyopathy patients on Medicare; more than 90 cardiomyopathy medications are covered, including ACE inhibitors, beta blockers, and anticoagulants. Mainly relevant to adult Barth syndrome patients on Medicare (for example via SSDI). HealthWell has no mitochondrial-disease-specific fund; its General Travel Fund (up to $500) requires a prior HealthWell grant and was reported temporarily closed to new patients.",
+      "eligibility": "Medicare beneficiaries with cardiomyopathy; income at or below 500% of the federal poverty level, adjusted for household size and cost of living; treatment in the US.",
+      "apply": "Apply online or call (800) 675-8416.",
+      "links": [
+        {
+          "label": "Cardiomyopathy Medicare fund",
+          "url": "https://www.healthwellfoundation.org/fund/cardiomyopathy-medicare-access/"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "CCF Family Assistance Program",
+      "sponsor": "Children's Cardiomyopathy Foundation",
+      "cat": "nonprofit",
+      "awardType": "cash",
+      "amount": "Up to $2,000",
+      "deadline": "Rolling",
+      "desc": "Financial assistance up to $2,000 for cardiomyopathy-related expenses incurred within 6 months of receipt, for families of children with cardiomyopathy — which includes Barth syndrome's cardiac presentation.",
+      "eligibility": "US families of pediatric cardiomyopathy patients under a pediatric cardiologist's care; free CCF membership required.",
+      "apply": "Apply through the CCF family assistance page.",
+      "links": [
+        {
+          "label": "CCF Family Assistance",
+          "url": "https://www.childrenscardiomyopathy.org/pages/family-resources/family-assistance-program/"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "Marcel's Way Family Fund & Mito411",
+      "sponsor": "MitoAction",
+      "cat": "nonprofit",
+      "awardType": "cash",
+      "expired": true,
+      "amount": "One-time grant up to $500",
+      "deadline": "Applications currently closed",
+      "desc": "One-time need-based grants up to $500 for mitochondrial-disease-related costs: uncovered medical expenses, lodging during treatment, equipment, home or vehicle modifications, and respite. One grant per patient lifetime; requires a physician letter and a community-professional letter. Applications are currently closed. MitoAction's Mito411 helpline (888-648-6228) and weekly support groups remain active.",
+      "eligibility": "US residents with a diagnosed mitochondrial disorder, which includes Barth syndrome.",
+      "apply": "Check the fund page for reopening; the Mito411 helpline operates regardless.",
+      "links": [
+        {
+          "label": "Marcel's Way Family Fund",
+          "url": "https://www.mitoaction.org/marcels-way-family-fund/"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "Mito Assist — FORZINITY Patient Support",
+      "sponsor": "Mighty Therapeutics with AnovoRx",
+      "cat": "corporate",
+      "awardType": "in-kind",
+      "amount": "Copay assistance; free drug for uninsured/underinsured",
+      "deadline": "Rolling",
+      "desc": "The patient support program for FORZINITY (elamipretide), the approved Barth syndrome treatment: insurance benefits investigation and submission support, copay assistance for commercially insured patients, a patient assistance program providing free drug to uninsured or underinsured patients, at-home subcutaneous injection training, and dedicated case management. AnovoRx is the exclusive US specialty pharmacy. Copay caps and income criteria are confirmed at enrollment; they are not published.",
+      "eligibility": "US patients prescribed FORZINITY (approved for patients weighing at least 30 kg); program tier depends on insurance status.",
+      "apply": "Call 1-833-458-9099 or start with the Patient Enrollment Form on the AnovoRx site, typically initiated with the prescriber.",
+      "links": [
+        {
+          "label": "Mito Assist announcement",
+          "url": "https://stealthbt.com/stealth-biotherapeutics-announces-mito-assist-patient-support-program-and-specialty-pharmacy-partnership-with-anovorx-to-distribute-forzinityelamipretide-injection/"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "G-CSF Assistance — Amgen SupportPlus & Safety Net Foundation",
+      "sponsor": "Amgen",
+      "cat": "corporate",
+      "awardType": "in-kind",
+      "amount": "Copays to as little as $0; free drug via Safety Net",
+      "deadline": "Rolling; 12-month Safety Net enrollments",
+      "desc": "Two routes to affording G-CSF (NEUPOGEN/Neulasta), the standard treatment for Barth syndrome neutropenia. SupportPlus Co-Pay Program: commercially insured patients pay as little as $0 per dose, applied to deductible, coinsurance, or copay — not valid for Medicare, Medicaid, or cash payers. Amgen Safety Net Foundation: free Amgen medicines for uninsured or under-covered patients. Families prescribed a filgrastim biosimilar (Zarxio, Nivestym) should ask the prescriber which manufacturer's program applies instead.",
+      "eligibility": "SupportPlus: commercial/private insurance only. Safety Net: US residence for 6+ months, household income at or below 400% of the federal poverty level, not eligible for Medicaid, Medicare, or other support.",
+      "apply": "SupportPlus: enroll online or call (866) 264-2778. Safety Net: 1-888-4ASSIST.",
+      "links": [
+        {
+          "label": "SupportPlus co-pay",
+          "url": "https://www.amgensupportplus.com/patient/copay-program"
+        },
+        {
+          "label": "Safety Net Foundation",
+          "url": "https://www.amgensafetynetfoundation.com/eligibility.html"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "#RAREis Scholarship",
+      "sponsor": "EveryLife Foundation, funded by Amgen",
+      "cat": "nonprofit",
+      "awardType": "cash",
+      "expired": true,
+      "amount": "$5,000 one-time; up to 58 recipients/yr",
+      "deadline": "2026 cycle closed Apr 28; next expected ~Mar 2027",
+      "desc": "One-time $5,000 scholarships for students living with any rare disease — Barth syndrome qualifies. The program has awarded nearly 500 scholarships since 2020. Administered by Scholarship America. The 2026 application window ran March 17 to April 28.",
+      "eligibility": "US residents age 17+, physician-diagnosed with a rare disease, enrolling full- or part-time at an accredited 2- or 4-year college, university, or vocational-technical school.",
+      "apply": "Apply via Scholarship America when the window opens (typically March).",
+      "links": [
+        {
+          "label": "#RAREis Scholarship",
+          "url": "https://everylifefoundation.org/rare-scholarship/"
+        },
+        {
+          "label": "Scholarship America",
+          "url": "https://scholarshipamerica.org/scholarship/rareis/"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "Mitochondrial Disease & Neuromuscular Student Scholarships",
+      "sponsor": "MitoAction & Muscular Dystrophy Association",
+      "cat": "nonprofit",
+      "awardType": "cash",
+      "expired": true,
+      "amount": "MDA up to $5,000; Harty amount varies",
+      "deadline": "Both 2026 cycles closed; annual",
+      "desc": "Two further scholarships a Barth syndrome student can pursue. The Matthew Harty Scholarship (MitoAction) is for high-school seniors or enrolled college students diagnosed with mitochondrial disease; over $200,000 awarded since 2015; the 2026 cycle closed May 31. The MDA College Scholarship is merit-based, up to $5,000, for students with an MDA-supported neuromuscular disease; the 2026 deadline was March 15 — whether MDA classifies Barth syndrome as covered should be confirmed at ResourceCenter@mdausa.org before applying.",
+      "eligibility": "Harty: students diagnosed with mitochondrial disease. MDA: US citizens or permanent residents with an MDA-covered disease; no age limit.",
+      "apply": "Both recur annually; apply on each organization's scholarship page when windows open.",
+      "links": [
+        {
+          "label": "Matthew Harty Scholarship",
+          "url": "https://www.mitoaction.org/programs-support/mitoaction-programs/mhcf/scholarship/"
+        },
+        {
+          "label": "MDA scholarship",
+          "url": "https://www.mda.org/scholarship"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "Medical Travel & Lodging Assistance",
+      "sponsor": "Miracle Flights, Angel Flight network, Mercy Medical Angels, RMHC",
+      "cat": "nonprofit",
+      "awardType": "in-kind",
+      "amount": "Free flights, ground travel vouchers, lodging",
+      "deadline": "Rolling; apply 10–14 days before travel",
+      "desc": "Four routes to distant specialist care. Miracle Flights: free commercial airline tickets for children 17 and under plus parents (confirmed appointment, medical clearance, income at or below 370% of federal poverty guidelines, apply 14+ days ahead). Angel Flight regional charities: volunteer pilots fly patients free in small aircraft (physician release required, request 7–10 business days ahead). Mercy Medical Angels: gas cards, Uber/Lyft vouchers, bus and train tickets, and flights for appointments 50+ miles away. Ronald McDonald House: lodging near children's hospitals, free or small suggested donation, requested through the treating hospital's social work team.",
+      "eligibility": "Varies by program: age limits (Miracle Flights: 17 and under), income verification (Miracle Flights, Mercy Medical Angels, some Angel Flights), distance rules (Mercy: 50+ miles; some RMHC Houses).",
+      "apply": "Each program takes online requests; Ronald McDonald House goes through hospital social work.",
+      "links": [
+        {
+          "label": "Miracle Flights",
+          "url": "https://miracleflights.org/request-a-flight/"
+        },
+        {
+          "label": "Angel Flight",
+          "url": "https://www.angelflight.com/patients/"
+        },
+        {
+          "label": "Mercy Medical Angels",
+          "url": "https://www.mercymedical.org/patients"
+        },
+        {
+          "label": "Ronald McDonald House",
+          "url": "https://ronaldmcdonaldhouse.org/our-core-programs/ronald-mcdonald-house-programs"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "Make-A-Wish & Starlight Children's Foundation",
+      "sponsor": "Make-A-Wish America / Starlight",
+      "cat": "nonprofit",
+      "awardType": "in-kind",
+      "amount": "A granted wish; in-hospital programs",
+      "deadline": "Rolling referrals",
+      "desc": "Make-A-Wish grants wishes for children roughly 2.5–17 at referral with a critical illness — progressive, degenerative, or malignant life-threatening conditions. Barth syndrome with cardiomyopathy has historically qualified; the determination is made by the child's treating physician with Make-A-Wish medical review, the child need not be terminal, and there is no cost or income test. Starlight delivers in-hospital programs (gaming stations, VR, hospital gowns, toy deliveries) at 800+ US facilities, and families can join the free Starlight Families program for at-home resources.",
+      "eligibility": "Make-A-Wish: children ~2.5–17 with a qualifying condition, one wish per child. Starlight: via participating hospitals, plus the free family program.",
+      "apply": "Make-A-Wish referrals come from a parent or guardian, medical professional, or the child at wish.org/refer-a-child.",
+      "links": [
+        {
+          "label": "Refer a child",
+          "url": "https://wish.org/refer-a-child"
+        },
+        {
+          "label": "Wish eligibility",
+          "url": "https://worldwish.org/what-we-do/wish-eligibility/"
+        },
+        {
+          "label": "Starlight Families",
+          "url": "https://www.starlight.org/families"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "for patients"
+      ],
+      "focus": [
+        "patient-support"
+      ],
+      "name": "SSI & Medicaid Waivers (Katie Beckett / TEFRA)",
+      "sponsor": "Social Security Administration / state Medicaid agencies",
+      "cat": "government",
+      "awardType": "cash",
+      "amount": "Monthly SSI payments; Medicaid coverage",
+      "deadline": "Rolling",
+      "desc": "Two government benefits worth pursuing. SSI childhood disability: Barth syndrome is not on SSA's Compassionate Allowances fast-track list (verified against the April 2026 list), so applications go through standard childhood disability evaluation — typically documented via the cardiomyopathy/heart failure, growth failure, and recurrent-infection listings; family income and asset limits apply. Katie Beckett/TEFRA Medicaid: lets a child with institutional-level care needs get Medicaid counting only the child's own income, regardless of parental income — valuable for families over SSI limits, covering copays, nursing, and equipment as secondary insurance. About 18 states plus DC have the classic TEFRA option; others run similar waivers, some waitlisted.",
+      "eligibility": "SSI: children meeting SSA's disability standard, subject to family income/asset limits. Katie Beckett/TEFRA: children needing an institutional level of care; rules vary by state.",
+      "apply": "SSI: ssa.gov/apply or 1-800-772-1213. Katie Beckett/TEFRA: through the state Medicaid agency; kidswaivers.org has a state-by-state directory.",
+      "links": [
+        {
+          "label": "Apply for SSI",
+          "url": "https://www.ssa.gov/apply"
+        },
+        {
+          "label": "State waiver directory",
+          "url": "https://www.kidswaivers.org/"
+        }
       ]
     }
   ]
