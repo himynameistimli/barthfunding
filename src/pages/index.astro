@@ -51,10 +51,11 @@ const jsonLd = [
 
     <main style="min-width: 0;">
       <div class={s.tblHead}>
-        <span class={s.lblMuted}>No.</span>
         <button id="sort-name" type="button">Program <span class="arrow"></span></button>
         <button id="sort-award" class={s.taR} type="button">Award max <span class="arrow"></span></button>
         <button id="sort-deadline" class={s.colDeadline} type="button">Deadline <span class="arrow"></span></button>
+        <span class={`${s.lblMuted} ${s.colWide}`}>Award type</span>
+        <span class={`${s.lblMuted} ${s.colWide}`}>Focus</span>
         <span class={`${s.lblMuted} ${s.taR}`}>Src</span>
       </div>
       <div id="rows"></div>
@@ -203,7 +204,6 @@ const jsonLd = [
         const meta = CAT_META[p.cat] || { code: "—" };
         return `
         <button class="${s.row}${p.expired ? " " + s.isPast : ""}" data-slug="${esc(p.slug)}" type="button">
-          <span class="${s.num}">${String(i + 1).padStart(2, "0")}</span>
           <span style="min-width:0">
             <span class="${s.name}">${highlight(p.name, t)}${p.expired ? `<span class="${s.tagPast}">PAST</span>` : ""}</span>
             <span class="${s.sponsor}">${highlight(p.sponsor, t)}</span>
@@ -211,6 +211,8 @@ const jsonLd = [
           </span>
           <span class="${s.award}">${fmtUSD(AWARD_MAX_USD[p.name])}</span>
           <span class="${s.deadline} ${s.colDeadline}">${highlight(shortDeadline(p.deadline), t)}</span>
+          <span class="${s.metaCol} ${s.colWide}">${esc(TYPE_LABELS[p.awardType] || "—")}</span>
+          <span class="${s.metaCol} ${s.colWide}">${highlight((p.focus || []).map(f => FOCUS_LABELS[f]).join(" · "), t)}</span>
           <span class="${s.src} ${srcClass(p.cat)}">${meta.code}</span>
         </button>`;
       }).join("") : `<div class="${s.empty}"><strong>No programs match.</strong>Try a broader term — “mitochondrial”, “pilot”, or “fellowship”.</div>`;
