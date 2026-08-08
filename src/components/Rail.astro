@@ -1,0 +1,59 @@
+---
+import { LAST_UPDATED } from "../data/programs.mjs";
+const { headline, showFilters = false } = Astro.props;
+const path = Astro.url.pathname;
+const NAV = [
+  { href: "/", label: "Funding index" },
+  { href: "/what-is-barth-syndrome/", label: "What is Barth syndrome" },
+  { href: "/therapies/", label: "Therapy progress" },
+  { href: "/suggest-update/", label: "Suggest an update" }
+];
+---
+<aside class="rail">
+  <div>
+    <a href="/" style="border: none; color: inherit;">
+      <div class="brand-a">Barth Syndrome</div>
+      <div class="brand-b">Research Funding Index</div>
+    </a>
+    {headline && (
+      <>
+        <div class="headline">{headline}</div>
+        <p class="headline-note">Max single-award total across capped programs still open. Uncapped and in-kind mechanisms add more.</p>
+      </>
+    )}
+  </div>
+
+  {showFilters && (
+    <>
+      <div>
+        <input type="search" id="q" placeholder="Search the index…" aria-label="Search funding programs" />
+        <p class="count" id="count"></p>
+      </div>
+      <div>
+        <div class="rail-head">Funder</div>
+        <div class="rail-list" id="cat-filters"></div>
+      </div>
+      <div>
+        <div class="rail-head">Audience</div>
+        <div class="rail-list" id="aud-filters"></div>
+      </div>
+      <div>
+        <div class="rail-head">Status</div>
+        <div class="rail-list" id="status-filters"></div>
+      </div>
+    </>
+  )}
+
+  <div>
+    <div class="rail-head">Pages</div>
+    <nav class="rail-nav" aria-label="Site">
+      {NAV.map(item => (
+        <a href={item.href} aria-current={path === item.href ? "page" : undefined}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="rail-foot">
+    Last updated {LAST_UPDATED}.<br />Confirm details on the funder's site before applying.
+  </div>
+</aside>

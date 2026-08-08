@@ -1,0 +1,87 @@
+---
+import Base from "../../layouts/Base.astro";
+import Rail from "../../components/Rail.astro";
+import { PROGRAMS, LAST_UPDATED } from "../../data/programs.mjs";
+import { CONTACT_EMAIL } from "../../data/site.mjs";
+
+export function getStaticPaths() {
+  return PROGRAMS.map(p => ({ params: { slug: p.slug }, props: { program: p } }));
+}
+
+const CAT_META = {
+  government: { code: "GOV", label: "Government" },
+  nonprofit: { code: "FDN", label: "Foundation / non-profit" },
+  corporate: { code: "CORP", label: "Corporate / industry" },
+  general: { code: "GEN", label: "General biomedical" }
+};
+
+const { program: p } = Astro.props;
+const meta = CAT_META[p.cat] || { code: "—", label: "" };
+const permalinkPath = `/grants/${p.slug}/`;
+const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Funding directory update: ${p.name}`)}`;
+---
+<Base title={`${p.name} — Barth Syndrome Research Funding`} description={p.desc.slice(0, 155)}>
+  <div class="shell">
+    <Rail />
+    <main class="doc">
+      <p class="crumb"><a href="/">← Funding index</a></p>
+      <span class={`drawer-cat src-${p.cat}`}>{meta.code} — {meta.label.toUpperCase()}</span>
+      <h1>{p.name}</h1>
+      <p class="sponsor">{p.sponsor}</p>
+
+      {p.expired && (
+        <div class="past-banner">
+          <strong>This application window has closed.</strong> The entry is kept for reference — check the funder's page below for a future cycle. It is hidden from the index unless “Include past programs” is on.
+        </div>
+      )}
+
+      <div class="facts">
+        <div class="fact"><div class="fact-k">Award</div><div class="fact-v">{p.amount || "—"}</div></div>
+        <div class="fact"><div class="fact-k">Deadline</div><div class="fact-v">{p.deadline || "—"}</div></div>
+      </div>
+
+      <p class="lede">{p.desc}</p>
+
+      <div class="sec"><div class="sec-h">Who can apply</div><p>{p.eligibility}</p></div>
+      <div class="sec"><div class="sec-h">How to apply</div><p>{p.apply}</p></div>
+      <div class="sec">
+        <div class="sec-h">Links &amp; downloads</div>
+        <div class="links">
+          {(p.links || []).map(l => <a href={l.url} target="_blank" rel="noopener">{l.label} ↗</a>)}
+        </div>
+      </div>
+
+      {p.tags?.length > 0 && (
+        <div class="sec">
+          <div class="sec-h">Tags</div>
+          <div class="tag-row">
+            {p.tags.map(t => <a href={`/?q=${encodeURIComponent(t)}`}>{t}</a>)}
+          </div>
+        </div>
+      )}
+
+      <div class="sec">
+        <div class="sec-h">Permalink</div>
+        <p class="mono" id="permalink">{permalinkPath}</p>
+        <p style="margin-top: 8px;">
+          <button class="drawer-close" id="copy-link" type="button" style="border: 1px solid var(--ink); padding: 5px 10px;">Copy link</button>
+        </p>
+      </div>
+
+      <p class="doc-foot">
+        Last updated {LAST_UPDATED} · <a href={mailto}>Suggest an update to this entry</a>
+      </p>
+    </main>
+  </div>
+
+  <script>
+    const code = document.getElementById("permalink");
+    if (code) code.textContent = window.location.href;
+    const btn = document.getElementById("copy-link");
+    btn?.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(window.location.href);
+      btn.textContent = "Copied";
+      setTimeout(() => (btn.textContent = "Copy link"), 1500);
+    });
+  </script>
+</Base>
