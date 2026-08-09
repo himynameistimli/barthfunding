@@ -107,7 +107,7 @@ export const THERAPIES = [
     routeDetail: "Potentially a one-time infusion. Limits seen with the 2020 vector: needed roughly 70% of heart cells transduced for durable benefit; skeletal-muscle levels declined over time; no re-dosing once neutralizing antibodies form.",
     unpublished: true,
     taz02: {
-      note: "Presented at the 2026 Barth Syndrome Foundation International Scientific, Medical & Family Conference (July 19–26, 2026, Bonita Springs, FL). Conference slides only — not peer-reviewed, not indexed, and not citable as a paper.",
+      note: "Source: conference presentation, 2026 Barth Syndrome Foundation International Scientific, Medical & Family Conference (July 19–26, 2026, Bonita Springs, FL). Not peer-reviewed.",
       rows: [
         ["Capsid", "AAV9", "A myotropic capsid designated C4"],
         ["Transgene", "TAZ, full length", "TAZΔ5 — the predominant human isoform — codon-optimized (PCTZO)"],
@@ -119,7 +119,7 @@ export const THERAPIES = [
       results: "Tested in the cardiac-and-skeletal-muscle knockout (mKO) mouse Pu's lab published in 2025. Safety: maximum tolerated dose 3 × 10¹³ vg/kg against a minimum effective dose of 3 × 10¹² — a roughly ten-fold therapeutic window; histology across heart, quadriceps, liver, kidney, lung, spleen, brain, spinal cord and gut was normal-to-mild, and serum markers (troponin, CK, ALT, AST, BUN, creatinine, glucose) were mostly unchanged. Efficacy: normalized mitochondrial morphology in heart and quadriceps, and corrected the cardiolipin profile in skeletal muscle. Cardiolipin data credited to Seul Kee Byeon.",
       nextSteps: "As stated on the slide: a pre-IND meeting with the FDA, and large-animal toxicity testing. That is the standard runway into a first-in-human trial."
     },
-    takeaway: "This is the furthest-along root-cause program, and it sits ahead of where the published record places it. The long-standing bottleneck — the capsid — has now been addressed in-house with C4 rather than by licensing an outside capsid. Two caveats apply: this is unpublished conference data, so it has not been through peer review and the dose and safety numbers could shift; and a pre-IND meeting is the start of the regulatory conversation, not the end of it — large-animal toxicity testing alone typically runs a year or more before a first patient is dosed."
+    takeaway: "The furthest-along root-cause program. The long-standing bottleneck was the capsid, addressed in-house with C4 rather than by licensing an outside capsid. The TAZ-02 dose and safety figures come from a conference presentation rather than peer review and may shift. A pre-IND meeting opens the regulatory process; large-animal toxicity testing alone typically runs a year or more before a first patient is dosed."
   },
   {
     slug: "gene-correction-base-editing",
@@ -216,7 +216,7 @@ export const REFERENCES = [
       { text: "AAV-Mediated TAZ Gene Replacement Restores Mitochondrial and Cardioskeletal Function in Barth Syndrome — Suzuki-Hatano, … Byrne BJ, Pacak CA; Human Gene Therapy 2019 (University of Florida group)" },
       { text: "Cell-Penetrating Peptide Enhances Tafazzin Gene Therapy in Mouse Model of Barth Syndrome — Raghav, … Chin MT; Int. J. Mol. Sci. 2024 (the “ratio fixed but function not” result)", url: "https://pubmed.ncbi.nlm.nih.gov/39769321/" },
       { text: "Yazawa E, … Pu WT. A murine model of Barth syndrome with cardiac and skeletal muscle selective inactivation of tafazzin — Dis. Model. Mech. 2025 (a model, not a therapy)" },
-      { text: "TAZ-02 — no citation exists. Presented at the 2026 Barth Syndrome Foundation International Scientific, Medical & Family Conference, July 19–26 2026, Bonita Springs FL. Conference slides only; not peer-reviewed, not citable as a paper." },
+      { text: "TAZ-02 — conference presentation, 2026 Barth Syndrome Foundation International Scientific, Medical & Family Conference, July 19–26 2026, Bonita Springs FL. Not peer-reviewed." },
       { text: "Directed evolution of a family of AAV capsid variants enabling potent muscle-directed gene delivery across species — Tabebordbar, … Wagers; Cell 2021 (MyoAAV). Companion: AAVMYO, Grimm lab, Science Advances." }
     ]
   },

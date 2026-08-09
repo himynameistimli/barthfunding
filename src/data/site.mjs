@@ -1,6 +1,6 @@
 // Site-wide config (hand-maintained, not generated).
 // Change this to the address that should receive update/correction requests.
-export const CONTACT_EMAIL = "tim@li.fm";
+export const CONTACT_EMAIL = "contact@barthfunding.org";
 
 // Canonical origin for sitemap, robots.txt, canonical tags, and JSON-LD.
 // Change here if the site deploys under a different domain.

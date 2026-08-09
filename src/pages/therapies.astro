@@ -70,7 +70,7 @@ const jsonLd = {
 
     <div class={`${a.note} ${a.noteAlt2} ${th.note}`}>
       <p style="margin:0 0 8px"><strong>And the gene therapy has moved further than the literature shows.</strong> <span class={th.pillUnpub}>Unpublished</span></p>
-      <p style="margin:0">At the <strong>2026 Barth Syndrome Foundation conference</strong> (July 19–26, Bonita Springs, FL), <strong>Bill Pu's lab</strong> presented an optimized vector called <strong>TAZ-02</strong> — a rebuilt version of the 2020 proof-of-concept therapy with a myotropic capsid, a codon-optimized TAZΔ5 transgene, a muscle-specific promoter, and a <strong>6.7-fold lower dose</strong>. Stated next steps: a pre-IND meeting with the FDA and large-animal toxicity testing. None of it is published — it exists as conference slides.</p>
+      <p style="margin:0">At the <strong>2026 Barth Syndrome Foundation conference</strong> (July 19–26, Bonita Springs, FL), <strong>Bill Pu's lab</strong> presented an optimized vector called <strong>TAZ-02</strong> — a rebuilt version of the 2020 proof-of-concept therapy with a myotropic capsid, a codon-optimized TAZΔ5 transgene, a muscle-specific promoter, and a <strong>6.7-fold lower dose</strong>. Stated next steps: a pre-IND meeting with the FDA and large-animal toxicity testing.</p>
     </div>
 
     <p class={th.proseP}>Every therapy here is trying to solve the same core problem: broken tafazzin (TAZ) means cardiolipin can't be remodeled, so mature cardiolipin falls, the toxic intermediate <strong>MLCL</strong> builds up, the mitochondrial energy machinery destabilizes, and ATP-hungry tissues (heart, skeletal muscle) suffer. What separates the approaches is <strong>where in that chain they intervene</strong> — which splits them into two families — plus a separate question that turns out to matter just as much: <strong>how you physically get the fix into the right cells</strong>.</p>
@@ -205,9 +205,6 @@ const jsonLd = {
     </div>
 
     <h2>References</h2>
-    <div class={`${a.note} ${th.note}`}>
-      <strong>The capsid swap is real, but it is not in the literature.</strong> Pu's <em>published</em> gene therapy used AAV9 — the 2020 <em>Circulation Research</em> paper below — and the lab's most recent Barth <em>publication</em> (2025) is a new mouse model, not a therapy. The optimized TAZ-02 vector was presented at the 2026 BSF conference and has not been published, so a literature search alone will place the program where it stood in 2020. It should be cited as conference data, not as peer-reviewed work.
-    </div>
     {REFERENCES.map(g => (
       <div class={th.refGroup}>
         <h3>{g.group}</h3>
