@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "August 7, 2026",
+  "lastUpdated": "August 9, 2026",
   "awardMaxUSD": {
     "BSF Research Grant Program (IDEA & DEVELOPMENT Grants)": 100000,
     "BSF Strategic Initiatives Program (SIP)": 140000,
@@ -17,7 +17,7 @@
     "FDA Orphan Products Grants — Natural History Studies (RFA-FD-25-017)": 2400000,
     "DoD Peer Reviewed Medical Research Program (PRMRP)": 20000000,
     "NIH SBIR / STTR (small business therapeutics development)": 3000000,
-    "CIHR Project Grant Program": 1500000,
+    "CIHR Project Grant Program": 1100000,
     "UK MRC Applicant-Led Research Grants": 1300000,
     "NIH Fellowships & Career Development Awards (F30/F31/F32, K08, K99/R00, T32)": 1100000,
     "Hartwell Individual Biomedical Research Award": 300000,
@@ -27,7 +27,7 @@
     "Career Awards at the Scientific Interface (CASI)": 560000,
     "Postdoctoral Enrichment Program (PDEP)": 60000,
     "Pew Scholars Program in the Biomedical Sciences": 300000,
-    "Searle Scholars Program": 300000,
+    "Searle Scholars Program": 450000,
     "Beckman Young Investigator Program": 600000,
     "Freeman Hrabowski Scholars Program": 8600000,
     "HHMI Investigator Program": 9000000,
@@ -264,10 +264,10 @@
       "sponsor": "AFM-Téléthon (France)",
       "cat": "nonprofit",
       "amount": "Trampoline up to €50,000/1 yr; project grants; postdoc fellowships",
-      "deadline": "Annual call ~Feb–Mar; next expected Feb 2027",
+      "deadline": "Annual main call opens ~Dec, deadline ~Jan; next expected Jan 2027",
       "desc": "Neuromuscular disease research funding; BTHS skeletal myopathy falls under the metabolic-diseases-of-muscle scope. Routes include Trampoline grants (early-stage/higher-risk, up to €50,000), 1-year research project grants, and renewable postdoctoral fellowships.",
       "eligibility": "International — open to French and foreign teams.",
-      "apply": "The 2026 call ran Feb 3 – Mar 10, 2026; the annual call recurs ~February. Apply via the AFM-Téléthon calls page.",
+      "apply": "The 2026 main call (Trampoline, project grants, postdoc fellowships) opened Dec 12, 2025 and closed Jan 20, 2026; the separate PhD-fellowship track ran Feb 3 – Mar 10, 2026. Apply via the AFM-Téléthon calls page.",
       "tags": [
         "neuromuscular",
         "myopathy",
@@ -387,9 +387,9 @@
       "cat": "nonprofit",
       "amount": "Low-cost services (not cash)",
       "deadline": "Rolling",
-      "desc": "Infrastructure for advocacy-led research: a low-cost independent IRB specialized in registries, natural-history studies, and surveys (roughly 15x faster turnaround than academic IRBs; a SMART IRB founding member); the PEER/Luna registry and data-collection platform with participant-controlled sharing; and a cooperative BioBank where member organizations run their own collections at negotiated rates. BSF's registry and any advocacy-led BTHS study needing IRB review fall within this scope.",
+      "desc": "Infrastructure for advocacy-led research: a low-cost independent IRB specialized in registries, natural-history studies, and surveys (roughly 15x faster turnaround than academic IRBs; a SMART IRB founding member); the registry and data-collection program (now on the DigitalCabinet platform) with participant-controlled sharing; and a cooperative BioBank where member organizations run their own collections at negotiated rates. BSF's registry and any advocacy-led BTHS study needing IRB review fall within this scope.",
       "eligibility": "Any disease advocacy organization; cooperative membership model.",
-      "apply": "IRB: irbadmin@geneticalliance.org. PEER/BioBank: through the program pages.",
+      "apply": "IRB: irbadmin@geneticalliance.org. Registry/BioBank: through the program pages.",
       "tags": [
         "for organizations",
         "registry",
@@ -404,7 +404,7 @@
           "url": "https://geneticalliance.org/irb"
         },
         {
-          "label": "Registry program (PEER)",
+          "label": "Registry program",
           "url": "https://geneticalliance.org/programs/g-a-registry"
         },
         {
@@ -455,7 +455,7 @@
       "name": "Global Genes Advocate Travel Support",
       "sponsor": "Global Genes",
       "cat": "nonprofit",
-      "amount": "Up to $800 domestic / $1,200 international per advocate",
+      "amount": "Up to $800 domestic / $1,500 international per advocate",
       "deadline": "Per-event windows; 2026 cycles have passed",
       "desc": "Travel assistance (flights, ground transport, hotel, meals) for in-person attendance at Global Genes events — the RARE Advocacy Summit, RARE Drug Development Symposium, and Week in RARE. First-time recipients are prioritized. Covers attendance costs for BSF staff and community members at advocacy and drug-development training events.",
       "eligibility": "Rare disease advocates; individual application per event; funds contingent on sponsor participation.",
@@ -615,7 +615,7 @@
       "amount": "$275K total over 2 years",
       "deadline": "Jun 2, 2027 (extended); expires Jun 3, 2027",
       "desc": "Funds efficacy studies of a proposed therapeutic in an established rare-disease model (PK/PD allowed) to justify further development toward IND. TAFAZZIN gene therapy, mitochondria-targeted agents, and cardiolipin-targeted candidates in tafazzin-KO models are within scope. Roughly 3–5 awards per year.",
-      "eligibility": "US higher-education institutions, nonprofits, for-profits, and governments. Domestic only — no foreign components or subawards.",
+      "eligibility": "US higher-education institutions, nonprofits, for-profits, and governments. US organizations only — foreign organizations and foreign subawards are ineligible, though foreign components (as NIH defines them) are allowed.",
       "apply": "Via eRA Commons / Grants.gov / ASSIST under RFA-TR-25-002; the deadline was extended to Jun 2, 2027.",
       "tags": [
         "rare disease",
@@ -671,7 +671,7 @@
       "cat": "government",
       "amount": "Collaboration & pilot awards within consortium",
       "deadline": "Rolling contact; next new-consortium competition ~2029",
-      "desc": "The RDCRN funds multi-site consortia for natural history, biomarker, and trial-readiness research. The North American Mitochondrial Disease Consortium (NAMDC) is an active cycle-5 consortium with a registry, biorepository, and 17 clinical sites. The new-consortium NOFO has expired, with the next competition expected ~2029; in the interim, access runs through affiliation or collaboration with NAMDC, which sometimes offers pilot awards within the consortium.",
+      "desc": "The RDCRN funds multi-site consortia for natural history, biomarker, and trial-readiness research. The North American Mitochondrial Disease Consortium (NAMDC) — with a registry, biorepository, and 17 clinical sites — was not renewed for cycle 5 in NIH's Oct 2025 awards and has been running on a one-year no-cost extension, so its longer-term status is uncertain. The new-consortium NOFO has expired, with the next competition expected ~2029; in the interim, access runs through affiliation or collaboration with NAMDC, which sometimes offers pilot awards within the consortium.",
       "eligibility": "Clinical and translational investigators in mitochondrial disease seeking multi-site infrastructure, registry, or biorepository access.",
       "apply": "Contact NAMDC/RDCRN directly to discuss affiliation, data/sample access, or pilot opportunities.",
       "tags": [
@@ -807,8 +807,8 @@
       ],
       "links": [
         {
-          "label": "FDA: developing products for rare diseases",
-          "url": "https://www.fda.gov/industry/developing-products-rare-diseases-conditions"
+          "label": "FDA: medical products for rare diseases",
+          "url": "https://www.fda.gov/industry/medical-products-rare-diseases-and-conditions"
         },
         {
           "label": "PRV reauthorization analysis",
@@ -827,7 +827,7 @@
       "cat": "government",
       "amount": "Up to ~$5.6M (TTDA); clinical trial awards to $20M",
       "deadline": "FY26 pre-apps closed Jul 23, 2026; FY27 cycle ~summer 2027",
-      "desc": "Mitochondrial Disease is one of 69 FY26 PRMRP topic areas designated by Congress as military health priorities, so Barth syndrome qualifies on topic. FY26 mechanisms include the Technology/Therapeutic Development Award (~$5.6M total costs), Clinical Trial Award ($6M–$20M funding levels), and Impact Award, from a $370M appropriation.",
+      "desc": "Mitochondrial Disease is one of 52 FY26 PRMRP topic areas designated by Congress as military health priorities, so Barth syndrome qualifies on topic. FY26 mechanisms include the Technology/Therapeutic Development Award (~$5.6M total costs), Clinical Trial Award ($6M–$20M funding levels), and Impact Award, from a $370M appropriation.",
       "eligibility": "Academic, industry, government, and military investigators worldwide — no citizenship restriction. Applications must address a listed topic area (Mitochondrial Disease) and include a one-page Military Relevance Statement.",
       "apply": "Two-step process: pre-application via eBRAP, then full application via Grants.gov. FY26 pre-applications closed Jul 23, 2026 (Clinical Trial Award full applications due Sept 22, 2026 for those with pre-applications in); the FY27 cycle is expected ~summer 2027, assuming mitochondrial disease remains a topic area. Applications must include a one-page Military Relevance Statement covering disease prevalence in service members, veterans, and beneficiaries, and dual-use benefit — how the knowledge gained serves both civilian and military needs. Relevant facts for BTHS: military families are TRICARE beneficiaries and affected boys are covered dependants (the Exceptional Family Member Program covers this population); and Barth syndrome is a human model of isolated cardiolipin deficiency, so findings bear on mitochondrial dysfunction in blast injury and TBI (Brain Injury Impact on Cardiac Health is a separate FY26 topic area), Gulf War Illness, exertional rhabdomyolysis and heat illness, and ischemia-reperfusion after hemorrhage. Elamipretide was studied in ischemia-reperfusion before Barth syndrome.",
       "tags": [
@@ -862,7 +862,7 @@
       "name": "NIH SBIR / STTR (small business therapeutics development)",
       "sponsor": "NIH (PA-27-100 / PA-27-102)",
       "cat": "government",
-      "amount": "~$314K Phase I / ~$2.1M Phase II (waivers to ~$700K/~$3M)",
+      "amount": "~$323K Phase I / ~$2.15M Phase II (waivers to ~$700K/~$3M)",
       "deadline": "First receipt Sept 8, 2026; then Jan 5 & Apr 5, 2027",
       "desc": "Small-business-led development of BTHS therapeutics and diagnostics — gene therapy, mitochondria-targeted drugs, cardiolipin-ratio diagnostics. Rare-disease therapeutics is a stated NIH SBIR priority area, and several institutes fund above standard caps for approved waiver topics. STTR requires a nonprofit research-institution partner, which accommodates academic labs spinning out companies.",
       "eligibility": "US small businesses (<500 employees, majority US-owned); STTR requires a nonprofit research-institution partner.",
@@ -956,7 +956,7 @@
       "name": "UK MRC Applicant-Led Research Grants",
       "sponsor": "Medical Research Council, UKRI",
       "cat": "government",
-      "amount": "Typically up to ~£1M over 3–5 years (80% FEC)",
+      "amount": "No set funding limit; up to 5 years (80% FEC)",
       "deadline": "Rolling — no closing dates since Apr 2026",
       "desc": "Investigator-initiated biomedical research including rare-disease mechanisms and translation; the Molecular & Cellular Medicine board covers mitochondrial biology. Since April 2026, applicant-led opportunities are open with no closing dates under MRC's flexible research grant.",
       "eligibility": "UK-based research organizations; international co-investigators allowed.",
@@ -1016,9 +1016,9 @@
       "name": "PCORI Eugene Washington Engagement Awards",
       "sponsor": "Patient-Centered Outcomes Research Institute",
       "cat": "government",
-      "amount": "Up to $300,000 by track; small-orgs track up to $250,000",
+      "amount": "Up to $300,000 by track; Convening Support up to $125,000",
       "deadline": "Fall cycle: LOIs due Oct 1, 2026",
-      "desc": "Non-research awards building capacity for patient-centered comparative effectiveness research — up to $25M available in FY2026 across four tracks: Capacity Building (≤$300K/2 yrs), Dissemination (≤$300K), Convening Support (≤$125K, applicable to BSF's biannual conference), and Building Capacity for Small Organizations (≤$250K, restricted to organizations with ≤$1.5M average operating budget, a cap BSF falls under; includes a peer learning network).",
+      "desc": "Non-research awards building capacity for patient-centered comparative effectiveness research — up to $25M available in FY2026 across four tracks: Capacity Building (≤$300K/2 yrs), Dissemination (≤$300K), Convening Support (≤$125K, applicable to BSF's biannual conference), and Building Capacity for Small Organizations (≤$300K, restricted to organizations with ≤$1.5M average operating budget, a cap BSF falls under; includes a peer learning network).",
       "eligibility": "US-based organizations; patient advocacy nonprofits explicitly eligible. This funds engagement capacity, not research itself.",
       "apply": "Two cycles per year: Letter of Intent, then invited full proposal via the PCORI Connect portal. Fall 2026: LOIs due Oct 1, 2026, full proposals Jan 11, 2027. Contact: ea@pcori.org.",
       "tags": [
@@ -1123,7 +1123,7 @@
       "cat": "corporate",
       "amount": "Funding and/or drug, project-based",
       "deadline": "Rolling (unsolicited proposals)",
-      "desc": "Funding and/or drug for investigator-initiated rare-disease studies — interventional, non-interventional, or preclinical — complementing Alexion's portfolio. Stated focus areas include metabolic disorders, cardiology, hematology, and neurology. Proposals must align with Alexion's strategic interests; BTHS work would fall under the metabolic or cardiology areas.",
+      "desc": "Funding and/or drug for investigator-initiated rare-disease studies — interventional, non-interventional, or preclinical — complementing Alexion's portfolio. Stated focus areas are hematology and nephrology, neurology, and metabolic disorders (meTA+). Proposals must align with Alexion's strategic interests; BTHS work would fall under the metabolic area.",
       "eligibility": "Qualified external academic investigators and clinicians; the study is initiated and managed by the investigator, independent of Alexion.",
       "apply": "Submit an unsolicited proposal through Alexion's ESR online process; rolling.",
       "tags": [
@@ -1203,7 +1203,7 @@
         },
         {
           "label": "Current RFPs / areas of interest",
-          "url": "https://www.bms.com/researchers-and-partners/independent-research/competitive-research-grants.html"
+          "url": "https://www.bms.com/research-and-development/independent-research/competitive-research-grants.html"
         }
       ],
       "awardType": "cash",
@@ -1217,7 +1217,7 @@
       "cat": "corporate",
       "amount": "In-kind WGS/WES + reagents, cloud storage, software",
       "deadline": "Rolling site applications; patient referral via network sites",
-      "desc": "A $120M initiative providing no-cost clinical whole-genome sequencing for undiagnosed children with suspected genetic disease, applicable to suspected-BTHS diagnostic confirmation and cohort building. Over 1,000 patients/year across 25 clinical sites in 14 countries; partner labs receive in-kind flow cells, reagents, library prep, cloud storage, and software. PacBio joined in Feb 2026, adding HiFi long-read WGS. Administered by Genetic Alliance (Illumina is founding sponsor); applications go to Genetic Alliance, not Illumina.",
+      "desc": "A $120M initiative providing no-cost clinical whole-genome sequencing for undiagnosed children with suspected genetic disease, applicable to suspected-BTHS diagnostic confirmation and cohort building. Over 1,000 patients/year across 26 clinical sites in 19 countries (3,000+ individuals sequenced to date); partner labs receive in-kind flow cells, reagents, library prep, cloud storage, and software. PacBio joined in Feb 2026, adding HiFi long-read WGS. Administered by Genetic Alliance (Illumina is founding sponsor); applications go to Genetic Alliance, not Illumina.",
       "eligibility": "Clinical sites and labs serving under-resourced communities, with priority for rare-disease/pediatrics/genetics experience; clinicians refer patients through member sites.",
       "apply": "Clinical sites apply via the site-engagement page (rolling review); clinicians route patients through existing network sites.",
       "tags": [
@@ -1279,7 +1279,7 @@
       "cat": "corporate",
       "amount": "Free at-home WGS (incl. mtDNA) + genetic counseling",
       "deadline": "Rolling",
-      "desc": "Patient-initiated free testing: a short online symptom quiz, then an at-home saliva kit with whole-genome sequencing including mitochondrial DNA, physician-ordered, with results in about 6–8 weeks and a free genetic counseling appointment. Probably Genetic states it conducts and funds the program itself; UMDF's patient-enabled no-cost testing program with Probably Genetic is also live. Whole-genome sequencing covers TAFAZZIN, but the program does not name it — families should confirm before relying on it for Barth confirmation, and carrier testing of asymptomatic relatives may fall outside the symptom-based eligibility.",
+      "desc": "Patient-initiated free testing: a short online symptom quiz, then an at-home saliva kit with whole-genome sequencing including mitochondrial DNA, physician-ordered, with results in about 6–12 weeks and a free genetic counseling appointment. Probably Genetic states it conducts and funds the program itself; UMDF's patient-enabled no-cost testing program with Probably Genetic is also live. Whole-genome sequencing covers TAFAZZIN, but the program does not name it — families should confirm before relying on it for Barth confirmation, and carrier testing of asymptomatic relatives may fall outside the symptom-based eligibility.",
       "eligibility": "US patients and families, initiated via a symptom questionnaire with physician follow-up.",
       "apply": "Through the Probably Genetic mito portal or UMDF's genetic testing page.",
       "tags": [
@@ -1374,9 +1374,9 @@
       "cat": "corporate",
       "amount": "$1K–$5K+ cloud credits; up to 30,000 GPU-hours (NVIDIA)",
       "deadline": "Rolling",
-      "desc": "In-kind compute for genomics and modeling work: AWS Cloud Credit for Research (up to $5,000 for students, no stated cap for faculty/staff; note Free Tier accounts became ineligible Feb 2026), Google Cloud Research Credits (up to $5,000 faculty/postdoc, $1,000/yr PhD students), Microsoft Azure credits (now mostly routed via the NAIRR Pilot's $20M pool), and the NVIDIA Academic Grant Program (up to 30,000 H100 GPU-hours or hardware — relevant for MD simulation of cardiolipin/TAZ or ML on multi-omics).",
+      "desc": "In-kind compute for genomics and modeling work: AWS Cloud Credit for Research (up to $5,000 for students, no stated cap for faculty/staff; note Free Tier accounts became ineligible Feb 2026), Google Cloud Research Credits (up to $5,000 faculty/postdoc, $1,000/yr PhD students), Microsoft Azure credits (now mostly routed via the NAIRR Pilot's $20M pool), and the NVIDIA Academic Grant Program (up to 30,000 H100 GPU-hours or hardware; calls are periodic and were closed to new applications at last check — relevant for MD simulation of cardiolipin/TAZ or ML on multi-omics).",
       "eligibility": "Faculty, research staff, and graduate students at accredited institutions; NVIDIA requires full-time faculty at a PhD-granting institution.",
-      "apply": "Each program takes rolling applications through its own page — AWS reviews in ~90–120 days, Google in 6–8 weeks.",
+      "apply": "Each program takes rolling applications through its own page — AWS reviews in ~30–60 days, Google in 6–8 weeks.",
       "tags": [
         "compute",
         "in-kind",
@@ -1396,7 +1396,7 @@
         },
         {
           "label": "NVIDIA academic grants",
-          "url": "https://developer.nvidia.com/higher-education-and-research"
+          "url": "https://www.nvidia.com/en-us/industries/higher-education-research/academic-grant-program/"
         }
       ],
       "awardType": "in-kind",
@@ -1410,7 +1410,7 @@
       "cat": "corporate",
       "amount": "De-identified data access; conference engagement",
       "deadline": "Rolling data requests",
-      "desc": "mitoSHARE is a global patient-driven mitochondrial disease registry (~1,600 participants; demographics, barriers to care, natural history, trial readiness) with a patient-controlled consent model — BTHS patients are in scope, and researchers can request de-identified data. Related industry-facing venues: the TREAT MITO consortium for pre-competitive collaboration and data/sample access, and the UMDF Clinical Research Pavilion at the annual Mitochondrial Medicine conference, where sponsors recruit sites and investigators.",
+      "desc": "mitoSHARE is a global patient-driven mitochondrial disease registry (~1,600 participants; demographics, barriers to care, natural history, trial readiness) with a patient-controlled consent model — BTHS patients are in scope, and researchers can request de-identified data. Related industry-facing venues: the TREAT MITO consortium for pre-competitive collaboration and data/sample access, and the UMDF Clinical Research Pavilion at the annual Mitochondrial Medicine conference, where recruiting studies connect with patients and families.",
       "eligibility": "Researchers requesting de-identified/anonymized registry data; consortium and conference participation open to mito investigators.",
       "apply": "Data requests via the mitoSHARE page; consortium inquiries via treatmito.org.",
       "tags": [
@@ -1647,7 +1647,7 @@
       "deadline": "IIS rolling; advocacy grants no longer listed",
       "desc": "The investigator-initiated studies program supports research in Alnylam's areas (ATTR amyloidosis, acute hepatic porphyria, PH1) with funding and drug; proposals go through the SteepRock platform. The Advocacy for Impact grants formerly offered to patient advocacy groups are no longer listed on Alnylam's grants pages, with no cycle announced since about 2020; the grants-and-giving page now covers educational grants, sponsorships, and fellowships.",
       "eligibility": "Advocacy grants: patient advocacy organizations. IIS: physicians, pharmacists, and researchers qualified by training.",
-      "apply": "Advocacy grants via the annual cycle on Alnylam's site; IIS via the SteepRock platform.",
+      "apply": "IIS proposals via the SteepRock platform; educational grant requests through the grants-and-giving page.",
       "tags": [
         "pharma",
         "for organizations",
@@ -1886,8 +1886,8 @@
       "cat": "corporate",
       "amount": "Philanthropic grants (amounts unpublished)",
       "deadline": "OPEN NOW — call closes Aug 21, 2026",
-      "desc": "Philanthropic grants to nonprofits serving the rare disease community (71 partners in 15 countries to date), with priorities including mental health and wellness, barriers to care, health literacy, diagnostic access, and patient supports. Grants are not tied to Alexion's product areas; any rare disease organization may apply. A global open call is running August 3–21, 2026.",
-      "eligibility": "Third-party nonprofit organizations serving rare disease communities, globally.",
+      "desc": "Philanthropic grants to nonprofits serving the rare disease community (71 partners in 15 countries to date), with priorities including mental health and wellness, barriers to care, health literacy, diagnostic access, and patient supports. Grants are not tied to Alexion's product areas, but direct grants are limited to disease-agnostic organizations — single-disease groups such as BSF are not directly eligible, and general operating support and event sponsorships are excluded. A global open call is running August 3–21, 2026.",
+      "eligibility": "Disease-agnostic nonprofit organizations serving rare disease communities, globally; single-disease organizations are not eligible for direct grants.",
       "apply": "Submit a Preliminary Request Form during the open call after reviewing the ACF Grant Guidelines. Contact: ACF@Alexion.com.",
       "tags": [
         "for organizations",
@@ -1916,10 +1916,10 @@
       "sponsor": "Amgen (formerly Horizon Therapeutics)",
       "cat": "corporate",
       "amount": "$5,000 one-time",
-      "deadline": "Annual window — 2026 dates unconfirmed",
+      "deadline": "Annual window — 2026 closed Jul 31, 2026",
       "desc": "One-time grants to rare disease patient advocacy organizations for programs and disease education (75 grants awarded in 2024), disease-agnostic within rare disease. In 2026 the program narrows to US-based organizations, which includes BSF. A companion #RAREis Scholarship gives $5,000 to students living with rare diseases.",
       "eligibility": "US-based rare disease advocacy organizations (2026).",
-      "apply": "The annual application window is posted at rareiscommunity.com (the 2026 window was unconfirmed at research time); contact rareconnect@amgen.com.",
+      "apply": "The annual application window is posted at rareiscommunity.com (the 2026 window closed Jul 31, 2026); contact rareconnect@amgen.com.",
       "tags": [
         "for organizations",
         "advocacy",
@@ -2101,7 +2101,7 @@
         },
         {
           "label": "Salesforce Power of Us",
-          "url": "https://www.salesforce.org/power-of-us/"
+          "url": "https://www.salesforce.com/company/power-of-us/"
         },
         {
           "label": "TechSoup",
@@ -2135,15 +2135,15 @@
       "links": [
         {
           "label": "NIH Research Training portal",
-          "url": "https://researchtraining.nih.gov/"
+          "url": "https://grants.nih.gov/funding/funding-categories/research-training-and-career-development"
         },
         {
           "label": "F32 parent announcement",
-          "url": "https://grants.nih.gov/grants/guide/pa-files/PA-24-194.html"
+          "url": "https://grants.nih.gov/grants/guide/pa-files/PA-25-423.html"
         },
         {
           "label": "K99/R00 parent announcement",
-          "url": "https://grants.nih.gov/grants/guide/pa-files/PA-24-193.html"
+          "url": "https://grants.nih.gov/grants/guide/pa-files/PA-24-194.html"
         }
       ],
       "awardType": "cash",
@@ -2191,7 +2191,7 @@
       "deadline": "Next opportunity posted September 2026",
       "desc": "Hypothesis-driven basic, clinical, public-health, or epidemiological research on child health, aimed at junior investigators; early-career Barth syndrome projects in pediatric cardiomyopathy, neutropenia, or metabolism qualify. Award includes 10% indirects.",
       "eligibility": "Geographically restricted to nonprofit academic, medical, and research institutions in the six New England states. Applicants must be within 5 years (PhD) or 7 years (physician-scientist) of completing training. Open application — no nomination needed.",
-      "apply": "Direct application via the foundation's site; two funding cycles per year (January and September). The September 2026 cycle is open; the exact deadline (typically ~April) is posted on the site.",
+      "apply": "Direct application via the foundation's site. No cycle is currently open — the foundation posts its next funding opportunity (with a new two-step concept-paper process) in September 2026.",
       "tags": [
         "pediatric",
         "early career",
@@ -2244,7 +2244,7 @@
       "cat": "general",
       "amount": "$2,000,000 over 4 years (PPC); 5-year capacity grants (Rare As One)",
       "deadline": "Rare As One round 4 opens fall 2026",
-      "desc": "Two vehicles: Patient-Partnered Collaborations fund teams pairing a patient-led organization with research labs at $2M over 4 years (recent RFAs covered rare neurodegenerative and rare inflammatory pediatric disease). Rare As One gives 5-year capacity-building grants to patient-led rare disease organizations; cycle 3 covered inborn errors of metabolism (BTHS-adjacent), and a fourth round opens fall 2026. Eligibility for a BSF-plus-TAFAZZIN-lab team depends on the disease scope of future RFAs.",
+      "desc": "Two vehicles: Patient-Partnered Collaborations fund teams pairing a patient-led organization with research labs at $2M over 4 years (recent RFAs covered rare neurodegenerative and rare inflammatory pediatric disease). Rare As One gives 5-year capacity-building grants to patient-led rare disease organizations; cycle 3 covered inborn errors of metabolism (BTHS-adjacent), and a fourth round opens fall 2026 covering rare pulmonary and immune diseases and rare cancers — likely out of scope for BTHS unless framed through its immune (neutropenia) component. Eligibility for a BSF-plus-TAFAZZIN-lab team depends on the disease scope of each RFA.",
       "eligibility": "Rare As One: patient-led advocacy organizations (BSF would be the applicant). Patient-Partnered Collaborations: joint teams of an advocacy organization and academic labs.",
       "apply": "RFAs are posted at apply.chanzuckerberg.com when cycles open; the fall 2026 Rare As One round and future PPC disease scopes are the next opportunities.",
       "tags": [
@@ -2366,7 +2366,7 @@
       "name": "Searle Scholars Program",
       "sponsor": "Kinship Foundation / Searle Funds",
       "cat": "general",
-      "amount": "$300,000 over 3 years",
+      "amount": "$450,000 over 3 years ($150,000/yr)",
       "deadline": "Nominee applications Sept 30, 2026 (2027 cycle)",
       "desc": "Supports new tenure-track faculty in basic biomedical sciences and chemistry; selection is field-agnostic.",
       "eligibility": "Nomination only — invited institutions put forward 1–2 nominees each via internal competition. Must be in your first tenure-track assistant professor appointment (recent-appointment cutoffs apply; check current cycle dates). Basic research focus, not purely clinical.",
@@ -2401,7 +2401,7 @@
       "amount": "~$600,000 over 4 years",
       "deadline": "Annual LOI ~July (2026 LOI closed Jul 31)",
       "desc": "Supports young faculty in chemistry and the life sciences, favoring innovative methods and instrumentation. Cardiolipin chemistry, lipidomics method development, or mitochondrial imaging tools fit; clinical research and single-target drug discovery are excluded.",
-      "eligibility": "Open application (no nomination). Tenure-track faculty within the first 4 years of appointment and ≤10 years post-PhD; US citizens or permanent residents; external funding cap of $225,000 direct annualized at application.",
+      "eligibility": "Open application (no nomination). Tenure-track faculty within the first 4 years of appointment and ≤10 years post-PhD; non-citizens may apply, but US citizenship or permanent residency is required by the end of full-application review; external funding cap of $225,000 direct annualized at application.",
       "apply": "Submit an LOI through the SurveyMonkey Apply portal (annual ~July deadline; 2026 round just closed — next expected July 2027); invited full proposals and finalist interviews follow in spring.",
       "tags": [
         "early career",
@@ -2611,7 +2611,7 @@
       "cat": "general",
       "amount": "€1.5M–€2.5M over 5 years by tier",
       "deadline": "StG 2027: Oct 14, 2026; CoG 2027: Jan 12, 2027",
-      "desc": "Investigator-driven frontier research in any field. Starting (2–7 yrs post-PhD, up to €1.5M/5 yrs), Consolidator (7–12 yrs, up to €2M), Advanced (established leaders, up to €2.5M). Relevant to European Barth syndrome labs working on tafazzin and cardiolipin.",
+      "desc": "Investigator-driven frontier research in any field. Under the 2027 work programme: Starting (0–10 yrs post-PhD, up to €1.5M/5 yrs), Consolidator (5–15 yrs, up to €2M), Advanced (established leaders, up to €2.5M); researchers may now win at most one Starting and one Consolidator grant over a career. Relevant to European Barth syndrome labs working on tafazzin and cardiolipin.",
       "eligibility": "Any nationality, but the host institution must be in an EU member state or Horizon-associated country and the PI must spend at least 50% of their time in Europe.",
       "apply": "Via the EU Funding & Tenders portal. ERC-2027-StG opens Jul 22, 2026 (deadline Oct 14, 2026); ERC-2027-CoG opens Sep 24, 2026 (deadline Jan 12, 2027); ERC-2027-AdG opens May 27, 2027 (deadline Aug 26, 2027).",
       "tags": [
@@ -2856,8 +2856,8 @@
           "url": "https://www.patientadvocate.org/"
         },
         {
-          "label": "Financial aid funds",
-          "url": "https://www.patientadvocate.org/connect-with-services/financial-aid-funds/"
+          "label": "TotalAssist fund finder",
+          "url": "https://totalassist.org/"
         }
       ]
     },
@@ -2898,7 +2898,7 @@
       "expired": true,
       "amount": "One-time grant up to $500",
       "deadline": "Applications currently closed",
-      "desc": "One-time need-based grants up to $500 for mitochondrial-disease-related costs: uncovered medical expenses, lodging during treatment, equipment, home or vehicle modifications, and respite. One grant per patient lifetime; requires a physician letter and a community-professional letter. Applications are currently closed. MitoAction's Mito411 helpline (888-648-6228) and weekly support groups remain active.",
+      "desc": "One-time need-based grants up to $500 for mitochondrial-disease-related costs: uncovered medical expenses, lodging during treatment, equipment, home or vehicle modifications, and respite. One grant per patient lifetime; requires a physician letter and a community-professional letter. Applications are currently closed. MitoAction's Mito411 helpline (1-888-648-6411) and weekly support groups remain active.",
       "eligibility": "US residents with a diagnosed mitochondrial disorder, which includes Barth syndrome.",
       "apply": "Check the fund page for reopening; the Mito411 helpline operates regardless.",
       "links": [
@@ -2945,7 +2945,7 @@
       "amount": "Copays to as little as $0; free drug via Safety Net",
       "deadline": "Rolling; 12-month Safety Net enrollments",
       "desc": "Two routes to affording G-CSF (NEUPOGEN/Neulasta), the standard treatment for Barth syndrome neutropenia. SupportPlus Co-Pay Program: commercially insured patients pay as little as $0 per dose, applied to deductible, coinsurance, or copay — not valid for Medicare, Medicaid, or cash payers. Amgen Safety Net Foundation: free Amgen medicines for uninsured or under-covered patients. Families prescribed a filgrastim biosimilar (Zarxio, Nivestym) should ask the prescriber which manufacturer's program applies instead.",
-      "eligibility": "SupportPlus: commercial/private insurance only. Safety Net: US residence for 6+ months, household income at or below 400% of the federal poverty level, not eligible for Medicaid, Medicare, or other support.",
+      "eligibility": "SupportPlus: commercial/private insurance only. Safety Net: US residence for 6+ months, household income at or below 400% of the federal poverty level, generally not eligible for public coverage (certain Medicare patients with coverage gaps may qualify).",
       "apply": "SupportPlus: enroll online or call (866) 264-2778. Safety Net: 1-888-4ASSIST.",
       "links": [
         {
@@ -3027,7 +3027,7 @@
       "awardType": "in-kind",
       "amount": "Free flights, ground travel vouchers, lodging",
       "deadline": "Rolling; apply 10–14 days before travel",
-      "desc": "Four routes to distant specialist care. Miracle Flights: free commercial airline tickets for children 17 and under plus parents (confirmed appointment, medical clearance, income at or below 370% of federal poverty guidelines, apply 14+ days ahead). Angel Flight regional charities: volunteer pilots fly patients free in small aircraft (physician release required, request 7–10 business days ahead). Mercy Medical Angels: gas cards, Uber/Lyft vouchers, bus and train tickets, and flights for appointments 50+ miles away. Ronald McDonald House: lodging near children's hospitals, free or small suggested donation, requested through the treating hospital's social work team.",
+      "desc": "Four routes to distant specialist care. Miracle Flights: free commercial airline tickets for children 17 and under plus parents (confirmed appointment, medical clearance, income at or below 370% of federal poverty guidelines, apply 14+ days ahead). Angel Flight regional charities: volunteer pilots fly patients free in small aircraft (physician release required; request at least 5 business days ahead — Angel Flight organizations are regional, so use the one covering your state). Mercy Medical Angels: gas cards, Uber/Lyft vouchers, bus and train tickets, and flights for appointments 50+ miles away. Ronald McDonald House: lodging near children's hospitals, free or small suggested donation, requested through the treating hospital's social work team.",
       "eligibility": "Varies by program: age limits (Miracle Flights: 17 and under), income verification (Miracle Flights, Mercy Medical Angels, some Angel Flights), distance rules (Mercy: 50+ miles; some RMHC Houses).",
       "apply": "Each program takes online requests; Ronald McDonald House goes through hospital social work.",
       "links": [
@@ -3045,7 +3045,7 @@
         },
         {
           "label": "Ronald McDonald House Charities",
-          "url": "https://rmhc.org/"
+          "url": "https://ronaldmcdonaldhouse.org/"
         }
       ]
     },

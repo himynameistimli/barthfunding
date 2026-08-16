@@ -47,13 +47,13 @@ export const THERAPIES = [
     route: "Oral (pill)",
     cl: "none", mlcl: "none", atp: "up",
     stage: 2,
-    stageNote: "Phase 1 safety done in healthy adults (Japan); Abe's group says it is preparing a Phase 2 trial",
+    stageNote: "Phase 1 safety done in healthy adults (Japan); Phase 2 began Dec 2025 — in mitochondrial disease with hearing loss, not yet Barth",
     leads: "Takaaki Abe and Takafumi Toyohara at Tohoku University Graduate School of Medicine, Japan; Yoshiyasu Tongu first-authored the 2025 Barth paper. Abe's group developed MA-5 originally.",
     mechanism: "Derived from a natural plant compound; homes to mitochondria, interacts with mitofilin (part of the cristae-shaping MICOS complex) and promotes ATP-synthase assembling into its efficient oligomers. Result: more ATP without burning more oxygen — which also lowers oxidative stress.",
     onLipid: "Unchanged — like elamipretide, it's an efficiency booster, not a lipid fix.",
     onAtp: "Improves. In Barth iPSC cells and fruit flies: better mitochondrial structure, higher ATP, less cell stress, and improved heart function plus climbing (muscle) in flies.",
     routeDetail: "Oral — a meaningful practical advantage over injected elamipretide.",
-    takeaway: "A real pill that has cleared an initial human-safety bar, and the Tohoku group has said publicly that it is preparing to start Phase 2 — which would make it the second Barth-specific drug to reach patients. The Barth evidence underneath it is still cells and flies, so a Phase 2 would be testing a hypothesis that has never been through a mammal."
+    takeaway: "A real pill that has cleared an initial human-safety bar, and a Phase 2 trial began in December 2025 at four Japanese sites — though in mitochondrial disease with hearing loss, not Barth syndrome. The Barth-specific evidence is still cells and flies, so any future Barth trial would be testing a hypothesis that has never been through a mammal."
   },
   {
     slug: "nr-nad-boosting",
@@ -81,13 +81,13 @@ export const THERAPIES = [
     route: "Oral / oligo (envisioned)",
     cl: "up", mlcl: "corrects", atp: "up",
     stage: 1,
-    stageNote: "Preclinical proof-of-concept (cells + mice); target validated and patented; drug discovery funded, no molecule yet",
+    stageNote: "Preclinical proof-of-concept (cells + mice); target validated and patented; a covalent tool inhibitor (ABD646) exists — no clinical candidate yet",
     leads: "Jason Moffat (University of Toronto) with Vincent Blomen and Sebastian Nijman (Scenic Biotech, Netherlands), drawing on the Brummelkamp genetic-screening approach, plus Charles Boone (Toronto), Chad Myers (Minnesota) and Ian Scott (SickKids). Moffat currently holds a Barth Syndrome Foundation grant on TAZ genetic interactions.",
     mechanism: "ABHD18 is the enzyme that deacylates nascent cardiolipin into MLCL (and degrades it further). Block ABHD18 and you never generate the toxic MLCL in the first place — nascent cardiolipin is preserved instead. And nascent (unremodeled) CL is functional enough to support the ATP machinery, so you bypass the need for TAZ entirely.",
     onLipid: "Corrects both: cardiolipin rises, MLCL falls, the diagnostic ratio moves toward normal, and respiratory-chain assembly is restored.",
     onAtp: "Improves — at the source, by rebuilding the machinery correctly rather than propping it up. Rescued survival in Barth mice.",
     routeDetail: "Envisioned as an oral pill (ABHD18 is a serine hydrolase — an unusually druggable enzyme class), or as an siRNA/ASO that lowers the enzyme (this is where a muscle-homing conjugate would matter).",
-    takeaway: "Mechanistically the most elegant option in the pipeline — it corrects the actual lipid defect and rescued survival in Barth mice — but there is no drug molecule yet. What exists is a validated target, a patent, and funded discovery work in the Moffat and Blomen labs. Years, not months. The druggable enzyme class is the reason for optimism."
+    takeaway: "Mechanistically the most elegant option in the pipeline — it corrects the actual lipid defect and rescued survival in Barth mice (via genetic inactivation) — but there is no clinical candidate yet. What exists is a validated target, a patent, a covalent tool inhibitor (ABD646, active in patient fibroblasts and zebrafish), and funded discovery work in the Moffat and Blomen labs. Years, not months. The druggable enzyme class is the reason for optimism."
   },
   {
     slug: "gene-therapy-taz-replacement",
@@ -203,7 +203,7 @@ export const REFERENCES = [
     group: "Approved therapy — elamipretide (Forzinity)",
     items: [
       { text: "Long-term efficacy and safety of elamipretide in Barth syndrome: 168-week open-label extension of TAZPOWER — Genetics in Medicine 2024; the open-label data the approval leaned on", url: "https://pubmed.ncbi.nlm.nih.gov/38602181/" },
-      { text: "SS-31 ameliorates cardiac mitochondrial morphology and defective mitophagy in a murine model of Barth syndrome — Scientific Reports 2024 (mechanism)", url: "https://pubmed.ncbi.nlm.nih.gov/38871974/" },
+      { text: "SS-31 treatment ameliorates cardiac mitochondrial morphology and defective mitophagy in a murine model of Barth syndrome — Scientific Reports 2024 (mechanism)", url: "https://pubmed.ncbi.nlm.nih.gov/38871974/" },
       { text: "FDA elamipretide updates and regulatory timeline — Barth Syndrome Foundation", url: "https://www.barthsyndrome.org/" },
       { text: "FDA grants accelerated approval to elamipretide, first treatment for Barth syndrome — Pharmacy Times, Sept 2025 (approval details, ≥30 kg, surrogate endpoint)" },
       { text: "FDA approves first mitochondrial disease therapy: Stealth's elamipretide for Barth syndrome — UMDF" }
@@ -215,7 +215,7 @@ export const REFERENCES = [
       { text: "AAV Gene Therapy Prevents and Reverses Heart Failure in a Murine Knockout Model of Barth Syndrome — Wang S, … Pu WT (senior author); Circulation Research 2020;126(8):1024–1039. The definitive Pu paper — uses AAV9." },
       { text: "AAV-Mediated TAZ Gene Replacement Restores Mitochondrial and Cardioskeletal Function in Barth Syndrome — Suzuki-Hatano, … Byrne BJ, Pacak CA; Human Gene Therapy 2019 (University of Florida group)" },
       { text: "Cell-Penetrating Peptide Enhances Tafazzin Gene Therapy in Mouse Model of Barth Syndrome — Raghav, … Chin MT; Int. J. Mol. Sci. 2024 (the “ratio fixed but function not” result)", url: "https://pubmed.ncbi.nlm.nih.gov/39769321/" },
-      { text: "Yazawa E, … Pu WT. A murine model of Barth syndrome with cardiac and skeletal muscle selective inactivation of tafazzin — Dis. Model. Mech. 2025 (a model, not a therapy)" },
+      { text: "Yazawa E, … Pu WT. A murine model of Barth syndrome recapitulates human cardiac and skeletal muscle phenotypes — Dis. Model. Mech. 2025 (a model, not a therapy)" },
       { text: "TAZ-02 — conference presentation, 2026 Barth Syndrome Foundation International Scientific, Medical & Family Conference, July 19–26 2026, Bonita Springs FL. Not peer-reviewed." },
       { text: "Directed evolution of a family of AAV capsid variants enabling potent muscle-directed gene delivery across species — Tabebordbar, … Wagers; Cell 2021 (MyoAAV). Companion: AAVMYO, Grimm lab, Science Advances." }
     ]
@@ -232,7 +232,7 @@ export const REFERENCES = [
     group: "Compensatory — MA-5 and NR / NAD⁺",
     items: [
       { text: "Mitochondria-Homing Drug Mitochonic Acid 5 Improves Barth Syndrome Myopathy in a Human iPSC Model and Drosophila Model — Tongu et al.; Abe & Toyohara labs, Tohoku University; FASEB J. 2025", url: "https://pubmed.ncbi.nlm.nih.gov/40542649/" },
-      { text: "First oral drug shows promise for Barth syndrome — Tohoku University press release; the source for “preparing to start Phase 2”" },
+      { text: "First oral drug shows promise for Barth syndrome — Tohoku University press release. Phase 2 began Dec 2025 in mitochondrial disease with hearing loss (four Japanese sites; jRCT2031250505)" },
       { text: "Restoration of mitophagy ameliorates cardiomyopathy in Barth syndrome — Jun Zhang et al., Yuguang Shi lab, Barshop Institute, UT Health San Antonio; Autophagy 2022. Establishes the mitophagy defect — the rescue used rapamycin, not NR." }
     ]
   },
@@ -246,14 +246,14 @@ export const REFERENCES = [
   {
     group: "Delivery platforms & enzyme replacement",
     items: [
-      { text: "A transferrin-receptor-binding bicyclic peptide enhances oligonucleotide delivery to heart and skeletal muscle — Nucleic Acids Research 2025 (Bicycle/TfR1 — the route for an anti-ABHD18 oligo)" },
+      { text: "Conjugation to a transferrin receptor 1-binding Bicycle peptide enhances ASO and siRNA potency in skeletal and cardiac muscles — Nucleic Acids Research 2025 (Bicycle/TfR1 — the route for an anti-ABHD18 oligo)" },
       { text: "Dinca A. Development of Enzyme Replacement Therapy in Mammalian Models of Barth Syndrome — PhD thesis, University of Washington 2017 (the recombinant tafazzin + CPP lineage)" }
     ]
   },
   {
     group: "Emerging",
     items: [
-      { text: "Allogenic mitochondria transfer improves cardiac function in iPSC-derived cardiomyocytes of a patient with Barth syndrome — Experimental & Molecular Medicine 2025" }
+      { text: "Allogenic mitochondria transfer improves cardiac function in iPS-cell-differentiated cardiomyocytes of a patient with Barth syndrome — Experimental & Molecular Medicine 2025" }
     ]
   }
 ];
