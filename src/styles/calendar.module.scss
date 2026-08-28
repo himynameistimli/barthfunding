@@ -38,34 +38,38 @@
   max-width: 72ch;
 }
 
-.feedGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 10px;
-}
-
-.feed {
-  border: 1px solid var(--line);
-  padding: 11px 12px 10px;
-  background: var(--paper);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 // Primary action: webcal:// hands the feed to the OS calendar handler.
-.feedAdd {
+// Secondary, for calendars that cannot take a webcal:// handoff.
+.feedPick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.chipN {
+  @include m.mono(10px);
+  margin-left: 6px;
+  opacity: .65;
+}
+
+.addRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+// Primary targets: each calendar's own add-by-URL route.
+.addBtn {
   @include m.label(9.5px, .1em);
   @include m.focus-ring();
-  display: block;
-  width: 100%;
-  margin-top: 9px;
-  padding: 7px 10px;
-  text-align: center;
+  padding: 8px 12px;
   text-decoration: none;
   background: var(--ink);
   color: var(--surface);
   border: 1px solid var(--ink);
+  white-space: nowrap;
 
   &:hover {
     background: var(--accent);
@@ -74,39 +78,21 @@
   }
 }
 
-// Secondary, for calendars that cannot take a webcal:// handoff.
-.feedCopy {
-  @include m.bare-button;
+// Fallbacks for anything the named routes do not cover.
+.addBtnAlt {
+  @include m.label(9.5px, .1em);
   @include m.focus-ring();
-  @include m.mono(10.5px);
-  margin-top: 7px;
-  color: var(--ink-faint);
-  border-bottom: 1px solid var(--line);
-
-  &:hover { color: var(--accent); border-color: var(--accent); }
-}
-
-.feedName {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--ink);
-  display: block;
-  margin-bottom: 2px;
-}
-
-.feedMeta {
-  @include m.mono(11px);
-  color: var(--ink-faint);
-  display: block;
-}
-
-.feedAll {
-  border-color: var(--ink);
+  padding: 8px 12px;
+  text-decoration: none;
   background: var(--surface);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
 
-  .feedName { color: var(--accent); }
+  &:hover { border-color: var(--accent); color: var(--accent); }
 }
-
 
 .subHint {
   font-size: 12.5px;

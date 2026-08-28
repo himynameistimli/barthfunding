@@ -30,8 +30,13 @@ const sections = AUDIENCES.map(aud => {
 });
 
 const FEEDS = [
-  { key: "all", label: "Everything", n: ENTRIES.length },
-  ...AUDIENCES.map(x => ({ key: x.key, label: x.label, n: entriesFor(x.key).length }))
+  { key: "all", label: "Everything", name: "Barth funding deadlines", n: ENTRIES.length },
+  ...AUDIENCES.map(x => ({
+    key: x.key,
+    label: x.label,
+    name: `Barth funding — ${x.label.toLowerCase()}`,
+    n: entriesFor(x.key).length
+  }))
 ];
 
 // Only entries you act on; decisions and award starts are context, not tasks.
@@ -70,28 +75,38 @@ const jsonLd = {
       <section class={c.subscribe}>
         <h2 class={c.subHead}>Subscribe</h2>
         <p class={c.subNote}>
-          Adds a live subscription to your calendar app — it stays up to date on its own, and
-          every deadline brings its own reminders.
+          Pick a list, then your calendar. The subscription updates itself as we correct
+          dates, and every deadline brings its own reminders.
         </p>
-        <div class={c.feedGrid}>
-          {FEEDS.map(f => (
-            <div class={`${c.feed} ${f.key === "all" ? c.feedAll : ""}`}>
-              <span class={c.feedName}>{f.label}</span>
-              <span class={c.feedMeta}>{f.n} {f.n === 1 ? "entry" : "entries"}</span>
-              <a class={c.feedAdd} href={`webcal://${SITE_HOST}/calendar/${f.key}.ics`}>
-                Add to calendar
-              </a>
-              <button
-                class={c.feedCopy}
-                type="button"
-                data-copy={`${SITE_URL}/calendar/${f.key}.ics`}
-              >copy link</button>
-            </div>
+
+        <div class={c.feedPick} role="group" aria-label="Which list">
+          {FEEDS.map((f, i) => (
+            <button
+              class={c.chip}
+              type="button"
+              data-feed={f.key}
+              data-name={f.name}
+              aria-pressed={i === 0 ? "true" : "false"}
+            >
+              <span>{f.label}</span><span class={c.chipN}>{f.n}</span>
+            </button>
           ))}
         </div>
+
+        <div class={c.addRow}>
+          <span class={c.ctrlLabel}>Add to</span>
+          <a class={c.addBtn} id="add-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+          <a class={c.addBtn} id="add-apple" href="#">Apple Calendar</a>
+          <a class={c.addBtn} id="add-outlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
+          <a class={c.addBtn} id="add-m365" href="#" target="_blank" rel="noopener">Microsoft 365</a>
+          <a class={c.addBtnAlt} id="add-download" href="#" download>Download .ics</a>
+          <button class={c.addBtnAlt} type="button" id="add-copy">Copy link</button>
+        </div>
+
         <p class={c.subHint} aria-live="polite" id="copy-status">
-          Opens your default calendar app. On Google Calendar, copy the link instead and add
-          it under “Other calendars → From URL”.
+          Google and Outlook open in a new tab and ask you to confirm. Apple Calendar opens
+          the app on your Mac or iPhone. Anything else — copy the link and add it as a
+          calendar “from URL”.
         </p>
       </section>
 
@@ -238,7 +253,7 @@ const jsonLd = {
   </div>
 </Base>
 
-<script define:vars={{ c, actionable: actionable.map(e => ({
+<script define:vars={{ c, SITE_URL, SITE_HOST, actionable: actionable.map(e => ({
   on: e.on, program: e.program, label: e.label, slug: e.slug,
   status: e.status, when: formatDate(e), precision: e.precision
 })) }}>
@@ -264,11 +279,60 @@ const jsonLd = {
     return `in ${plural(months, "month")}`;
   };
 
-  // --- copy a feed link -----------------------------------------------------
-  // Subscribing means pasting the URL into a calendar app, so the button hands
-  // over the address rather than downloading a snapshot that never updates.
+  // --- subscribe targets ----------------------------------------------------
+  // webcal:// only works when an app is registered for that protocol, so the
+  // browser-based calendars need their own add-by-URL endpoints instead.
   const copyStatus = document.getElementById("copy-status");
   const statusDefault = copyStatus.textContent;
+  const copyBtn = document.getElementById("add-copy");
+  const copyDefault = copyBtn.textContent;
+
+  let feed = "all";
+  let feedName = document.querySelector("[data-feed]").dataset.name;
+
+  function feedUrls() {
+    const https = `${SITE_URL}/calendar/${feed}.ics`;
+    const webcal = `webcal://${SITE_HOST}/calendar/${feed}.ics`;
+    return {
+      https,
+      webcal,
+      // Google takes the feed as `cid`; the webcal form is what it expects.
+      google: `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}`,
+      // Same add-by-URL route, but personal and work/school accounts live on
+      // different hosts — one button would fail for half of Outlook users.
+      outlook:
+        "https://outlook.live.com/calendar/0/addfromweb?url=" +
+        encodeURIComponent(https) + "&name=" + encodeURIComponent(feedName),
+      m365:
+        "https://outlook.office.com/calendar/0/addfromweb?url=" +
+        encodeURIComponent(https) + "&name=" + encodeURIComponent(feedName)
+    };
+  }
+
+  function syncTargets() {
+    const u = feedUrls();
+    document.getElementById("add-google").href = u.google;
+    document.getElementById("add-apple").href = u.webcal;
+    document.getElementById("add-outlook").href = u.outlook;
+    document.getElementById("add-m365").href = u.m365;
+    const dl = document.getElementById("add-download");
+    dl.href = u.https;
+    dl.setAttribute("download", `barth-funding-${feed}.ics`);
+  }
+
+  for (const btn of document.querySelectorAll("[data-feed]")) {
+    btn.addEventListener("click", () => {
+      feed = btn.dataset.feed;
+      feedName = btn.dataset.name;
+      for (const b of document.querySelectorAll("[data-feed]")) {
+        b.setAttribute("aria-pressed", String(b === btn));
+      }
+      syncTargets();
+      copyBtn.textContent = copyDefault;
+      copyStatus.textContent = statusDefault;
+    });
+  }
+  syncTargets();
 
   async function copyText(text) {
     try {
@@ -290,43 +354,35 @@ const jsonLd = {
   }
 
   let resetTimer;
-  for (const btn of document.querySelectorAll("[data-copy]")) {
-    const label = btn;
-    const labelDefault = label.textContent;
-    btn.addEventListener("click", async () => {
-      const url = btn.dataset.copy;
-      const ok = await copyText(url);
-      clearTimeout(resetTimer);
-      for (const other of document.querySelectorAll("[data-copy]")) {
-        if (other !== label && other.dataset.default) other.textContent = other.dataset.default;
-      }
-      label.dataset.default = labelDefault;
-      label.textContent = ok ? "copied ✓" : "select the link below";
-      copyStatus.textContent = "";
+  copyBtn.addEventListener("click", async () => {
+    const url = feedUrls().https;
+    const ok = await copyText(url);
+    clearTimeout(resetTimer);
+    copyBtn.textContent = ok ? "Copied \u2713" : "Select it below";
+    copyStatus.textContent = "";
 
-      if (ok) {
-        copyStatus.textContent = `Copied ${url} — paste it into your calendar app as a new subscription.`;
-      } else {
-        // Clipboard access can be blocked outright. Put the address on the page
-        // and select it, so the keyboard shortcut has something to act on —
-        // telling someone to press Cmd-C with nothing selected is useless.
-        copyStatus.append("Copy this address: ");
-        const code = document.createElement("code");
-        code.textContent = url;
-        copyStatus.append(code);
-        const range = document.createRange();
-        range.selectNodeContents(code);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-      }
+    if (ok) {
+      copyStatus.textContent =
+        `Copied ${url} — paste it into your calendar app as a new subscription.`;
+    } else {
+      // Clipboard access can be blocked outright. Put the address on the page
+      // and select it, so the keyboard shortcut has something to act on.
+      copyStatus.append("Copy this address: ");
+      const code = document.createElement("code");
+      code.textContent = url;
+      copyStatus.append(code);
+      const range = document.createRange();
+      range.selectNodeContents(code);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
 
-      resetTimer = setTimeout(() => {
-        label.textContent = labelDefault;
-        copyStatus.textContent = statusDefault;
-      }, 8000);
-    });
-  }
+    resetTimer = setTimeout(() => {
+      copyBtn.textContent = copyDefault;
+      copyStatus.textContent = statusDefault;
+    }, 8000);
+  });
 
   // --- "what to do next" ----------------------------------------------------
   const upcoming = actionable
