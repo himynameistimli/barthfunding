@@ -2,12 +2,17 @@
 import s from "../styles/app.module.scss";
 import { LAST_UPDATED } from "../data/programs.mjs";
 
-const { headline, showFilters = false } = Astro.props;
+// headlineNote defaults to the index's award-total explainer; other pages that
+// set a headline should pass their own.
+const {
+  headline,
+  headlineNote = "Max single-award total across capped programs still open. Uncapped and in-kind mechanisms add more.",
+  showFilters = false
+} = Astro.props;
 const path = Astro.url.pathname;
 const NAV = [
   { href: "/", label: "Funding index" },
-  { href: "/what-is-barth-syndrome/", label: "What is Barth syndrome" },
-  { href: "/therapies/", label: "Therapy progress" },
+  { href: "/calendar/", label: "Deadline calendar" },
   { href: "/suggest-update/", label: "Suggest an update" }
 ];
 ---
@@ -23,7 +28,7 @@ const NAV = [
     {headline && (
       <>
         <div class={s.headline}>{headline}</div>
-        <p class={s.headlineNote}>Max single-award total across capped programs still open. Uncapped and in-kind mechanisms add more.</p>
+        {headlineNote && <p class={s.headlineNote}>{headlineNote}</p>}
       </>
     )}
   </div>

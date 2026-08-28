@@ -1,0 +1,368 @@
+---
+import Base from "../../layouts/Base.astro";
+import Rail from "../../components/Rail.astro";
+import { LAST_UPDATED } from "../../data/programs.mjs";
+import { SITE_URL, CONTACT_EMAIL } from "../../data/site.mjs";
+import {
+  AUDIENCES, ENTRIES, entriesFor, rollingFor, groupByMonth,
+  formatDate, formatTime, KIND_LABEL, isSoft
+} from "../../data/calendar.mjs";
+import a from "../../styles/app.module.scss";
+import c from "../../styles/calendar.module.scss";
+
+const verified = ENTRIES.filter(e => e.status === "verified").length;
+const projected = ENTRIES.length - verified;
+const in2027 = ENTRIES.filter(e => e.year === 2027).length;
+const withDates = new Set(ENTRIES.map(e => e.slug)).size;
+
+const sections = AUDIENCES.map(aud => {
+  const entries = entriesFor(aud.key);
+  return {
+    ...aud,
+    entries,
+    months: groupByMonth(entries),
+    rolling: rollingFor(aud.key),
+    feed: `${SITE_URL}/calendar/${aud.key}.ics`
+  };
+});
+
+const FEEDS = [
+  { key: "all", label: "Everything", n: ENTRIES.length },
+  ...AUDIENCES.map(x => ({ key: x.key, label: x.label, n: entriesFor(x.key).length }))
+];
+
+// Only entries you act on; decisions and award starts are context, not tasks.
+const actionable = ENTRIES.filter(e => !isSoft(e));
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Barth syndrome funding deadline calendar",
+  url: `${SITE_URL}/calendar/`,
+  description:
+    "Every dated deadline across Barth syndrome and rare-disease research funding, separated by audience, with subscribable calendar feeds.",
+  isPartOf: { "@type": "WebSite", name: "Barth Syndrome Research Funding Index", url: SITE_URL }
+};
+---
+<Base
+  title="Funding deadline calendar — Barth syndrome research funding"
+  description="Every dated funding deadline through 2027 for Barth syndrome research, advocacy organizations, and families — with subscribable .ics calendar feeds that set their own reminders."
+  jsonLd={jsonLd}
+>
+  <div class={a.shell}>
+    <Rail
+      headline={`${ENTRIES.length} dated entries`}
+      headlineNote={`Deadlines, openings, and decisions across ${withDates} programs — ${verified} verified against the funder, ${projected} projected from past cycles.`}
+    />
+
+    <main class={`${a.doc} ${a.docWide} ${c.page}`}>
+      <p class={a.crumb}><a href="/">← Funding index</a></p>
+      <h1>Funding deadline calendar</h1>
+
+      <p class={c.lede}>
+        Every date we hold across the {ENTRIES.length} tracked entries — grant deadlines, letters of
+        intent, opening dates, and decisions — laid out chronologically and split by who it
+        is for. {in2027} of them fall in 2027. Subscribe to a feed below and your calendar
+        will remind you without you having to come back here.
+      </p>
+
+      <section class={c.subscribe}>
+        <h2 class={c.subHead}>Subscribe</h2>
+        <p class={c.subNote}>
+          These are live subscription feeds, not one-time downloads: add one and it keeps
+          itself current as we correct dates. Every deadline carries reminders at 30 days,
+          7 days, and 1 day, and each event holds the award amount, eligibility, how to
+          apply, and a link back to the full entry.
+        </p>
+        <div class={c.feedGrid}>
+          {FEEDS.map(f => (
+            <a
+              class={`${c.feed} ${f.key === "all" ? c.feedAll : ""}`}
+              href={`/calendar/${f.key}.ics`}
+              download={`barth-funding-${f.key}.ics`}
+            >
+              <span class={c.feedName}>{f.label}</span>
+              <span class={c.feedMeta}>{f.n} {f.n === 1 ? "entry" : "entries"} · .ics</span>
+            </a>
+          ))}
+        </div>
+
+        <details class={c.howto}>
+          <summary>How to subscribe so it stays up to date</summary>
+          <p>
+            Clicking a feed downloads a snapshot. To get the version that updates itself,
+            copy the feed address and add it as a subscribed calendar:
+          </p>
+          <ul>
+            <li>
+              <strong>Google Calendar</strong> — Other calendars → + → From URL → paste
+              <code>{SITE_URL}/calendar/researchers.ics</code>
+            </li>
+            <li>
+              <strong>Apple Calendar</strong> — File → New Calendar Subscription → paste the
+              same address → set auto-refresh to daily.
+            </li>
+            <li>
+              <strong>Outlook</strong> — Add calendar → Subscribe from web → paste the address.
+            </li>
+          </ul>
+          <p>
+            Swap <code>researchers</code> for <code>all</code>, <code>orgs</code>, or
+            <code>patients</code> depending on which list you want.
+          </p>
+        </details>
+      </section>
+
+      <section class={c.actNow} id="act-now">
+        <h2 class={c.subHead}>What to do next</h2>
+        <p class={c.subNote} id="act-intro">The soonest dates you can still act on.</p>
+        <ul class={c.actList} id="act-list"></ul>
+        <p class={c.empty} id="act-empty" hidden>
+          Nothing in the next stretch. Scroll on for what is coming later.
+        </p>
+      </section>
+
+      <div class={c.controls}>
+        <span class={c.ctrlLabel}>Show</span>
+        <button class={c.chip} type="button" data-year="all" aria-pressed="true">All</button>
+        <button class={c.chip} type="button" data-year="2026" aria-pressed="false">Rest of 2026</button>
+        <button class={c.chip} type="button" data-year="2027" aria-pressed="false">2027</button>
+        <button class={c.chip} type="button" data-year="2028" aria-pressed="false">2028+</button>
+        <span class={c.spacer}></span>
+        <button class={c.chip} type="button" id="toggle-past" aria-pressed="false">Include past dates</button>
+        <button class={c.chip} type="button" id="toggle-projected" aria-pressed="true">Include projected</button>
+      </div>
+
+      {sections.map(sec => (
+        <section class={c.audSection} id={sec.key}>
+          <div class={c.audHead}>
+            <h2 class={c.audTitle}>{sec.label}</h2>
+            <span class={c.audCount}>
+              <span data-count-for={sec.key}>{sec.entries.length}</span> dated ·{" "}
+              <a class={c.audSub} href={`/calendar/${sec.key}.ics`}>subscribe .ics</a>
+            </span>
+          </div>
+          <p class={c.audBlurb}>{sec.blurb}</p>
+
+          {sec.months.map(mon => (
+            <>
+              <h3 class={c.monthHead} data-month={mon.key}>{mon.label}</h3>
+              {mon.entries.map(e => (
+                <article
+                  class={c.entry}
+                  data-on={e.on}
+                  data-year={e.year}
+                  data-status={e.status}
+                  data-soft={isSoft(e) ? "1" : "0"}
+                  data-aud={sec.key}
+                  data-program={e.program}
+                  data-label={e.label}
+                  data-href={`/grants/${e.slug}/`}
+                  data-when={formatDate(e)}
+                >
+                  <div class={c.when}>
+                    {formatDate(e)}
+                    {formatTime(e) && <span class={c.whenTime}>{formatTime(e)}</span>}
+                    <span class={c.days} data-days></span>
+                  </div>
+                  <div class={c.body}>
+                    <p class={c.prog}><a href={`/grants/${e.slug}/`}>{e.program}</a></p>
+                    <p class={c.what}>{e.label}</p>
+                    {e.note && <p class={c.note}>{e.note}</p>}
+                  </div>
+                  <div class={c.flags}>
+                    <span class={`${c.tag} ${c.tagKind}`}>{KIND_LABEL[e.kind]}</span>
+                    {e.expired && <span class={`${c.tag} ${c.tagWatch}`}>Watch</span>}
+                    <span class={`${c.tag} ${e.status === "verified" ? c.tagVerified : c.tagProjected}`}>
+                      {e.status === "verified" ? "Verified" : "Projected"}
+                    </span>
+                  </div>
+                </article>
+              ))}
+            </>
+          ))}
+
+          {sec.rolling.length > 0 && (
+            <div class={c.rolling}>
+              <h3 class={c.subHead}>
+                No deadline to track — {sec.rolling.length} rolling {sec.rolling.length === 1 ? "program" : "programs"}
+              </h3>
+              <p class={c.subNote}>
+                {sec.key === "patients"
+                  ? "Nearly all family assistance runs on rolling intake: there is no date to diarise, you apply at the point of need. These are the ones to know about before you need them."
+                  : "These accept applications year-round or on request, so they never appear on a calendar. Worth a look when you are between deadlines."}
+              </p>
+              <ul class={c.rollingList}>
+                {sec.rolling.map(p => (
+                  <li class={c.rollingItem}>
+                    <a href={`/grants/${p.slug}/`}>{p.name}</a>
+                    <span>{p.deadline}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      ))}
+
+      <section class={c.legend}>
+        <h2>How to read this</h2>
+        <div class={c.legendGrid}>
+          <p class={c.legendItem}>
+            <strong>Verified ({verified})</strong>
+            Checked against the funder's own page on the date shown in the calendar entry.
+          </p>
+          <p class={c.legendItem}>
+            <strong>Projected ({projected})</strong>
+            Inferred from the program's past cycles. The funder has not published this date.
+            Treat it as a prompt to go and check, never as a deadline.
+          </p>
+          <p class={c.legendItem}>
+            <strong>Watch</strong>
+            The program has no open call right now. The date is our best guess at when it
+            reopens.
+          </p>
+          <p class={c.legendItem}>
+            <strong>NIH dates</strong>
+            Standing receipt dates, already shifted off weekends and federal holidays to the
+            next business day, as NIH policy requires.
+          </p>
+        </div>
+        <p class={a.note}>
+          A program can appear under more than one audience when it genuinely serves both.
+          Dates move, and calls are cancelled without notice — confirm on the funder's own
+          site before you rely on anything here. Corrections go to{" "}
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> or the{" "}
+          <a href="/suggest-update/">suggest an update</a> page.
+        </p>
+        <p class={a.docFoot}>Deadline data last verified {LAST_UPDATED}.</p>
+      </section>
+    </main>
+  </div>
+</Base>
+
+<script define:vars={{ c, actionable: actionable.map(e => ({
+  on: e.on, program: e.program, label: e.label, slug: e.slug,
+  status: e.status, when: formatDate(e), precision: e.precision
+})) }}>
+  // The site is statically built, so "today" has to be decided in the browser —
+  // otherwise a stale build would show past deadlines as upcoming.
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const iso = d => d.toISOString().slice(0, 10);
+  const todayISO = iso(today);
+  const dayDiff = on => {
+    const [y, m, d] = on.split("-").map(Number);
+    return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(
+      today.getFullYear(), today.getMonth(), today.getDate())) / 86400000);
+  };
+
+  const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+  const relative = n => {
+    if (n === 0) return "today";
+    if (n < 0) return `${plural(-n, "day")} ago`;
+    if (n === 1) return "tomorrow";
+    if (n < 45) return `in ${plural(n, "day")}`;
+    const months = Math.round(n / 30.4);
+    return `in ${plural(months, "month")}`;
+  };
+
+  // --- "what to do next" ----------------------------------------------------
+  const upcoming = actionable
+    .filter(e => e.on >= todayISO)
+    .sort((a, b) => (a.on < b.on ? -1 : 1))
+    .slice(0, 8);
+
+  const list = document.getElementById("act-list");
+  const empty = document.getElementById("act-empty");
+  if (!upcoming.length) {
+    empty.hidden = false;
+  } else {
+    list.innerHTML = upcoming.map(e => {
+      const n = dayDiff(e.on);
+      const soon = n <= 21;
+      const mark = e.status === "projected" ? " (projected)" : "";
+      return `<li class="${c.actItem}">
+        <span class="${c.actDays} ${soon ? c.actSoon : ""}">${relative(n)}</span>
+        <span><a href="/grants/${e.slug}/">${e.program}</a> — ${e.label}${mark}
+          <span class="${c.actWhen}">${e.when}</span></span>
+      </li>`;
+    }).join("");
+  }
+
+  // --- per-row day counts ---------------------------------------------------
+  const rows = [...document.querySelectorAll("article[data-on]")];
+  for (const row of rows) {
+    const on = row.dataset.on;
+    const n = dayDiff(on);
+    const slot = row.querySelector("[data-days]");
+    if (slot) {
+      slot.textContent = relative(n);
+      if (n < 0) slot.classList.add(c.daysPast);
+    }
+    row.dataset.past = n < 0 ? "1" : "0";
+  }
+
+  // --- filters --------------------------------------------------------------
+  let year = "all";
+  let showPast = false;
+  let showProjected = true;
+
+  function apply() {
+    for (const row of rows) {
+      const y = row.dataset.year;
+      const yearOk = year === "all"
+        || (year === "2028" ? Number(y) >= 2028 : y === year);
+      const pastOk = showPast || row.dataset.past === "0";
+      const projOk = showProjected || row.dataset.status !== "projected";
+      const show = yearOk && pastOk && projOk;
+      row.hidden = !show;
+      row.classList.toggle(c.entryPast, row.dataset.past === "1");
+    }
+
+    // Hide month headings whose rows are all filtered out.
+    let visible = 0;
+    const counts = {};
+    for (const head of document.querySelectorAll("[data-month]")) {
+      let any = false;
+      let el = head.nextElementSibling;
+      while (el && !el.hasAttribute("data-month")) {
+        if (el.dataset.on && !el.hidden) {
+          any = true;
+          visible++;
+          counts[el.dataset.aud] = (counts[el.dataset.aud] || 0) + 1;
+        }
+        el = el.nextElementSibling;
+      }
+      head.hidden = !any;
+    }
+    for (const el of document.querySelectorAll("[data-count-for]")) {
+      el.textContent = counts[el.dataset.countFor] || 0;
+    }
+  }
+
+  document.querySelectorAll("[data-year]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      year = btn.dataset.year;
+      document.querySelectorAll("[data-year]").forEach(b =>
+        b.setAttribute("aria-pressed", String(b === btn)));
+      apply();
+    });
+  });
+
+  const pastBtn = document.getElementById("toggle-past");
+  pastBtn.addEventListener("click", () => {
+    showPast = !showPast;
+    pastBtn.setAttribute("aria-pressed", String(showPast));
+    apply();
+  });
+
+  const projBtn = document.getElementById("toggle-projected");
+  projBtn.addEventListener("click", () => {
+    showProjected = !showProjected;
+    projBtn.setAttribute("aria-pressed", String(showProjected));
+    apply();
+  });
+
+  apply();
+</script>

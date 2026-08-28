@@ -19,12 +19,24 @@ export function GET() {
 ## Pages
 
 - [Funding index](${SITE_URL}/): searchable, sortable table of all programs with facets for funder, audience, award type, research focus, and status
+- [Deadline calendar](${SITE_URL}/calendar/): every dated deadline, opening, and decision in chronological order, split by audience, with subscribable iCalendar feeds
 - [What is Barth syndrome](${SITE_URL}/what-is-barth-syndrome/): the disease, how it presents, and how it is diagnosed
 - [Therapy progress](${SITE_URL}/therapies/): every current and emerging BTHS therapy by mechanism, effect on the cardiolipin defect, delivery route, and development stage
 - [Suggest an update](${SITE_URL}/suggest-update/): how to report corrections or missing programs
 
 Each program has a permanent page at ${SITE_URL}/grants/<slug>/ with award details,
 eligibility, application steps, and links.
+
+## Calendar feeds (iCalendar / .ics)
+
+Subscribable feeds of every dated deadline. Each event carries the award amount,
+eligibility, how to apply, whether the date is verified or projected, and reminders
+at 30, 7, and 1 day before.
+
+- ${SITE_URL}/calendar/all.ics: every dated entry
+- ${SITE_URL}/calendar/researchers.ics: investigator and trainee funding deadlines
+- ${SITE_URL}/calendar/orgs.ics: advocacy-organization deadlines
+- ${SITE_URL}/calendar/patients.ics: patient and family assistance windows
 
 ## Active programs (${active.length})
 

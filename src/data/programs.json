@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "August 9, 2026",
+  "lastUpdated": "August 28, 2026",
   "awardMaxUSD": {
     "BSF Research Grant Program (IDEA & DEVELOPMENT Grants)": 100000,
     "BSF Strategic Initiatives Program (SIP)": 140000,
@@ -55,7 +55,7 @@
       "sponsor": "Barth Syndrome Foundation & International Affiliates",
       "cat": "nonprofit",
       "amount": "IDEA up to $50,000 (1–2 yrs); DEVELOPMENT up to $100,000 (2–3 yrs)",
-      "deadline": "2027 cycle stated to open Jul 31, 2026 — portal still showed closed in early Aug; check",
+      "deadline": "2027 cycle OPEN — full applications due Oct 30, 2026; grantees announced Mar 2027",
       "desc": "BSF's grant program for Barth-specific research: seed grants for basic, translational, and clinical research on BTHS — natural history, biochemical basis, and treatment — intended to generate preliminary data for follow-on NIH-scale funding. Indirects are capped at 10%. Young/non-tenured investigators may put up to 75% of funds toward PI salary. Research-participant travel for clinical studies is budgeted outside the cap. BSF affiliates (Canada, UK/Barth Syndrome Trust, Barth Italia, Association Barth France) co-fund through this single program.",
       "eligibility": "Independent investigators with faculty appointments, worldwide — no geographic restrictions. Postdocs cannot apply as PI (they are directed to the AHA/BSF co-funded fellowships instead).",
       "apply": "Apply via BSF's SurveyMonkey Apply portal. An LOI is required for DEVELOPMENT-grant applications and optional for IDEA grants. Annual cycle: opens ~July 31, full applications due Oct 31, awards announced ~March. Guidelines, budget table, and grant policies are downloadable inside the portal. Contacts: Lindsay Marjoram, PhD, Director of Research (lindsay.marjoram@barthsyndrome.org); applications: Melissa Huang, PhD (melissa.huang@barthsyndrome.org).",
@@ -89,6 +89,38 @@
         "basic",
         "preclinical",
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-30",
+          "label": "2027 cycle — full application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "Submit through BSF's SurveyMonkey Apply portal. Grantees announced March 2027, which is also the earliest award start."
+        },
+        {
+          "on": "2027-03-01",
+          "label": "2027 grantees announced; earliest award start",
+          "kind": "decision",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "precision": "month"
+        },
+        {
+          "on": "2027-07-30",
+          "label": "2028 cycle expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "note": "BSF has opened the next cycle at the end of July in recent years. Not yet published."
+        },
+        {
+          "on": "2027-10-29",
+          "label": "2028 cycle application expected due",
+          "kind": "deadline",
+          "status": "projected",
+          "note": "Projected from the late-October pattern; confirm when BSF posts the 2028 RFP."
+        }
       ]
     },
     {
@@ -157,6 +189,22 @@
       "focus": [
         "training",
         "basic"
+      ],
+      "dates": [
+        {
+          "on": "2027-08-04",
+          "label": "2028 predoctoral fellowship expected due",
+          "kind": "deadline",
+          "status": "projected",
+          "note": "The 2027 cycle closed Aug 4-5, 2026. AHA has held early-August deadlines; confirm when the 2028 program announcement posts."
+        },
+        {
+          "on": "2027-08-05",
+          "label": "2028 postdoctoral fellowship expected due",
+          "kind": "deadline",
+          "status": "projected",
+          "note": "2027 postdoc proposals were due Aug 5, 2026, 3:00 PM CT."
+        }
       ]
     },
     {
@@ -190,6 +238,16 @@
         "basic",
         "preclinical",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2027-02-01",
+          "label": "Next cycle expected",
+          "kind": "deadline",
+          "status": "projected",
+          "precision": "month",
+          "note": "UMDF has run a late-February deadline in prior cycles. Watch umdf.org/researchgrants."
+        }
       ]
     },
     {
@@ -223,6 +281,16 @@
         "basic",
         "preclinical",
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2027-01-01",
+          "label": "Next Incubator round expected",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month",
+          "note": "Expected late 2026 or during 2027; no round announced yet."
+        }
       ]
     },
     {
@@ -291,6 +359,22 @@
         "basic",
         "preclinical",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2026-12-01",
+          "label": "Annual call expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month"
+        },
+        {
+          "on": "2027-01-01",
+          "label": "Annual call deadline expected",
+          "kind": "deadline",
+          "status": "projected",
+          "precision": "month"
+        }
       ]
     },
     {
@@ -319,6 +403,16 @@
       "focus": [
         "basic",
         "preclinical"
+      ],
+      "dates": [
+        {
+          "on": "2027-08-01",
+          "label": "Annual RFP announcement expected",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month",
+          "note": "A BTHS-specific fund does not exist yet; establishing one requires a disease-fund agreement with NORD. The 2026 announcement window has passed."
+        }
       ]
     },
     {
@@ -352,6 +446,16 @@
       "focus": [
         "basic",
         "preclinical"
+      ],
+      "dates": [
+        {
+          "on": "2027-06-01",
+          "label": "Ride date — a Barth team must be registered well beforehand",
+          "kind": "window",
+          "status": "projected",
+          "precision": "month",
+          "note": "Funds raised by a disease team are matched and returned as pilot grants. Team registration opens months ahead."
+        }
       ]
     },
     {
@@ -573,6 +677,83 @@
         "basic",
         "preclinical",
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-05",
+          "label": "R01 new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Applications are due 5:00 PM local time of the applicant organization."
+        },
+        {
+          "on": "2026-11-05",
+          "label": "R01 renewal / resubmission due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-02-05",
+          "label": "R01 new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-03-05",
+          "label": "R01 renewal / resubmission due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-06-07",
+          "label": "R01 new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Jun 5 falls on a weekend; NIH moves it to the next business day."
+        },
+        {
+          "on": "2027-07-06",
+          "label": "R01 renewal / resubmission due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Jul 5 falls on a federal holiday; NIH moves it to the next business day."
+        },
+        {
+          "on": "2027-10-05",
+          "label": "R01 new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-11-05",
+          "label": "R01 renewal / resubmission due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        }
       ]
     },
     {
@@ -606,6 +787,46 @@
       "focus": [
         "basic",
         "preclinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-16",
+          "label": "R21 / R03 new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Applications are due 5:00 PM local time of the applicant organization."
+        },
+        {
+          "on": "2027-02-16",
+          "label": "R21 / R03 new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-06-16",
+          "label": "R21 / R03 new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-10-18",
+          "label": "R21 / R03 new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Oct 16 falls on a weekend; NIH moves it to the next business day."
+        }
       ]
     },
     {
@@ -634,6 +855,16 @@
       "awardType": "cash",
       "focus": [
         "preclinical"
+      ],
+      "dates": [
+        {
+          "on": "2027-06-02",
+          "label": "Final application due (extended)",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "The funding opportunity expires Jun 3, 2027 — this is the last receipt date."
+        }
       ]
     },
     {
@@ -663,6 +894,16 @@
       "focus": [
         "natural-history",
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2027-02-17",
+          "label": "Application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "Opportunity runs through July 2028."
+        }
       ]
     },
     {
@@ -759,6 +1000,22 @@
       "awardType": "cash",
       "focus": [
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-20",
+          "label": "Receipt date",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28"
+        },
+        {
+          "on": "2027-10-19",
+          "label": "Receipt date",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28"
+        }
       ]
     },
     {
@@ -786,6 +1043,15 @@
       "awardType": "cash",
       "focus": [
         "natural-history"
+      ],
+      "dates": [
+        {
+          "on": "2028-02-08",
+          "label": "Next receipt date",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28"
+        }
       ]
     },
     {
@@ -856,6 +1122,16 @@
       "focus": [
         "preclinical",
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2027-06-01",
+          "label": "FY27 pre-application expected",
+          "kind": "deadline",
+          "status": "projected",
+          "precision": "month",
+          "note": "FY26 pre-applications closed Jul 23, 2026; the FY27 cycle is expected around summer 2027."
+        }
       ]
     },
     {
@@ -863,7 +1139,7 @@
       "sponsor": "NIH (PA-27-100 / PA-27-102)",
       "cat": "government",
       "amount": "~$323K Phase I / ~$2.15M Phase II (waivers to ~$700K/~$3M)",
-      "deadline": "First receipt Sept 8, 2026; then Jan 5 & Apr 5, 2027",
+      "deadline": "Standard receipts Jan 5, Apr 5, Sept 5 (shifted to the next business day)",
       "desc": "Small-business-led development of BTHS therapeutics and diagnostics — gene therapy, mitochondria-targeted drugs, cardiolipin-ratio diagnostics. Rare-disease therapeutics is a stated NIH SBIR priority area, and several institutes fund above standard caps for approved waiver topics. STTR requires a nonprofit research-institution partner, which accommodates academic labs spinning out companies.",
       "eligibility": "US small businesses (<500 employees, majority US-owned); STTR requires a nonprofit research-institution partner.",
       "apply": "Via eRA Commons / Grants.gov under the FY26 series (reposted Jun 1, 2026). First receipt date Sept 8, 2026, then standard cycles Jan 5 and Apr 5, 2027.",
@@ -885,6 +1161,46 @@
       "awardType": "cash",
       "focus": [
         "preclinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-09-08",
+          "label": "SBIR / STTR receipt date",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Sep 5 falls on a weekend; NIH moves it to the next business day. Applications are due 5:00 PM local time of the applicant organization."
+        },
+        {
+          "on": "2027-01-05",
+          "label": "SBIR / STTR receipt date",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-04-05",
+          "label": "SBIR / STTR receipt date",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-09-07",
+          "label": "SBIR / STTR receipt date",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Sep 5 falls on a weekend; NIH moves it to the next business day."
+        }
       ]
     },
     {
@@ -921,6 +1237,23 @@
       "awardType": "cash",
       "focus": [
         "preclinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-09-14",
+          "label": "Preclinical services expression-of-interest window opens",
+          "kind": "opens",
+          "status": "verified",
+          "checked": "2026-08-28"
+        },
+        {
+          "on": "2026-10-02",
+          "label": "Expression-of-interest window closes",
+          "kind": "closes",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "NHLBI expects to fund up to 8 new Catalyze awards in FY2027."
+        }
       ]
     },
     {
@@ -950,6 +1283,16 @@
       "focus": [
         "basic",
         "preclinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-11-01",
+          "label": "JTC 2027 pre-announcement expected",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month",
+          "note": "Pre-announcement expected Nov-Dec 2026, with the call following."
+        }
       ]
     },
     {
@@ -986,7 +1329,7 @@
       "sponsor": "Canadian Institutes of Health Research",
       "cat": "government",
       "amount": "~CAD $100–300K/yr, up to 5 years",
-      "deadline": "Fall 2026: registration Aug 12, application Sept 9, 2026",
+      "deadline": "Fall 2026: registration closed Aug 12; application due Sept 9, 2026",
       "desc": "Canada's open investigator-initiated program covering any health research including rare disease. Competitions run twice yearly (spring/fall). CIHR also runs a Rare Disease Research Initiative with its own opportunities.",
       "eligibility": "Independent researchers at eligible Canadian institutions.",
       "apply": "Via ResearchNet: Fall 2026 registration closes Aug 12, 2026, applications Sept 9, 2026, decisions ~Jan 2027.",
@@ -1010,6 +1353,40 @@
       "focus": [
         "basic",
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-09-09",
+          "label": "Fall 2026 application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "20:00",
+          "tz": "America/Toronto",
+          "note": "Registration closed Aug 12, 2026 — only registered applicants may submit."
+        },
+        {
+          "on": "2027-01-14",
+          "label": "Fall 2026 notice of recommendation released",
+          "kind": "decision",
+          "status": "verified",
+          "checked": "2026-08-28"
+        },
+        {
+          "on": "2027-02-01",
+          "label": "Spring 2027 registration expected",
+          "kind": "loi",
+          "status": "projected",
+          "precision": "month",
+          "note": "CIHR runs two Project Grant competitions a year; spring registration has fallen in February."
+        },
+        {
+          "on": "2027-03-01",
+          "label": "Spring 2027 application expected",
+          "kind": "deadline",
+          "status": "projected",
+          "precision": "month"
+        }
       ]
     },
     {
@@ -1041,6 +1418,15 @@
       "awardType": "cash",
       "focus": [
         "capacity"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-01",
+          "label": "Fall cycle letter of intent due",
+          "kind": "loi",
+          "status": "verified",
+          "checked": "2026-08-28"
+        }
       ]
     },
     {
@@ -1048,7 +1434,7 @@
       "sponsor": "National Institutes of Health",
       "cat": "government",
       "amount": "Typically $10K–$50K/yr; up to 5 years for recurring series",
-      "deadline": "Standard NIH due dates",
+      "deadline": "Standard NIH R13 dates — Apr 12, Aug 12, Dec 12",
       "desc": "Cash support for scientific conferences and workshops, including the scientific sessions of BSF's biannual conference; a recurring series run by a permanent sponsoring organization can receive up to 5 years of support. Effective Feb 10, 2026, NIH no longer requires advance institute permission for conference grant applications (NOT-OD-26-040).",
       "eligibility": "Nonprofits with or without 501(c)(3) status are explicitly eligible, alongside universities and governments. Requires eRA Commons/SAM.gov registration; patient organizations can apply directly or co-sponsor with an academic partner.",
       "apply": "Via Grants.gov/ASSIST under PA-25-080 (or its successor) at standard NIH due dates.",
@@ -1072,6 +1458,48 @@
       "awardType": "cash",
       "focus": [
         "capacity"
+      ],
+      "dates": [
+        {
+          "on": "2026-12-14",
+          "label": "R13 conference grant application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Dec 12 falls on a weekend; NIH moves it to the next business day. Supports scientific meetings and conferences — a route for patient-organization scientific meetings."
+        },
+        {
+          "on": "2027-04-12",
+          "label": "R13 conference grant application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Supports scientific meetings and conferences — a route for patient-organization scientific meetings."
+        },
+        {
+          "on": "2027-08-12",
+          "label": "R13 conference grant application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Supports scientific meetings and conferences — a route for patient-organization scientific meetings."
+        },
+        {
+          "on": "2027-12-13",
+          "label": "R13 conference grant application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Dec 12 falls on a weekend; NIH moves it to the next business day. Supports scientific meetings and conferences — a route for patient-organization scientific meetings."
+        }
       ]
     },
     {
@@ -1154,7 +1582,7 @@
       "sponsor": "Pfizer",
       "cat": "corporate",
       "amount": "Funding and/or drug, project-based",
-      "deadline": "Portal paused for system migration — reopens after Aug 19, 2026",
+      "deadline": "System migration ongoing — application windows still unposted as of Aug 28, 2026",
       "desc": "Funding and/or drug for investigator-sponsored preclinical and clinical studies involving a Pfizer asset, plus general research projects. Rare-disease areas include ATTR cardiac amyloidosis / rare cardiomyopathy (tafamidis). Pfizer has no active rare-DCM asset; a BTHS proposal would need to connect to the rare-cardiomyopathy areas, for example heart-failure phenotyping methodology.",
       "eligibility": "Qualified researchers at eligible institutions; country lists apply per therapeutic area.",
       "apply": "Via the Pfizer ISR portal (pfizer.com/ISR); applications are reviewed in batched cycles published on the site, with contracting targeted within 60 days of approval.",
@@ -1444,7 +1872,7 @@
       "sponsor": "Uplifting Athletes (backed by Sanofi, Alexion, UCB, Takeda, Jazz)",
       "cat": "corporate",
       "amount": "$20,000+/yr unrestricted",
-      "deadline": "2027 cycle open now — due Sept 14, 2026",
+      "deadline": "2027 cycle open — due Sept 14, 2026, 11:59 PM ET",
       "desc": "Unrestricted grants to ~10 early-career rare-disease researchers annually, awarded at an NFL-style draft event at Lincoln Financial Field ($1.42M to 75 researchers to date). Categories include rare genetic disorders and rare muscular & neurological disorders, both of which cover Barth syndrome.",
       "eligibility": "Early-career investigators doing collaborative basic bench research on rare disease; US and Canadian institutions represented.",
       "apply": "Download the application form from the site and submit to grants@upliftingathletes.org by September 14, 2026, 11:59 PM EDT.",
@@ -1465,6 +1893,18 @@
       "focus": [
         "basic",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2026-09-14",
+          "label": "2027 Young Investigator Draft application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "23:59",
+          "tz": "America/New_York",
+          "note": "At least $20,000 for one year, for early-career rare disease researchers in the US and Canada."
+        }
       ]
     },
     {
@@ -1494,6 +1934,16 @@
       "focus": [
         "basic",
         "preclinical"
+      ],
+      "dates": [
+        {
+          "on": "2027-04-01",
+          "label": "Annual call expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month",
+          "note": "2026 pre-proposals closed May 22."
+        }
       ]
     },
     {
@@ -1846,6 +2296,16 @@
       "focus": [
         "basic",
         "tools"
+      ],
+      "dates": [
+        {
+          "on": "2027-02-01",
+          "label": "Institutional nomination deadlines expected",
+          "kind": "deadline",
+          "status": "projected",
+          "precision": "month",
+          "note": "Nomination-only; internal university deadlines have run around February."
+        }
       ]
     },
     {
@@ -1878,6 +2338,16 @@
       "focus": [
         "basic",
         "tools"
+      ],
+      "dates": [
+        {
+          "on": "2027-08-01",
+          "label": "Next cycle expected",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month",
+          "note": "The 2026 call closed Aug 2, 2026. Watch for new cycles and hackathons."
+        }
       ]
     },
     {
@@ -1885,7 +2355,7 @@
       "sponsor": "Alexion Charitable Foundation (AstraZeneca Rare Disease)",
       "cat": "corporate",
       "amount": "Philanthropic grants (amounts unpublished)",
-      "deadline": "OPEN NOW — call closes Aug 21, 2026",
+      "deadline": "OPEN NOW — global call runs Aug 3–31, 2026",
       "desc": "Philanthropic grants to nonprofits serving the rare disease community (71 partners in 15 countries to date), with priorities including mental health and wellness, barriers to care, health literacy, diagnostic access, and patient supports. Grants are not tied to Alexion's product areas, but direct grants are limited to disease-agnostic organizations — single-disease groups such as BSF are not directly eligible, and general operating support and event sponsorships are excluded. A global open call is running August 3–21, 2026.",
       "eligibility": "Disease-agnostic nonprofit organizations serving rare disease communities, globally; single-disease organizations are not eligible for direct grants.",
       "apply": "Submit a Preliminary Request Form during the open call after reviewing the ACF Grant Guidelines. Contact: ACF@Alexion.com.",
@@ -1909,6 +2379,23 @@
       "awardType": "cash",
       "focus": [
         "capacity"
+      ],
+      "dates": [
+        {
+          "on": "2026-08-31",
+          "label": "Global open call closes",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "The call ran Aug 3-31, 2026. This is the last week to submit."
+        },
+        {
+          "on": "2027-08-02",
+          "label": "Next open call expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "note": "Alexion has run an annual August open call; the 2027 window is not yet announced."
+        }
       ]
     },
     {
@@ -1980,7 +2467,7 @@
       "sponsor": "Pfizer",
       "cat": "corporate",
       "amount": "IME ~$10K–$150K; RFPs $5K–$250K",
-      "deadline": "Portal paused for system migration — reopens after Aug 19, 2026",
+      "deadline": "System migration ongoing — application windows still unposted as of Aug 28, 2026",
       "desc": "Cash grants for independent medical education and quality improvement, with patient advocacy groups explicitly listed as eligible applicants. Grants track posted RFP topics plus a general request channel; rare disease is a Pfizer area, though not BTHS specifically — fit depends on broader cardiomyopathy/rare-disease education RFPs.",
       "eligibility": "Patient advocacy groups, medical societies, med-ed companies, and academic institutions; must align with Pfizer therapeutic areas.",
       "apply": "Respond to posted RFPs or submit a general IME request through Pfizer's online grant portal.",
@@ -2071,6 +2558,15 @@
       "focus": [
         "capacity",
         "tools"
+      ],
+      "dates": [
+        {
+          "on": "2027-03-01",
+          "label": "Next round expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month"
+        }
       ]
     },
     {
@@ -2149,6 +2645,83 @@
       "awardType": "cash",
       "focus": [
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-13",
+          "label": "K-series new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Oct 12 falls on a federal holiday; NIH moves it to the next business day. Applications are due 5:00 PM local time of the applicant organization."
+        },
+        {
+          "on": "2026-12-08",
+          "label": "F-series fellowship due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-02-12",
+          "label": "K-series new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-04-08",
+          "label": "F-series fellowship due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-06-14",
+          "label": "K-series new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Jun 12 falls on a weekend; NIH moves it to the next business day."
+        },
+        {
+          "on": "2027-08-09",
+          "label": "F-series fellowship due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local",
+          "note": "Standard date Aug 8 falls on a weekend; NIH moves it to the next business day."
+        },
+        {
+          "on": "2027-10-12",
+          "label": "K-series new application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        },
+        {
+          "on": "2027-12-08",
+          "label": "F-series fellowship due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "17:00",
+          "tz": "local"
+        }
       ]
     },
     {
@@ -2208,6 +2781,15 @@
       "focus": [
         "basic",
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2026-09-01",
+          "label": "Next opportunity expected to post",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month"
+        }
       ]
     },
     {
@@ -2236,6 +2818,16 @@
       "focus": [
         "basic",
         "clinical"
+      ],
+      "dates": [
+        {
+          "on": "2027-02-01",
+          "label": "Concept papers expected",
+          "kind": "deadline",
+          "status": "projected",
+          "precision": "month",
+          "note": "2027 cycle announced but dates are still TBD; concept papers have historically been due around February."
+        }
       ]
     },
     {
@@ -2270,6 +2862,15 @@
       "focus": [
         "basic",
         "capacity"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-01",
+          "label": "Rare As One round 4 expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month"
+        }
       ]
     },
     {
@@ -2277,7 +2878,7 @@
       "sponsor": "Burroughs Wellcome Fund",
       "cat": "general",
       "amount": "$560,000 over 5 years",
-      "deadline": "LOI due Aug 14, 2026, 3 PM ET (annual)",
+      "deadline": "LOI closed Aug 14, 2026; invited full applications due Jan 11, 2027",
       "desc": "Bridges postdoc to faculty for scientists crossing from physical, mathematical, computational, or engineering backgrounds into biology: roughly $100K/yr for 1–2 postdoc years, then $120K/yr for the first 3 faculty years. BTHS-relevant directions include computational lipidomics, cardiolipin membrane biophysics, and modeling of mitochondrial function.",
       "eligibility": "PhD in physical/mathematical/computational science or engineering, doing postdoctoral work in biological sciences at a US or Canadian institution. Degree-date windows apply — see the RFP.",
       "apply": "LOI-screened annual cycle: submit LOI by August 14, 2026 (3 PM ET); invited full proposals follow.",
@@ -2302,6 +2903,39 @@
       "focus": [
         "training",
         "basic"
+      ],
+      "dates": [
+        {
+          "on": "2026-11-13",
+          "label": "Invitations to submit a full proposal issued",
+          "kind": "decision",
+          "status": "verified",
+          "checked": "2026-08-28"
+        },
+        {
+          "on": "2027-01-11",
+          "label": "Full application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "time": "15:00",
+          "tz": "America/New_York",
+          "note": "Invited applicants only — the LOI stage for this cycle closed Aug 14, 2026."
+        },
+        {
+          "on": "2027-07-01",
+          "label": "Award start",
+          "kind": "start",
+          "status": "verified",
+          "checked": "2026-08-28"
+        },
+        {
+          "on": "2027-08-13",
+          "label": "Next cycle LOI expected",
+          "kind": "loi",
+          "status": "projected",
+          "note": "CASI runs annually with a mid-August LOI; the 2028 date is not yet published."
+        }
       ]
     },
     {
@@ -2333,6 +2967,15 @@
       "awardType": "cash",
       "focus": [
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2027-01-20",
+          "label": "Next cycle deadline expected",
+          "kind": "deadline",
+          "status": "projected",
+          "note": "The 2026 deadline was Jan 20; the 2027 date is not yet posted."
+        }
       ]
     },
     {
@@ -2360,6 +3003,16 @@
       "focus": [
         "basic",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2027-09-01",
+          "label": "Application expected",
+          "kind": "deadline",
+          "status": "projected",
+          "precision": "month",
+          "note": "Nomination-only; institutional nominations run in May. Confirm your institution's internal deadline well ahead."
+        }
       ]
     },
     {
@@ -2391,6 +3044,16 @@
       "focus": [
         "basic",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2026-09-30",
+          "label": "2027 competition application due",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "Nomination-only — your institution must nominate you first. Nominations opened Jun 1, 2026."
+        }
       ]
     },
     {
@@ -2428,6 +3091,15 @@
       "focus": [
         "basic",
         "tools"
+      ],
+      "dates": [
+        {
+          "on": "2027-07-31",
+          "label": "Letter of intent expected",
+          "kind": "loi",
+          "status": "projected",
+          "note": "The 2026 LOI closed Jul 31."
+        }
       ]
     },
     {
@@ -2459,6 +3131,15 @@
       "focus": [
         "basic",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2026-11-03",
+          "label": "Applications open (combined 2028 competition)",
+          "kind": "opens",
+          "status": "verified",
+          "checked": "2026-08-28"
+        }
       ]
     },
     {
@@ -2484,6 +3165,15 @@
       "awardType": "cash",
       "focus": [
         "basic"
+      ],
+      "dates": [
+        {
+          "on": "2027-09-28",
+          "label": "Next competition opens",
+          "kind": "opens",
+          "status": "verified",
+          "checked": "2026-08-28"
+        }
       ]
     },
     {
@@ -2510,6 +3200,16 @@
       "focus": [
         "basic",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2026-12-01",
+          "label": "Institutional nominations expected",
+          "kind": "deadline",
+          "status": "projected",
+          "precision": "month",
+          "note": "Nomination-only."
+        }
       ]
     },
     {
@@ -2538,6 +3238,24 @@
       "focus": [
         "basic",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-14",
+          "label": "Application period closes",
+          "kind": "closes",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "The window opened Jul 9, 2026."
+        },
+        {
+          "on": "2027-04-01",
+          "label": "Awards announced",
+          "kind": "decision",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "precision": "month"
+        }
       ]
     },
     {
@@ -2603,6 +3321,16 @@
         "basic",
         "clinical",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2026-09-22",
+          "label": "Discovery Award round closes",
+          "kind": "closes",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "Early-Career and Career Development Awards are always-open after this round."
+        }
       ]
     },
     {
@@ -2610,7 +3338,7 @@
       "sponsor": "European Research Council (Horizon Europe)",
       "cat": "general",
       "amount": "€1.5M–€2.5M over 5 years by tier",
-      "deadline": "StG 2027: Oct 14, 2026; CoG 2027: Jan 12, 2027",
+      "deadline": "StG 2027: Oct 14, 2026; CoG 2027: Jan 12, 2027; AdG 2027: Aug 26, 2027",
       "desc": "Investigator-driven frontier research in any field. Under the 2027 work programme: Starting (0–10 yrs post-PhD, up to €1.5M/5 yrs), Consolidator (5–15 yrs, up to €2M), Advanced (established leaders, up to €2.5M); researchers may now win at most one Starting and one Consolidator grant over a career. Relevant to European Barth syndrome labs working on tafazzin and cardiolipin.",
       "eligibility": "Any nationality, but the host institution must be in an EU member state or Horizon-associated country and the PI must spend at least 50% of their time in Europe.",
       "apply": "Via the EU Funding & Tenders portal. ERC-2027-StG opens Jul 22, 2026 (deadline Oct 14, 2026); ERC-2027-CoG opens Sep 24, 2026 (deadline Jan 12, 2027); ERC-2027-AdG opens May 27, 2027 (deadline Aug 26, 2027).",
@@ -2635,6 +3363,39 @@
       "awardType": "cash",
       "focus": [
         "basic"
+      ],
+      "dates": [
+        {
+          "on": "2026-10-14",
+          "label": "ERC-2027 Starting Grant deadline",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "EUR 594.1M for an estimated 373 grants."
+        },
+        {
+          "on": "2027-01-12",
+          "label": "ERC-2027 Consolidator Grant deadline",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "EUR 618.5M for an estimated 296 grants."
+        },
+        {
+          "on": "2027-05-27",
+          "label": "ERC-2027 Advanced Grant call opens",
+          "kind": "opens",
+          "status": "verified",
+          "checked": "2026-08-28"
+        },
+        {
+          "on": "2027-08-26",
+          "label": "ERC-2027 Advanced Grant deadline",
+          "kind": "deadline",
+          "status": "verified",
+          "checked": "2026-08-28",
+          "note": "EUR 798.1M for an estimated 311 grants."
+        }
       ]
     },
     {
@@ -2668,6 +3429,22 @@
       "focus": [
         "basic",
         "training"
+      ],
+      "dates": [
+        {
+          "on": "2027-03-01",
+          "label": "Research grant letter of intent expected",
+          "kind": "loi",
+          "status": "projected",
+          "precision": "month"
+        },
+        {
+          "on": "2027-05-01",
+          "label": "Postdoctoral fellowship letter of intent expected",
+          "kind": "loi",
+          "status": "projected",
+          "precision": "month"
+        }
       ]
     },
     {
@@ -2983,6 +3760,16 @@
         {
           "label": "Scholarship America",
           "url": "https://scholarshipamerica.org/scholarship/rareis/"
+        }
+      ],
+      "dates": [
+        {
+          "on": "2027-03-01",
+          "label": "Next cycle expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month",
+          "note": "The 2026 cycle closed Apr 28, 2026."
         }
       ]
     },

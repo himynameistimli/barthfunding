@@ -1,0 +1,443 @@
+// Deadline calendar. A dense chronological ledger rather than a month grid —
+// the span is 18 months and the useful question is "what is next", not
+// "what does June look like".
+@use "tokens" as t;
+@use "mixins" as m;
+
+.page {
+  max-width: none;
+
+  p { max-width: 78ch; }
+}
+
+.lede {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+
+// --- subscribe panel --------------------------------------------------------
+.subscribe {
+  border: 1px solid var(--ink);
+  background: var(--surface);
+  padding: 18px 20px 16px;
+  margin: 22px 0 30px;
+}
+
+.subHead {
+  @include m.label(11px);
+  margin: 0 0 6px;
+}
+
+.subNote {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+  max-width: 72ch;
+}
+
+.feedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.feed {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  text-decoration: none;
+  display: block;
+  background: var(--paper);
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  @include m.focus-ring();
+}
+
+.feedName {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.feedMeta {
+  @include m.mono(11px);
+  color: var(--ink-faint);
+  display: block;
+}
+
+.feedAll {
+  border-color: var(--ink);
+
+  .feedName { color: var(--accent); }
+}
+
+.howto {
+  margin: 14px 0 0;
+  padding: 12px 14px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+
+  code {
+    @include m.mono(12px);
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    padding: 1px 5px;
+    // Feed URLs are longer than a phone is wide.
+    overflow-wrap: anywhere;
+  }
+
+  summary {
+    @include m.label(10px);
+    cursor: pointer;
+    color: var(--ink);
+    list-style: none;
+
+    &::-webkit-details-marker { display: none; }
+
+    &::before {
+      content: "▸ ";
+      color: var(--accent);
+    }
+  }
+
+  &[open] summary {
+    margin-bottom: 10px;
+
+    &::before { content: "▾ "; }
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  li { font-size: 13px; margin-bottom: 5px; }
+}
+
+// --- act-now band -----------------------------------------------------------
+.actNow {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  padding: 16px 20px;
+  margin: 0 0 34px;
+}
+
+.actList {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  max-width: none;
+}
+
+.actItem {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 7px 0;
+  border-top: 1px solid var(--line-soft);
+  font-size: 14px;
+
+  &:first-child { border-top: none; }
+
+  a { font-weight: 600; }
+}
+
+.actDays {
+  @include m.mono(11px);
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.actSoon { color: var(--accent); }
+
+.actWhen {
+  @include m.mono(11.5px);
+  color: var(--ink-faint);
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+.empty {
+  font-size: 14px;
+  color: var(--ink-faint);
+  margin: 8px 0 0;
+}
+
+// --- audience sections ------------------------------------------------------
+.audSection {
+  margin: 0 0 12px;
+  scroll-margin-top: 12px;
+}
+
+.audHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 2px solid var(--ink);
+  padding-top: 10px;
+  margin: 44px 0 0;
+}
+
+.audTitle {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  margin: 0;
+}
+
+.audCount {
+  @include m.mono(11px);
+  color: var(--ink-faint);
+}
+
+.audBlurb {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 8px 0 4px;
+}
+
+.audSub {
+  @include m.mono(11px);
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  white-space: nowrap;
+
+  &:hover { color: var(--ink); }
+}
+
+// --- ledger -----------------------------------------------------------------
+.monthHead {
+  @include m.label(10px);
+  color: var(--ink-faint);
+  border-top: 1px solid var(--line);
+  padding: 14px 0 5px;
+  margin: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line-soft);
+  align-items: baseline;
+
+  &:first-of-type { border-top: none; }
+
+  @media (max-width: t.$bp-stack) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 5px;
+  }
+}
+
+.entryPast {
+  opacity: .42;
+}
+
+.when {
+  @include m.mono(12.5px);
+  color: var(--ink);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.whenTime {
+  display: block;
+  @include m.mono(10.5px);
+  color: var(--ink-faint);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.days {
+  display: block;
+  @include m.mono(10.5px);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.daysPast {
+  color: var(--faint);
+  font-weight: 400;
+}
+
+.body { min-width: 0; }
+
+.prog {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 2px;
+
+  a { border: none; }
+}
+
+.what {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.note {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  line-height: 1.55;
+  margin: 4px 0 0;
+  max-width: 82ch;
+}
+
+.flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: flex-end;
+
+  @media (max-width: t.$bp-stack) { justify-content: flex-start; }
+}
+
+.tag {
+  @include m.label(9.5px, .1em);
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.tagVerified {
+  border-color: var(--npo);
+  color: var(--npo);
+}
+
+.tagProjected {
+  border-color: var(--gen);
+  color: var(--gen);
+}
+
+.tagWatch {
+  border-color: var(--corp);
+  color: var(--corp);
+}
+
+.tagKind {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+// --- controls ---------------------------------------------------------------
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 18px 0 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 5;
+  padding-top: 12px;
+}
+
+.ctrlLabel {
+  @include m.label(10px);
+  color: var(--ink-faint);
+  margin-right: 2px;
+}
+
+.chip {
+  @include m.bare-button;
+  @include m.focus-ring();
+  @include m.label(10px, .1em);
+  border: 1px solid var(--line);
+  padding: 5px 10px;
+  color: var(--ink-soft);
+  background: var(--surface);
+
+  &:hover { border-color: var(--accent); color: var(--accent); }
+
+  &[aria-pressed="true"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--surface);
+  }
+}
+
+.spacer { flex: 1; }
+
+// --- rolling / no-deadline programs ----------------------------------------
+.rolling {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 14px 18px;
+  margin: 14px 0 0;
+}
+
+.rollingList {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 28px;
+  max-width: none;
+
+  @media (max-width: t.$bp-stack) { columns: 1; }
+}
+
+.rollingItem {
+  font-size: 13.5px;
+  line-height: 1.45;
+  margin: 0 0 8px;
+  break-inside: avoid;
+
+  span {
+    display: block;
+    @include m.mono(11px);
+    color: var(--ink-faint);
+  }
+}
+
+// --- legend -----------------------------------------------------------------
+.legend {
+  border-top: 1px solid var(--line);
+  margin-top: 46px;
+  padding-top: 16px;
+}
+
+.legendGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.legendItem {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+
+  strong {
+    display: block;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+}
