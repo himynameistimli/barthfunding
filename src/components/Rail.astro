@@ -1,18 +1,21 @@
 ---
 import s from "../styles/app.module.scss";
+import ViewToggle from "./ViewToggle.astro";
 import { LAST_UPDATED } from "../data/programs.mjs";
 
 // headlineNote defaults to the index's award-total explainer; other pages that
 // set a headline should pass their own.
+// `view` is "index" | "calendar" | undefined — undefined on pages that are
+// neither, where the toggle renders as two plain links.
 const {
   headline,
   headlineNote = "Max single-award total across capped programs still open. Uncapped and in-kind mechanisms add more.",
-  showFilters = false
+  showFilters = false,
+  view
 } = Astro.props;
 const path = Astro.url.pathname;
+// The index and calendar live in the toggle above, not here.
 const NAV = [
-  { href: "/", label: "Funding index" },
-  { href: "/calendar/", label: "Deadline calendar" },
   { href: "/suggest-update/", label: "Suggest an update" }
 ];
 ---
@@ -25,6 +28,7 @@ const NAV = [
       </a>
       <button class={s.menuToggle} id="menu-toggle" type="button" aria-label="Menu" aria-controls="pages-group" aria-expanded="false">☰</button>
     </div>
+    <ViewToggle view={view} />
     {headline && (
       <>
         <div class={s.headline}>{headline}</div>

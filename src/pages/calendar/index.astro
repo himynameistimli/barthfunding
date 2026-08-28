@@ -1,7 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Rail from "../../components/Rail.astro";
-import ViewToggle from "../../components/ViewToggle.astro";
 import { LAST_UPDATED } from "../../data/programs.mjs";
 import { SITE_URL, CONTACT_EMAIL } from "../../data/site.mjs";
 import {
@@ -54,67 +53,42 @@ const jsonLd = {
   <div class={a.shell}>
     <Rail
       headline={`${ENTRIES.length} dated entries`}
+      view="calendar"
       headlineNote={`Across ${withDates} programs — ${verified} read off the funder's own page, ${unconfirmed} published but unconfirmed, ${projected} projected from past cycles.`}
     />
 
     <main class={`${a.doc} ${a.docWide} ${c.page}`}>
-      <ViewToggle view="calendar" />
       <h1>Funding deadline calendar</h1>
 
       <p class={c.lede}>
-        Every date we hold across the {ENTRIES.length} tracked entries — grant deadlines, letters of
-        intent, opening dates, and decisions — laid out chronologically and split by who it
-        is for. {in2027} of them fall in 2027. Each one says where it came from: {verified} were
-        read off the funder's own page, the rest are flagged so you know to check them
-        yourself. Subscribe to a feed below and your calendar will remind you without you
-        having to come back here.
+        Every tracked deadline, letter of intent, opening date, and decision, in order and
+        split by who it is for. {in2027} of {ENTRIES.length} fall in 2027.
       </p>
 
       <section class={c.subscribe}>
         <h2 class={c.subHead}>Subscribe</h2>
         <p class={c.subNote}>
-          These are live subscription feeds, not one-time downloads: add one and it keeps
-          itself current as we correct dates. Every deadline carries reminders at 30 days,
-          7 days, and 1 day, and each event holds the award amount, eligibility, how to
-          apply, and a link back to the full entry.
+          Copy a link and paste it into your calendar app as a new subscription. It stays up
+          to date on its own, and every deadline brings its own reminders.
         </p>
         <div class={c.feedGrid}>
           {FEEDS.map(f => (
-            <a
+            <button
               class={`${c.feed} ${f.key === "all" ? c.feedAll : ""}`}
-              href={`/calendar/${f.key}.ics`}
-              download={`barth-funding-${f.key}.ics`}
+              type="button"
+              data-copy={`${SITE_URL}/calendar/${f.key}.ics`}
             >
               <span class={c.feedName}>{f.label}</span>
-              <span class={c.feedMeta}>{f.n} {f.n === 1 ? "entry" : "entries"} · .ics</span>
-            </a>
+              <span class={c.feedMeta} data-copy-label>
+                {f.n} {f.n === 1 ? "entry" : "entries"} · copy link
+              </span>
+            </button>
           ))}
         </div>
-
-        <details class={c.howto}>
-          <summary>How to subscribe so it stays up to date</summary>
-          <p>
-            Clicking a feed downloads a snapshot. To get the version that updates itself,
-            copy the feed address and add it as a subscribed calendar:
-          </p>
-          <ul>
-            <li>
-              <strong>Google Calendar</strong> — Other calendars → + → From URL → paste
-              <code>{SITE_URL}/calendar/researchers.ics</code>
-            </li>
-            <li>
-              <strong>Apple Calendar</strong> — File → New Calendar Subscription → paste the
-              same address → set auto-refresh to daily.
-            </li>
-            <li>
-              <strong>Outlook</strong> — Add calendar → Subscribe from web → paste the address.
-            </li>
-          </ul>
-          <p>
-            Swap <code>researchers</code> for <code>all</code>, <code>orgs</code>, or
-            <code>patients</code> depending on which list you want.
-          </p>
-        </details>
+        <p class={c.subHint} aria-live="polite" id="copy-status">
+          In Google Calendar it goes under “Other calendars → From URL”; in Apple Calendar,
+          “File → New Calendar Subscription”.
+        </p>
       </section>
 
       <section class={c.actNow} id="act-now">
@@ -285,6 +259,70 @@ const jsonLd = {
     const months = Math.round(n / 30.4);
     return `in ${plural(months, "month")}`;
   };
+
+  // --- copy a feed link -----------------------------------------------------
+  // Subscribing means pasting the URL into a calendar app, so the button hands
+  // over the address rather than downloading a snapshot that never updates.
+  const copyStatus = document.getElementById("copy-status");
+  const statusDefault = copyStatus.textContent;
+
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      // Older browsers, and any context where the async clipboard is blocked.
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:-1000px;opacity:0";
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch { ok = false; }
+      ta.remove();
+      return ok;
+    }
+  }
+
+  let resetTimer;
+  for (const btn of document.querySelectorAll("[data-copy]")) {
+    const label = btn.querySelector("[data-copy-label]");
+    const labelDefault = label.textContent;
+    btn.addEventListener("click", async () => {
+      const url = btn.dataset.copy;
+      const ok = await copyText(url);
+      clearTimeout(resetTimer);
+      for (const other of document.querySelectorAll("[data-copy-label]")) {
+        if (other !== label) other.textContent = other.dataset.default ?? other.textContent;
+      }
+      label.dataset.default = labelDefault;
+      label.textContent = ok ? "copied ✓" : "select the link below";
+      copyStatus.textContent = "";
+
+      if (ok) {
+        copyStatus.textContent = `Copied ${url} — paste it into your calendar app as a new subscription.`;
+      } else {
+        // Clipboard access can be blocked outright. Put the address on the page
+        // and select it, so the keyboard shortcut has something to act on —
+        // telling someone to press Cmd-C with nothing selected is useless.
+        copyStatus.append("Copy this address: ");
+        const code = document.createElement("code");
+        code.textContent = url;
+        copyStatus.append(code);
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+
+      resetTimer = setTimeout(() => {
+        label.textContent = labelDefault;
+        copyStatus.textContent = statusDefault;
+      }, 8000);
+    });
+  }
 
   // --- "what to do next" ----------------------------------------------------
   const upcoming = actionable

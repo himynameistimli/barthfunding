@@ -1,5 +1,7 @@
-// Index ⇄ calendar view switch. Two views over the same dataset, so this reads
-// as one segmented control rather than two nav links.
+// Index ⇄ calendar view switch, sitting under the brand in the rail. Two views
+// over one dataset, so it reads as a segmented control rather than two links.
+// Labels are short because the brand directly above already says
+// "Research Funding Index".
 @use "tokens" as t;
 @use "mixins" as m;
 
@@ -7,18 +9,14 @@
   display: inline-flex;
   border: 1px solid var(--ink);
   background: var(--surface);
-
-  @media (max-width: t.$bp-stack) {
-    display: flex;
-    width: 100%;
-  }
+  margin-top: 12px;
 }
 
 .viewOpt {
-  @include m.label(10px, .12em);
+  @include m.label(9px, .1em);
   @include m.focus-ring(-2px);
   display: block;
-  padding: 8px 15px;
+  padding: 5px 10px;
   color: var(--ink-soft);
   text-decoration: none;
   border: none;
@@ -30,12 +28,6 @@
   &:hover {
     background: var(--hover);
     color: var(--accent);
-  }
-
-  @media (max-width: t.$bp-stack) {
-    flex: 1;
-    text-align: center;
-    padding: 9px 8px;
   }
 }
 
@@ -49,11 +41,4 @@
     background: var(--ink);
     color: var(--surface);
   }
-}
-
-// Placement above the index's sticky table header.
-.viewBar {
-  padding: 16px 28px 14px;
-
-  @media (max-width: t.$bp-narrow) { padding: 14px 16px 12px; }
 }
