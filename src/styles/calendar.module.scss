@@ -45,20 +45,45 @@
 }
 
 .feed {
-  @include m.focus-ring();
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
   border: 1px solid var(--line);
-  padding: 10px 12px;
+  padding: 11px 12px 10px;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+// Primary action: webcal:// hands the feed to the OS calendar handler.
+.feedAdd {
+  @include m.label(9.5px, .1em);
+  @include m.focus-ring();
   display: block;
   width: 100%;
-  background: var(--paper);
+  margin-top: 9px;
+  padding: 7px 10px;
+  text-align: center;
+  text-decoration: none;
+  background: var(--ink);
+  color: var(--surface);
+  border: 1px solid var(--ink);
 
   &:hover {
+    background: var(--accent);
     border-color: var(--accent);
-    background: var(--accent-soft);
+    color: var(--surface);
   }
+}
+
+// Secondary, for calendars that cannot take a webcal:// handoff.
+.feedCopy {
+  @include m.bare-button;
+  @include m.focus-ring();
+  @include m.mono(10.5px);
+  margin-top: 7px;
+  color: var(--ink-faint);
+  border-bottom: 1px solid var(--line);
+
+  &:hover { color: var(--accent); border-color: var(--accent); }
 }
 
 .feedName {
@@ -77,6 +102,7 @@
 
 .feedAll {
   border-color: var(--ink);
+  background: var(--surface);
 
   .feedName { color: var(--accent); }
 }
