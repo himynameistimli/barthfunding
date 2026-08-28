@@ -56,10 +56,13 @@ export function isSoft(e) {
   return SOFT_KINDS.has(e.kind);
 }
 
-/** Every dated entry across all programs, sorted chronologically. */
-export function buildEntries() {
+/**
+ * Every dated entry across the given programs, sorted chronologically.
+ * Defaults to the full set; the filtered feed passes a subset.
+ */
+export function buildEntries(programs = PROGRAMS) {
   const out = [];
-  for (const p of PROGRAMS) {
+  for (const p of programs) {
     for (const dRec of p.dates || []) {
       out.push({
         ...dRec,

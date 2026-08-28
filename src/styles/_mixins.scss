@@ -30,7 +30,7 @@
 // The index grid, shared by the header row and each data row so columns align.
 @mixin index-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 94px 120px 170px;
+  grid-template-columns: minmax(0, 1fr) 118px 94px 150px;
   gap: 16px;
   padding-left: 28px;
   padding-right: 28px;

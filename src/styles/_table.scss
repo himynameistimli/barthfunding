@@ -29,6 +29,45 @@
 }
 
 .lblMuted { color: var(--ink-faint); }
+
+.dueCol {
+  min-width: 0;
+}
+
+.dueDate {
+  @include m.mono(11.5px);
+  color: var(--ink);
+  font-weight: 700;
+  display: block;
+  white-space: nowrap;
+}
+
+.dueRel {
+  @include m.mono(10.5px);
+  color: var(--accent);
+  display: block;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.dueNone {
+  @include m.mono(11.5px);
+  color: var(--faint);
+}
+
+// The Due column is hidden below the narrow breakpoint, so the date moves into
+// the inline line there rather than disappearing on phones.
+.dueInline {
+  display: none;
+
+  @media (max-width: t.$bp-narrow) {
+    @include m.mono(11px);
+    display: block;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+}
 .taR { text-align: right; }
 
 .row {

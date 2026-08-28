@@ -19,6 +19,11 @@ $npo: #2E7D5B;
 $corp: #B0512E;
 $gen: #6B4A78;
 
+// Calendar audience colours — who a deadline is for, distinct from funder type.
+$aud-research: #35618C;
+$aud-org: #26714F;
+$aud-patient: #8A4B7D;
+
 $sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
@@ -43,6 +48,10 @@ $bp-stack: 760px;
   --npo: #{$npo};
   --corp: #{$corp};
   --gen: #{$gen};
+
+  --aud-research: #{$aud-research};
+  --aud-org: #{$aud-org};
+  --aud-patient: #{$aud-patient};
 
   --sans: #{$sans};
   --mono: #{$mono};

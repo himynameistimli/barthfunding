@@ -407,8 +407,8 @@
   }
 }
 
-// --- legend -----------------------------------------------------------------
-.legend {
+// --- how to read ------------------------------------------------------------------
+.legendSec {
   border-top: 1px solid var(--line);
   margin-top: 46px;
   padding-top: 16px;
@@ -431,4 +431,175 @@
     color: var(--ink);
     margin-bottom: 2px;
   }
+}
+
+
+// --- month grid --------------------------------------------------------------
+.monthView { margin-top: 22px; }
+
+.monthBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.monthTitle {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  margin: 0;
+  min-width: 168px;
+}
+
+.monthNav {
+  @include m.bare-button;
+  @include m.focus-ring();
+  border: 1px solid var(--line);
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  line-height: 26px;
+  color: var(--ink);
+
+  &:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  &:disabled { opacity: .3; cursor: default; }
+}
+
+.ctrlDivider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--line);
+  margin: 0 2px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.legendKey {
+  @include m.label(9px, .1em);
+  color: var(--ink-faint);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  &::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    background: currentColor;
+    flex: none;
+  }
+}
+
+.weekHead {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border: 1px solid var(--ink);
+  border-bottom: none;
+  background: var(--surface);
+
+  span {
+    @include m.label(9px, .1em);
+    color: var(--ink-faint);
+    padding: 6px 8px;
+    text-align: left;
+  }
+}
+
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border: 1px solid var(--ink);
+  background: var(--line-soft);
+  gap: 1px;
+}
+
+.day {
+  background: var(--surface);
+  min-height: 104px;
+  padding: 5px 6px 7px;
+  min-width: 0;
+
+  @media (max-width: t.$bp-stack) { min-height: 74px; padding: 3px 4px 5px; }
+}
+
+.dayBlank { background: var(--paper); }
+.dayPast { background: var(--paper); }
+
+.dayToday {
+  box-shadow: inset 0 0 0 2px var(--accent);
+
+  .dayNum { color: var(--accent); font-weight: 700; }
+}
+
+.dayNum {
+  @include m.mono(10.5px);
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.dayItems {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+// One deadline. Colour carries the audience; an outline means the date is not
+// confirmed at the funder.
+.chipEvent {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 10.5px;
+  line-height: 1.25;
+  padding: 3px 4px;
+  text-decoration: none;
+  border: none;
+  color: var(--surface);
+  background: var(--chip, var(--ink));
+  overflow: hidden;
+
+  &:hover { filter: brightness(1.18); }
+
+  @media (max-width: t.$bp-stack) {
+    font-size: 0;
+    padding: 4px;
+    gap: 0;
+  }
+}
+
+.chipDot {
+  display: none;
+
+  @media (max-width: t.$bp-stack) {
+    display: block;
+    width: 100%;
+    height: 4px;
+  }
+}
+
+.chipTentative {
+  background: var(--surface);
+  color: var(--chip, var(--ink));
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.audResearchers { --chip: var(--aud-research); color: var(--aud-research); }
+.audOrgs        { --chip: var(--aud-org);      color: var(--aud-org); }
+.audPatients    { --chip: var(--aud-patient);  color: var(--aud-patient); }
+
+// Solid chips need light text; the class above sets `color` for the legend key
+// and the tentative outline, so restore it for the filled state.
+.chipEvent:not(.chipTentative) { color: var(--surface); }
+
+.monthEmpty {
+  font-size: 14px;
+  color: var(--ink-faint);
+  margin: 12px 0 0;
 }

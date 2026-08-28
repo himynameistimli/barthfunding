@@ -52,8 +52,8 @@ const jsonLd = [
     <main style="min-width: 0;">
       <div class={s.tblHead}>
         <button id="sort-name" type="button">Program <span class="arrow"></span></button>
+        <button id="sort-due" class={s.colWide} type="button">Due <span class="arrow"></span></button>
         <button id="sort-award" class={s.taR} type="button">Award<span class={s.colWide}> max</span> <span class="arrow"></span></button>
-        <span class={`${s.lblMuted} ${s.colWide}`}>Award type</span>
         <span class={`${s.lblMuted} ${s.colWide}`}>Focus</span>
       </div>
       <div id="rows"></div>
@@ -74,7 +74,7 @@ const jsonLd = [
     // On stacked/mobile layouts the drawer is cramped — go straight to the page.
     const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
 
-    let state = { q: "", cat: "all", aud: null, type: null, focus: null, showPast: false, sort: "award", dir: "desc" };
+    let state = { q: "", cat: "all", aud: null, type: null, focus: null, showPast: false, sort: "due", dir: "asc" };
 
     const esc = str => String(str ?? "").replace(/[&<>"']/g, c =>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -103,13 +103,35 @@ const jsonLd = [
       return tags.includes("for researchers") || (!isOrg && !isPatient);
     };
 
-    function parseDeadline(str) {
-      if (!str) return Infinity;
-      const m = String(str).match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z.]*\s+(\d{1,2}),?\s+(\d{4})/);
-      if (m) return new Date(m[3] + " " + m[1] + " " + m[2]).getTime();
-      const y = String(str).match(/\b(20\d\d)\b/);
-      if (y) return new Date(y[1] + "-06-30").getTime();
-      return Infinity;
+    // Today is decided in the browser: the site is statically built, so a stale
+    // build must never report a past deadline as the next one.
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayISO = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+      .toISOString().slice(0, 10);
+
+    // The soonest structured date still ahead of us; null when a program has no
+    // dated entry at all (rolling intake) or every date it has has passed.
+    function nextDate(p) {
+      const upcoming = (p.dates || []).filter(d => d.on >= todayISO).map(d => d.on).sort();
+      return upcoming.length ? upcoming[0] : null;
+    }
+
+    const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    function fmtDue(iso) {
+      const [y, m, d] = iso.split("-");
+      return `${MON[Number(m) - 1]} ${Number(d)}, ${y}`;
+    }
+    function daysUntil(iso) {
+      const [y, m, d] = iso.split("-").map(Number);
+      return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(
+        today.getFullYear(), today.getMonth(), today.getDate())) / 86400000);
+    }
+    function relDue(n) {
+      if (n === 0) return "today";
+      if (n === 1) return "tomorrow";
+      if (n < 45) return `in ${n} days`;
+      return `in ${Math.round(n / 30.4)} mo`;
     }
 
     function fmtUSD(v) {
@@ -147,11 +169,14 @@ const jsonLd = [
           const av = AWARD_MAX_USD[a.name] || 0, bv = AWARD_MAX_USD[b.name] || 0;
           return sgn * (av - bv) || a.name.localeCompare(b.name);
         }
-        const ad = parseDeadline(a.deadline), bd = parseDeadline(b.deadline);
+        // Programs with nothing scheduled sort to the end whichever way the
+        // date column points — they are not "furthest away", they are undated.
+        const ad = nextDate(a), bd = nextDate(b);
+        if (!ad && !bd) return a.name.localeCompare(b.name);
+        if (!ad) return 1;
+        if (!bd) return -1;
         if (ad === bd) return a.name.localeCompare(b.name);
-        if (ad === Infinity) return 1;
-        if (bd === Infinity) return -1;
-        return sgn * (ad - bd);
+        return sgn * (ad < bd ? -1 : 1);
       });
     }
 
@@ -212,15 +237,20 @@ const jsonLd = [
 
       rowsEl.innerHTML = list.length ? list.map((p, i) => {
         const meta = CAT_META[p.cat] || { code: "—" };
+        const due = nextDate(p);
         return `
         <button class="${s.row}${p.expired ? " " + s.isPast : ""}" data-slug="${esc(p.slug)}" type="button">
           <span style="min-width:0">
             <span class="${s.name}">${highlight(p.name, t)}<span class="${s.src} ${srcClass(p.cat)}">${meta.code}</span>${p.expired ? `<span class="${s.tagPast}">PAST</span>` : ""}</span>
             <span class="${s.sponsor}">${highlight(p.sponsor, t)}</span>
-            <span class="${s.deadlineInline}">${highlight(shortDeadline(p.deadline), t)}</span>
+            <span class="${s.deadlineInline}">${due
+              ? `<span class="${s.dueInline}">${fmtDue(due)} · ${relDue(daysUntil(due))}</span>` : ""
+            }${highlight(shortDeadline(p.deadline), t)}</span>
           </span>
+          <span class="${s.dueCol} ${s.colWide}">${due
+            ? `<span class="${s.dueDate}">${fmtDue(due)}</span><span class="${s.dueRel}">${relDue(daysUntil(due))}</span>`
+            : `<span class="${s.dueNone}">—</span>`}</span>
           <span class="${s.award}">${fmtUSD(AWARD_MAX_USD[p.name])}</span>
-          <span class="${s.metaCol} ${s.colWide}">${esc(TYPE_LABELS[p.awardType] || "—")}</span>
           <span class="${s.metaCol} ${s.colWide}">${highlight((p.focus || []).map(f => FOCUS_LABELS[f]).join(" · "), t)}</span>
         </button>`;
       }).join("") : `<div class="${s.empty}"><strong>No programs match.</strong>Try a broader term — “mitochondrial”, “pilot”, or “fellowship”.</div>`;
@@ -232,11 +262,31 @@ const jsonLd = [
         };
       });
 
-      const arrows = { name: "sort-name", award: "sort-award" };
+      const arrows = { name: "sort-name", due: "sort-due", award: "sort-award" };
       for (const [key, id] of Object.entries(arrows)) {
         document.querySelector(`#${id} .arrow`).textContent =
           state.sort === key ? (state.dir === "asc" ? "↑" : "↓") : "";
       }
+      // The subscribe link carries the current filter through to the calendar
+      // page, which owns the per-provider add-to-calendar buttons.
+      const sub = new URLSearchParams();
+      if (state.aud) sub.set("aud", state.aud);
+      if (state.cat !== "all") sub.set("cat", state.cat);
+      if (state.type) sub.set("type", state.type);
+      if (state.focus) sub.set("focus", state.focus);
+      if (state.q.trim()) sub.set("q", state.q.trim());
+      if (state.showPast) sub.set("past", "1");
+      const subEl = document.getElementById("rail-sub");
+      const subN = document.getElementById("rail-sub-n");
+      if (subEl) {
+        const qs = sub.toString();
+        subEl.href = "/calendar/" + (qs ? "?" + qs : "");
+        const dated = list.filter(p => (p.dates || []).length).length;
+        subN.textContent = qs
+          ? `${dated} of ${list.length} shown have dates`
+          : `all ${list.length} programs`;
+      }
+
       renderRail();
     }
 
@@ -246,6 +296,7 @@ const jsonLd = [
       render();
     }
     document.getElementById("sort-name").onclick = () => setSort("name");
+    document.getElementById("sort-due").onclick = () => setSort("due");
     document.getElementById("sort-award").onclick = () => setSort("award");
 
     qEl.addEventListener("input", () => { state.q = qEl.value; render(); });

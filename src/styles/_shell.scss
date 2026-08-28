@@ -216,6 +216,37 @@
   line-height: 1.6;
 }
 
+.railSub {
+  display: block;
+  border: 1px solid var(--ink);
+  background: var(--surface);
+  padding: 8px 10px;
+  margin-top: 12px;
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  @include m.focus-ring();
+}
+
+.railSubHead {
+  @include m.label(9px, .1em);
+  color: var(--accent);
+  display: block;
+
+  &::after { content: " →"; }
+}
+
+.railSubN {
+  @include m.mono(10px);
+  color: var(--ink-faint);
+  display: block;
+  margin-top: 2px;
+}
+
 .railFootLink {
   @include m.label(9px, .1em);
   @include m.focus-ring();

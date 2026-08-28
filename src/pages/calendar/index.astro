@@ -42,6 +42,22 @@ const FEEDS = [
 // Only entries you act on; decisions and award starts are context, not tasks.
 const actionable = ENTRIES.filter(e => !isSoft(e));
 
+// The month grid is rendered client-side from this. Audience drives the colour;
+// the narrowest one wins so a program serving two shows as the more specific.
+const AUD_RANK = ["patients", "orgs", "researchers"];
+const calEntries = ENTRIES.map(e => ({
+  on: e.on,
+  program: e.program,
+  slug: e.slug,
+  label: e.label,
+  kind: e.kind,
+  status: e.status,
+  precision: e.precision,
+  soft: isSoft(e),
+  aud: AUD_RANK.find(a => e.audiences.includes(a)) || "researchers",
+  auds: e.audiences
+}));
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -120,16 +136,42 @@ const jsonLd = {
       </section>
 
       <div class={c.controls}>
-        <span class={c.ctrlLabel}>Show</span>
-        <button class={c.chip} type="button" data-year="all" aria-pressed="true">All</button>
-        <button class={c.chip} type="button" data-year="2026" aria-pressed="false">Rest of 2026</button>
-        <button class={c.chip} type="button" data-year="2027" aria-pressed="false">2027</button>
-        <button class={c.chip} type="button" data-year="2028" aria-pressed="false">2028+</button>
+        <span class={c.ctrlLabel}>View</span>
+        <button class={c.chip} type="button" data-view="month" aria-pressed="true">Month</button>
+        <button class={c.chip} type="button" data-view="list" aria-pressed="false">List</button>
+        <span class={c.ctrlDivider}></span>
+        <span class={c.ctrlLabel} data-list-only>Show</span>
+        <button class={c.chip} type="button" data-year="all" aria-pressed="true" data-list-only>All</button>
+        <button class={c.chip} type="button" data-year="2026" aria-pressed="false" data-list-only>Rest of 2026</button>
+        <button class={c.chip} type="button" data-year="2027" aria-pressed="false" data-list-only>2027</button>
+        <button class={c.chip} type="button" data-year="2028" aria-pressed="false" data-list-only>2028+</button>
         <span class={c.spacer}></span>
-        <button class={c.chip} type="button" id="toggle-past" aria-pressed="false">Include past dates</button>
+        <button class={c.chip} type="button" id="toggle-past" aria-pressed="false" data-list-only>Include past dates</button>
         <button class={c.chip} type="button" id="toggle-verified" aria-pressed="false">Verified dates only</button>
       </div>
 
+      <section class={c.monthView} id="month-view">
+        <div class={c.monthBar}>
+          <button class={c.monthNav} type="button" id="month-prev" aria-label="Previous month">‹</button>
+          <h2 class={c.monthTitle} id="month-title">—</h2>
+          <button class={c.monthNav} type="button" id="month-next" aria-label="Next month">›</button>
+          <button class={c.chip} type="button" id="month-today">Today</button>
+          <span class={c.spacer}></span>
+          <span class={c.legend}>
+            <span class={`${c.legendKey} ${c.audResearchers}`}>Researchers</span>
+            <span class={`${c.legendKey} ${c.audOrgs}`}>Advocacy orgs</span>
+            <span class={`${c.legendKey} ${c.audPatients}`}>Patients &amp; families</span>
+          </span>
+        </div>
+        <div class={c.weekHead} aria-hidden="true">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+          <span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div class={c.monthGrid} id="month-grid"></div>
+        <p class={c.monthEmpty} id="month-empty" hidden>Nothing scheduled this month.</p>
+      </section>
+
+      <div id="list-view" hidden>
       {sections.map(sec => (
         <section class={c.audSection} id={sec.key}>
           <div class={c.audHead}>
@@ -209,8 +251,9 @@ const jsonLd = {
           )}
         </section>
       ))}
+      </div>
 
-      <section class={c.legend}>
+      <section class={c.legendSec}>
         <h2>How to read this</h2>
         <div class={c.legendGrid}>
           <p class={c.legendItem}>
@@ -253,7 +296,7 @@ const jsonLd = {
   </div>
 </Base>
 
-<script define:vars={{ c, SITE_URL, SITE_HOST, actionable: actionable.map(e => ({
+<script define:vars={{ c, SITE_URL, SITE_HOST, calEntries, actionable: actionable.map(e => ({
   on: e.on, program: e.program, label: e.label, slug: e.slug,
   status: e.status, when: formatDate(e), precision: e.precision
 })) }}>
@@ -261,8 +304,13 @@ const jsonLd = {
   // otherwise a stale build would show past deadlines as upcoming.
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const iso = d => d.toISOString().slice(0, 10);
+  // Build the ISO day from local parts: toISOString() converts to UTC and would
+  // report yesterday for anyone east of Greenwich.
+  const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}` +
+    `-${String(d.getDate()).padStart(2, "0")}`;
   const todayISO = iso(today);
+  const esc = str => String(str ?? "").replace(/[&<>"']/g, ch =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
   const dayDiff = on => {
     const [y, m, d] = on.split("-").map(Number);
     return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(
@@ -290,9 +338,40 @@ const jsonLd = {
   let feed = "all";
   let feedName = document.querySelector("[data-feed]").dataset.name;
 
+  // A filter carried over from the index becomes an extra, preselected option,
+  // served by the on-demand /calendar/feed.ics route.
+  const FILTER_KEYS = ["aud", "cat", "type", "focus", "q", "past"];
+  const incoming = new URLSearchParams(location.search);
+  const filterQS = new URLSearchParams();
+  for (const k of FILTER_KEYS) {
+    const v = incoming.get(k);
+    if (v) filterQS.set(k, v);
+  }
+  let filterPath = "";
+  if ([...filterQS].length) {
+    filterPath = `/calendar/feed.ics?${filterQS.toString()}`;
+    const pick = document.querySelector("[class*='feedPick'], [data-feed]").parentElement;
+    const btn = document.createElement("button");
+    btn.className = document.querySelector("[data-feed]").className;
+    btn.type = "button";
+    btn.dataset.feed = "filter";
+    btn.dataset.name = "Barth funding — filtered";
+    btn.setAttribute("aria-pressed", "true");
+    const label = document.createElement("span");
+    label.textContent = "From your filter";
+    btn.append(label);
+    pick.prepend(btn);
+    for (const b of pick.querySelectorAll("[data-feed]")) {
+      if (b !== btn) b.setAttribute("aria-pressed", "false");
+    }
+    feed = "filter";
+    feedName = btn.dataset.name;
+  }
+
   function feedUrls() {
-    const https = `${SITE_URL}/calendar/${feed}.ics`;
-    const webcal = `webcal://${SITE_HOST}/calendar/${feed}.ics`;
+    const path = feed === "filter" ? filterPath : `/calendar/${feed}.ics`;
+    const https = `${SITE_URL}${path}`;
+    const webcal = `webcal://${SITE_HOST}${path}`;
     return {
       https,
       webcal,
@@ -317,7 +396,7 @@ const jsonLd = {
     document.getElementById("add-m365").href = u.m365;
     const dl = document.getElementById("add-download");
     dl.href = u.https;
-    dl.setAttribute("download", `barth-funding-${feed}.ics`);
+    dl.setAttribute("download", `barth-funding-${feed === "filter" ? "filtered" : feed}.ics`);
   }
 
   for (const btn of document.querySelectorAll("[data-feed]")) {
@@ -479,7 +558,112 @@ const jsonLd = {
     verifiedOnly = !verifiedOnly;
     verBtn.setAttribute("aria-pressed", String(verifiedOnly));
     apply();
+    if (!monthView.hidden) renderMonth();
   });
 
+  // --- month grid -----------------------------------------------------------
+  const AUD_CLASS = {
+    researchers: c.audResearchers,
+    orgs: c.audOrgs,
+    patients: c.audPatients
+  };
+  const MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+
+  const byDay = new Map();
+  for (const e of calEntries) {
+    if (!byDay.has(e.on)) byDay.set(e.on, []);
+    byDay.get(e.on).push(e);
+  }
+
+  const gridEl = document.getElementById("month-grid");
+  const titleEl = document.getElementById("month-title");
+  const monthEmpty = document.getElementById("month-empty");
+
+  // Clamp navigation to the span we actually hold dates for.
+  const allDates = calEntries.map(e => e.on).sort();
+  const firstMonth = allDates[0].slice(0, 7);
+  const lastMonth = allDates[allDates.length - 1].slice(0, 7);
+  const monthKeyOf = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+  const clampMonth = k => (k < firstMonth ? firstMonth : k > lastMonth ? lastMonth : k);
+
+  let cursor = clampMonth(monthKeyOf(today));
+
+  function renderMonth() {
+    const [y, m] = cursor.split("-").map(Number);
+    titleEl.textContent = `${MONTH_NAMES[m - 1]} ${y}`;
+
+    const first = new Date(Date.UTC(y, m - 1, 1));
+    const daysInMonth = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    const lead = first.getUTCDay();
+    const cells = [];
+    for (let i = 0; i < lead; i++) cells.push(null);
+    for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+    while (cells.length % 7 !== 0) cells.push(null);
+
+    let shown = 0;
+    gridEl.innerHTML = cells.map(d => {
+      if (d === null) return `<div class="${c.day} ${c.dayBlank}"></div>`;
+      const iso = `${cursor}-${String(d).padStart(2, "0")}`;
+      const items = (byDay.get(iso) || []).filter(e => !verifiedOnly || e.status === "verified");
+      shown += items.length;
+      const isToday = iso === todayISO;
+      const past = iso < todayISO;
+      const chips = items.map(e => {
+        const cls = [c.chipEvent, AUD_CLASS[e.aud] || "", e.status !== "verified" ? c.chipTentative : ""]
+          .filter(Boolean).join(" ");
+        const title = `${e.program} — ${e.label}` +
+          (e.status !== "verified" ? ` (${e.status})` : "") +
+          `\nFor: ${e.auds.map(a => a === "orgs" ? "advocacy orgs"
+            : a === "patients" ? "patients & families" : "researchers").join(", ")}`;
+        return `<a class="${cls}" href="/grants/${e.slug}/" title="${esc(title)}">` +
+          `<span class="${c.chipDot}"></span>${esc(e.program)}</a>`;
+      }).join("");
+      return `<div class="${c.day}${isToday ? " " + c.dayToday : ""}${past ? " " + c.dayPast : ""}">
+        <span class="${c.dayNum}">${d}</span>
+        <div class="${c.dayItems}">${chips}</div>
+      </div>`;
+    }).join("");
+
+    monthEmpty.hidden = shown > 0;
+    document.getElementById("month-prev").disabled = cursor <= firstMonth;
+    document.getElementById("month-next").disabled = cursor >= lastMonth;
+  }
+
+  function shiftMonth(delta) {
+    const [y, m] = cursor.split("-").map(Number);
+    const d = new Date(Date.UTC(y, m - 1 + delta, 1));
+    cursor = clampMonth(monthKeyOf(new Date(d.getUTCFullYear(), d.getUTCMonth(), 1)));
+    renderMonth();
+  }
+
+  document.getElementById("month-prev").addEventListener("click", () => shiftMonth(-1));
+  document.getElementById("month-next").addEventListener("click", () => shiftMonth(1));
+  document.getElementById("month-today").addEventListener("click", () => {
+    cursor = clampMonth(monthKeyOf(today));
+    renderMonth();
+  });
+
+  // --- month / list switch ---------------------------------------------------
+  const monthView = document.getElementById("month-view");
+  const listView = document.getElementById("list-view");
+
+  function setView(v) {
+    const isMonth = v === "month";
+    monthView.hidden = !isMonth;
+    listView.hidden = isMonth;
+    for (const el of document.querySelectorAll("[data-list-only]")) {
+      el.hidden = isMonth;
+    }
+    for (const b of document.querySelectorAll("[data-view]")) {
+      b.setAttribute("aria-pressed", String(b.dataset.view === v));
+    }
+    if (isMonth) renderMonth();
+  }
+  for (const b of document.querySelectorAll("[data-view]")) {
+    b.addEventListener("click", () => setView(b.dataset.view));
+  }
+
   apply();
+  setView("month");
 </script>
