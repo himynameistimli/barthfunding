@@ -250,8 +250,11 @@
 .railFootLink {
   @include m.label(9px, .1em);
   @include m.focus-ring();
-  display: inline-block;
-  margin-top: 8px;
+  // Block so it sits on its own line, shrink-to-fit so it does not stretch the
+  // full rail width like a normal block would.
+  display: block;
+  width: fit-content;
+  margin-top: 10px;
   padding: 4px 9px;
   border: 1px solid var(--line);
   color: var(--ink-soft);
