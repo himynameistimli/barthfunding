@@ -69,6 +69,7 @@ export function buildEntries() {
         slug: p.slug,
         sponsor: p.sponsor,
         amount: p.amount,
+        bths: p.bths,
         eligibility: p.eligibility,
         apply: p.apply,
         cat: p.cat,
@@ -235,6 +236,7 @@ function describe(e) {
     lines.push("STATUS: This program has no currently open call. The date above is a watch-for-reopening prompt.");
   }
   if (e.note) lines.push(`Note: ${e.note}`);
+  if (e.bths) lines.push(`Why it is in this index: ${e.bths}`);
   if (e.amount) lines.push(`Award: ${e.amount}`);
   if (e.eligibility) lines.push(`Eligibility: ${e.eligibility}`);
   if (e.apply) lines.push(`How to apply: ${e.apply}`);

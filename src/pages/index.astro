@@ -90,7 +90,7 @@ const jsonLd = [
       return out;
     }
 
-    const hay = p => [p.name, p.sponsor, p.desc, p.eligibility, p.apply, p.amount, p.deadline,
+    const hay = p => [p.name, p.sponsor, p.desc, p.bths, p.eligibility, p.apply, p.amount, p.deadline,
       (p.tags || []).join(" "), CAT_LABELS[p.cat] || "", TYPE_LABELS[p.awardType] || "",
       (p.focus || []).map(f => FOCUS_LABELS[f]).join(" ")].join(" ").toLowerCase();
 
@@ -278,6 +278,7 @@ const jsonLd = [
             <div class="${s.fact}"><div class="${s.factK}">Focus</div><div class="${s.factV}">${esc((p.focus || []).map(f => FOCUS_LABELS[f]).join(" · ") || "—")}</div></div>
           </div>
           <p class="${s.lede}">${esc(p.desc)}</p>
+          <div class="${s.sec}"><div class="${s.secH}">Why it's in this index</div><p>${esc(p.bths)}</p></div>
           <div class="${s.sec}"><div class="${s.secH}">Who can apply</div><p>${esc(p.eligibility)}</p></div>
           <div class="${s.sec}"><div class="${s.secH}">How to apply</div><p>${esc(p.apply)}</p></div>
           <div class="${s.sec}">

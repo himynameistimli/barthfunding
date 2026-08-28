@@ -58,6 +58,13 @@ if (badFocus.length) throw new Error("Missing/invalid focus: " + badFocus.join("
 const unknown = Object.keys(AWARD_MAX_USD).filter(n => !PROGRAMS.some(p => p.name === n));
 if (unknown.length) throw new Error("awardMaxUSD keys with no matching program: " + unknown.join(", "));
 
+// `desc` describes the program on its own terms; `bths` carries the Barth
+// relevance. Keeping them apart stops a general mechanism from reading as
+// though it were created for BTHS, and lets `desc` alone feed meta
+// descriptions and search snippets.
+const noBths = PROGRAMS.filter(p => !p.bths || !p.bths.trim()).map(p => p.name);
+if (noBths.length) throw new Error("Missing bths relevance note: " + noBths.join(", "));
+
 // Optional `dates[]` drives the calendar and the .ics feeds. A malformed date
 // would silently drop an event or land it on the wrong day, so fail the build.
 const DATE_KINDS = new Set(["deadline", "loi", "opens", "closes", "decision", "start", "window"]);
