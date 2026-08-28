@@ -11,7 +11,8 @@ import a from "../../styles/app.module.scss";
 import c from "../../styles/calendar.module.scss";
 
 const verified = ENTRIES.filter(e => e.status === "verified").length;
-const projected = ENTRIES.length - verified;
+const unconfirmed = ENTRIES.filter(e => e.status === "unconfirmed").length;
+const projected = ENTRIES.filter(e => e.status === "projected").length;
 const in2027 = ENTRIES.filter(e => e.year === 2027).length;
 const withDates = new Set(ENTRIES.map(e => e.slug)).size;
 
@@ -52,7 +53,7 @@ const jsonLd = {
   <div class={a.shell}>
     <Rail
       headline={`${ENTRIES.length} dated entries`}
-      headlineNote={`Deadlines, openings, and decisions across ${withDates} programs — ${verified} verified against the funder, ${projected} projected from past cycles.`}
+      headlineNote={`Across ${withDates} programs — ${verified} read off the funder's own page, ${unconfirmed} published but unconfirmed, ${projected} projected from past cycles.`}
     />
 
     <main class={`${a.doc} ${a.docWide} ${c.page}`}>
@@ -62,8 +63,10 @@ const jsonLd = {
       <p class={c.lede}>
         Every date we hold across the {ENTRIES.length} tracked entries — grant deadlines, letters of
         intent, opening dates, and decisions — laid out chronologically and split by who it
-        is for. {in2027} of them fall in 2027. Subscribe to a feed below and your calendar
-        will remind you without you having to come back here.
+        is for. {in2027} of them fall in 2027. Each one says where it came from: {verified} were
+        read off the funder's own page, the rest are flagged so you know to check them
+        yourself. Subscribe to a feed below and your calendar will remind you without you
+        having to come back here.
       </p>
 
       <section class={c.subscribe}>
@@ -130,7 +133,7 @@ const jsonLd = {
         <button class={c.chip} type="button" data-year="2028" aria-pressed="false">2028+</button>
         <span class={c.spacer}></span>
         <button class={c.chip} type="button" id="toggle-past" aria-pressed="false">Include past dates</button>
-        <button class={c.chip} type="button" id="toggle-projected" aria-pressed="true">Include projected</button>
+        <button class={c.chip} type="button" id="toggle-verified" aria-pressed="false">Verified dates only</button>
       </div>
 
       {sections.map(sec => (
@@ -173,8 +176,16 @@ const jsonLd = {
                   <div class={c.flags}>
                     <span class={`${c.tag} ${c.tagKind}`}>{KIND_LABEL[e.kind]}</span>
                     {e.expired && <span class={`${c.tag} ${c.tagWatch}`}>Watch</span>}
-                    <span class={`${c.tag} ${e.status === "verified" ? c.tagVerified : c.tagProjected}`}>
-                      {e.status === "verified" ? "Verified" : "Projected"}
+                    <span
+                      class={`${c.tag} ${
+                        e.status === "verified" ? c.tagVerified
+                        : e.status === "unconfirmed" ? c.tagUnconfirmed
+                        : c.tagProjected
+                      }`}
+                      title={e.status === "verified" ? `Confirmed on ${e.source} on ${e.checked}` : undefined}
+                    >
+                      {e.status === "verified" ? "Verified"
+                        : e.status === "unconfirmed" ? "Unconfirmed" : "Projected"}
                     </span>
                   </div>
                 </article>
@@ -210,7 +221,14 @@ const jsonLd = {
         <div class={c.legendGrid}>
           <p class={c.legendItem}>
             <strong>Verified ({verified})</strong>
-            Checked against the funder's own page on the date shown in the calendar entry.
+            Read directly off the funder's own page on {LAST_UPDATED}. The calendar entry
+            records which page, so you can check our work.
+          </p>
+          <p class={c.legendItem}>
+            <strong>Unconfirmed ({unconfirmed})</strong>
+            A real published date that we have not confirmed at the source — either the
+            funder's own page was unreachable and we are relying on others reporting it, or
+            the date came from an earlier pass of this index and has not been re-checked.
           </p>
           <p class={c.legendItem}>
             <strong>Projected ({projected})</strong>
@@ -306,7 +324,7 @@ const jsonLd = {
   // --- filters --------------------------------------------------------------
   let year = "all";
   let showPast = false;
-  let showProjected = true;
+  let verifiedOnly = false;
 
   function apply() {
     for (const row of rows) {
@@ -314,8 +332,8 @@ const jsonLd = {
       const yearOk = year === "all"
         || (year === "2028" ? Number(y) >= 2028 : y === year);
       const pastOk = showPast || row.dataset.past === "0";
-      const projOk = showProjected || row.dataset.status !== "projected";
-      const show = yearOk && pastOk && projOk;
+      const statusOk = !verifiedOnly || row.dataset.status === "verified";
+      const show = yearOk && pastOk && statusOk;
       row.hidden = !show;
       row.classList.toggle(c.entryPast, row.dataset.past === "1");
     }
@@ -357,10 +375,10 @@ const jsonLd = {
     apply();
   });
 
-  const projBtn = document.getElementById("toggle-projected");
-  projBtn.addEventListener("click", () => {
-    showProjected = !showProjected;
-    projBtn.setAttribute("aria-pressed", String(showProjected));
+  const verBtn = document.getElementById("toggle-verified");
+  verBtn.addEventListener("click", () => {
+    verifiedOnly = !verifiedOnly;
+    verBtn.setAttribute("aria-pressed", String(verifiedOnly));
     apply();
   });
 

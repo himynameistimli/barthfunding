@@ -327,6 +327,11 @@
   color: var(--npo);
 }
 
+.tagUnconfirmed {
+  border-color: var(--gov);
+  color: var(--gov);
+}
+
 .tagProjected {
   border-color: var(--gen);
   color: var(--gen);

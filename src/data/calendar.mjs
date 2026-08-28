@@ -222,8 +222,14 @@ function describe(e) {
       "cycles and has not been published by the funder. Treat it as a prompt to " +
       "go check, not as a deadline."
     );
+  } else if (e.status === "unconfirmed") {
+    lines.push(
+      "CONFIDENCE: UNCONFIRMED — this is a real published date, but we have not " +
+      "confirmed it against the funder's own page. Check the source before you " +
+      "rely on it."
+    );
   } else {
-    lines.push(`CONFIDENCE: Verified against the funder's own page on ${e.checked}.`);
+    lines.push(`CONFIDENCE: Verified on the funder's own page on ${e.checked} — ${e.source}`);
   }
   if (e.expired) {
     lines.push("STATUS: This program has no currently open call. The date above is a watch-for-reopening prompt.");
@@ -279,14 +285,15 @@ function vevent(e, dtstamp) {
     lines.push(`DTEND;VALUE=DATE:${plusDays(e.on, 1).replace(/-/g, "")}`);
   }
 
-  const mark = e.status === "projected" ? " (projected)" : "";
+  const mark = e.status === "verified" ? "" : ` (${e.status})`;
   const verb = KIND_LABEL[e.kind] || "Date";
   lines.push(`SUMMARY:${escapeText(`${e.program} — ${verb}${mark}`)}`);
   lines.push(`DESCRIPTION:${escapeText(describe(e))}`);
   lines.push(`URL:${e.url}`);
   lines.push(`CATEGORIES:${escapeText(e.audiences.map(a => AUD_LABEL[a]).join(","))}`);
-  // Projected dates are tentative so a calendar client can show them differently.
-  lines.push(`STATUS:${e.status === "projected" ? "TENTATIVE" : "CONFIRMED"}`);
+  // Only a date read off the funder's own page is CONFIRMED; anything we have
+  // not checked there is TENTATIVE so a calendar client can show it differently.
+  lines.push(`STATUS:${e.status === "verified" ? "CONFIRMED" : "TENTATIVE"}`);
   lines.push("TRANSP:TRANSPARENT");
   for (const a of alarms(e)) lines.push(...a);
   lines.push("END:VEVENT");

@@ -72,8 +72,17 @@ for (const p of PROGRAMS) {
     }
     if (!d.label) throw new Error(`Missing date label in ${where}`);
     if (d.kind !== undefined && !DATE_KINDS.has(d.kind)) throw new Error(`Bad date kind "${d.kind}" in ${where}`);
-    if (!["verified", "projected"].includes(d.status)) throw new Error(`Bad date status "${d.status}" in ${where}`);
-    if (d.status === "verified" && !d.checked) throw new Error(`Verified date needs a "checked" date: ${where}`);
+    if (!["verified", "unconfirmed", "projected"].includes(d.status)) {
+      throw new Error(`Bad date status "${d.status}" in ${where}`);
+    }
+    // "Verified" is a claim about provenance that ships to subscribers in the
+    // .ics, so it has to be backed by the page it was read off.
+    if (d.status === "verified" && !(d.checked && d.source)) {
+      throw new Error(`Verified date needs both "checked" and "source": ${where}`);
+    }
+    if (d.status !== "verified" && d.checked) {
+      throw new Error(`Only verified dates may carry "checked": ${where}`);
+    }
     if (d.precision !== undefined && !["day", "month"].includes(d.precision)) {
       throw new Error(`Bad date precision "${d.precision}" in ${where}`);
     }
