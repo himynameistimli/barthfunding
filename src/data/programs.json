@@ -72,11 +72,15 @@
       ],
       "links": [
         {
+          "label": "2027 program page — current cycle",
+          "url": "https://www.barthsyndrome.org/research/bsf-grant-program.html"
+        },
+        {
           "label": "Application portal (SM Apply)",
           "url": "https://barthsyndrome.smapply.us/prog/barth_syndrome_foundation_grant_program/"
         },
         {
-          "label": "2026 program page",
+          "label": "2026 program page (past cycle)",
           "url": "https://www.barthsyndrome.org/research/2026-bsf-grant-program.html"
         },
         {
@@ -358,7 +362,7 @@
           "url": "https://www.afm-telethon.fr/en/health-professionals-and-researchers/calls-proposals"
         },
         {
-          "label": "2026 call (PDF)",
+          "label": "2026 call (PDF, past cycle)",
           "url": "https://www.afm-telethon.fr/sites/default/files/media/documents/SCIENTIFIC%20CALL%20FOR%20PROPOSALS%20AFM-TELETHON%202026.pdf"
         }
       ],
@@ -1722,8 +1726,8 @@
       "sponsor": "PacBio",
       "cat": "corporate",
       "amount": "Free long-read sequencing packages (Revio) + bioinformatics",
-      "deadline": "Themed rounds recur; 2026 metagenomics round closed",
-      "desc": "Free long-read sequencing — consumables, library prep, Revio sequencing, and initial bioinformatics through certified service providers — awarded through continually running themed grant rounds plus local and regional SMRT grants. The application is a 100-word proposal.",
+      "deadline": "No round open — 2026 metagenomics closed; new themes post through the year",
+      "desc": "Free long-read sequencing — consumables, library prep, Revio sequencing, and initial bioinformatics through certified service providers — awarded in themed rounds plus local and regional SMRT grants. The application is a 100-word proposal. As of Aug 28, 2026 no round is open: the 2026 metagenomics round has closed and the 2026 cancer round has announced its winner. PacBio opens submission windows throughout the year and posts them to its blog.",
       "eligibility": "Scientists at any level; short-form application.",
       "apply": "Themed windows are posted on the SMRT Grant page; the application is the short proposal, and decisions come ~2 months from submission.",
       "tags": [
@@ -1734,11 +1738,11 @@
       ],
       "links": [
         {
-          "label": "SMRT Grants",
+          "label": "SMRT Grants — themes and open rounds",
           "url": "https://www.pacb.com/engage/smrt-grant/"
         },
         {
-          "label": "Local SMRT Grants",
+          "label": "Local & regional SMRT Grants",
           "url": "https://www.pacb.com/engage/smrt-grant/local-smrt-grant/"
         }
       ],
@@ -2315,8 +2319,8 @@
       "sponsor": "Oxford Nanopore Technologies",
       "cat": "corporate",
       "amount": "~60 discounted sequencing packs/quarter (MinION, PromethION)",
-      "deadline": "Quarterly cycles",
-      "desc": "Reduced-cost long-read nanopore sequencing packs for researchers who lack the resources to access the technology, awarded in quarterly cycles.",
+      "deadline": "Quarterly windows — apply in months 1–2 of each quarter; programme page unreachable Aug 28, 2026",
+      "desc": "Lower-cost MinION Mk1D and PromethION 2 Solo sequencing packs for researchers who lack the resources to access the technology — Oxford Nanopore documents 30 of each per quarter. Applications open during the first two months of a quarter with review in the third. Note the status is uncertain: the programme's own support page returned 404 on Aug 28, 2026 even though search engines still index its contents, so it may have moved or ended. Confirm with Oxford Nanopore before counting on it. This is separate from the company's conference bursary, which covers registration and travel for presenting nanopore research.",
       "eligibility": "Researchers lacking resources to access nanopore sequencing.",
       "apply": "Quarterly application cycles via nanoporetech.com account pages (search 'Grant Programme').",
       "tags": [
@@ -2327,15 +2331,36 @@
       ],
       "links": [
         {
-          "label": "Oxford Nanopore",
+          "label": "Oxford Nanopore (company site — programme page unreachable Aug 2026)",
           "url": "https://nanoporetech.com"
+        },
+        {
+          "label": "Conference bursary — separate programme",
+          "url": "https://register.nanoporetech.com/bursaryapplication"
         }
       ],
       "awardType": "in-kind",
       "focus": [
         "tools"
       ],
-      "bths": "Useful for resolving structural or deep-intronic TAFAZZIN variants that short-read sequencing misses."
+      "bths": "Useful for resolving structural or deep-intronic TAFAZZIN variants that short-read sequencing misses — a diagnostic gap rather than a funding one.",
+      "dates": [
+        {
+          "on": "2026-10-01",
+          "label": "Q4 application window expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month",
+          "note": "Windows open in the first two months of each quarter with review in the third. Confirm the programme still runs before planning around it."
+        },
+        {
+          "on": "2027-01-01",
+          "label": "Q1 2027 application window expected to open",
+          "kind": "opens",
+          "status": "projected",
+          "precision": "month"
+        }
+      ]
     },
     {
       "name": "Agilent Early Career Professor Award",
@@ -2441,7 +2466,7 @@
           "url": "https://alexion.com/alexion-charitable-foundation"
         },
         {
-          "label": "Grant guidelines (PDF)",
+          "label": "Grant guidelines (PDF, 2024 — most recent published)",
           "url": "https://alexion.com/-/media/alexion_global/documents/community/global/all/2024/english/acfrarebelongingguidelines2024.pdf"
         }
       ],
@@ -2924,10 +2949,10 @@
       "sponsor": "Chan Zuckerberg Initiative",
       "cat": "general",
       "amount": "$2,000,000 over 4 years (PPC); 5-year capacity grants (Rare As One)",
-      "deadline": "Rare As One round 4 opens fall 2026",
-      "desc": "Two vehicles. Patient-Partnered Collaborations fund teams pairing a patient-led organization with research labs, at $2M over 4 years; recent RFAs covered rare neurodegenerative and rare inflammatory pediatric disease. Rare As One gives 5-year capacity-building grants to patient-led rare disease organizations.",
+      "deadline": "No open call — every CZI RFA is closed; round 4 announced for fall 2026",
+      "desc": "Two vehicles, neither currently accepting applications. Patient-Partnered Collaborations fund teams pairing a patient-led organization with research labs at $2M over four years; the rare neurodegenerative and rare inflammatory pediatric disease RFAs have both closed. Rare As One gives 5-year capacity-building grants to patient-led rare disease organizations; Cycle 3 closed Feb 22, 2024. As of Aug 28, 2026 CZI's funding page lists all 28 of its opportunities as closed. A fourth Rare As One cycle was announced in June 2026 for “this fall” — reported as likely October, with no official date and no RFA page yet — scoped to rare pulmonary and immune diseases and rare cancers. The network has backed 94 patient-led organizations and CZI puts more than $150M into rare disease work across the cycles.",
       "eligibility": "Rare As One: patient-led advocacy organizations (BSF would be the applicant). Patient-Partnered Collaborations: joint teams of an advocacy organization and academic labs.",
-      "apply": "RFAs are posted at apply.chanzuckerberg.com when cycles open; the fall 2026 Rare As One round and future PPC disease scopes are the next opportunities.",
+      "apply": "Nothing is open. New RFAs post to CZI's science funding page and are announced to its science mailing list, which is the only reliable way to catch a window — the round 4 RFA page does not exist yet.",
       "tags": [
         "rare disease",
         "patient-led",
@@ -2939,11 +2964,15 @@
       ],
       "links": [
         {
-          "label": "CZI science funding",
+          "label": "CZI science funding — where new RFAs post",
           "url": "https://chanzuckerberg.com/science/science-funding/"
         },
         {
-          "label": "Rare As One RFA",
+          "label": "Round 4 announcement (CNBC, June 2026)",
+          "url": "https://www.cnbc.com/2026/06/25/chan-zuckerberg-biohub-rare-disease-funding.html"
+        },
+        {
+          "label": "Rare As One Cycle 3 RFA (closed Feb 2024, for reference)",
           "url": "https://chanzuckerberg.com/rfa/rare-as-one/"
         }
       ],
@@ -2958,10 +2987,11 @@
           "label": "Rare As One round 4 expected to open",
           "kind": "opens",
           "status": "projected",
-          "precision": "month"
+          "precision": "month",
+          "note": "CZI announced the round in June 2026 for “this fall”, reported as likely October. No official date and no RFA page as of Aug 28, 2026. Announced scope is rare pulmonary and immune diseases and rare cancers, which likely excludes BTHS."
         }
       ],
-      "bths": "Eligibility for a BSF-plus-TAFAZZIN-lab team depends entirely on each RFA's disease scope. Rare As One cycle 3 covered inborn errors of metabolism, which is BTHS-adjacent; the fourth round opening fall 2026 covers rare pulmonary and immune diseases and rare cancers, likely out of scope unless framed through the neutropenia component."
+      "bths": "Nothing to apply to right now. Rare As One Cycle 3 covered inborn errors of metabolism, which was BTHS-adjacent, but the announced round 4 scope — rare pulmonary and immune diseases and rare cancers — does not cover Barth syndrome except through a strained neutropenia framing. Watch it for the cycle after, and for any PPC RFA whose disease scope reaches mitochondrial or cardiac disease, since BSF plus a TAFAZZIN lab is exactly the team shape PPC funds."
     },
     {
       "name": "Career Awards at the Scientific Interface (CASI)",
@@ -2985,7 +3015,11 @@
           "url": "https://www.bwfund.org/grants/interfaces-in-science/career-awards-at-the-scientific-interface/"
         },
         {
-          "label": "2026 RFP (PDF)",
+          "label": "2027 RFP (PDF) — current cycle",
+          "url": "https://www.bwfund.org/wp-content/uploads/2026/06/BWF-CASI-RFP-2027_v2.pdf"
+        },
+        {
+          "label": "2026 RFP (PDF, past cycle)",
           "url": "https://www.bwfund.org/wp-content/uploads/2020/10/BWF-CASI-RFP-2026_Final.pdf"
         }
       ],
@@ -3054,7 +3088,7 @@
           "url": "https://www.bwfund.org/"
         },
         {
-          "label": "PDEP RFP (PDF)",
+          "label": "PDEP RFP (PDF, 2026 — past cycle)",
           "url": "https://www.bwfund.org/wp-content/uploads/2020/10/BWF_PDEP-RFP-2026_v2.pdf"
         }
       ],
@@ -3181,7 +3215,7 @@
           "url": "https://beckman-foundation.smapply.io/prog/beckman_young_investigator/"
         },
         {
-          "label": "FAQ (PDF)",
+          "label": "FAQ (PDF, 2026 — past cycle)",
           "url": "https://www.beckman-foundation.org/documents/514/2026_FAQ_BYI_Program.pdf"
         }
       ],

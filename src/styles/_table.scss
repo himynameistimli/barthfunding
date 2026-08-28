@@ -50,6 +50,15 @@
   white-space: nowrap;
 }
 
+// Muted variant: a projected date, or one that is not a submission deadline.
+.dueRelSoft {
+  @include m.mono(10.5px);
+  color: var(--ink-faint);
+  display: block;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
 .dueNone {
   @include m.mono(11.5px);
   color: var(--faint);

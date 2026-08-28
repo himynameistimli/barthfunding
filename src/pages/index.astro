@@ -112,10 +112,19 @@ const jsonLd = [
 
     // The soonest structured date still ahead of us; null when a program has no
     // dated entry at all (rolling intake) or every date it has has passed.
+    // Returns the whole record: an opening date and a submission deadline are
+    // not the same promise, and the column has to say which it is showing.
     function nextDate(p) {
-      const upcoming = (p.dates || []).filter(d => d.on >= todayISO).map(d => d.on).sort();
+      const upcoming = (p.dates || []).filter(d => d.on >= todayISO)
+        .slice().sort((a, b) => (a.on < b.on ? -1 : a.on > b.on ? 1 : 0));
       return upcoming.length ? upcoming[0] : null;
     }
+
+    // Only these are things you submit by. The rest are context.
+    const ACTIONABLE_KIND = { deadline: "", loi: "LOI", closes: "closes" };
+    const KIND_PREFIX = {
+      opens: "opens", decision: "decision", start: "starts", window: "window"
+    };
 
     const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     function fmtDue(iso) {
@@ -171,7 +180,7 @@ const jsonLd = [
         }
         // Programs with nothing scheduled sort to the end whichever way the
         // date column points — they are not "furthest away", they are undated.
-        const ad = nextDate(a), bd = nextDate(b);
+        const ad = nextDate(a)?.on, bd = nextDate(b)?.on;
         if (!ad && !bd) return a.name.localeCompare(b.name);
         if (!ad) return 1;
         if (!bd) return -1;
@@ -244,11 +253,16 @@ const jsonLd = [
             <span class="${s.name}">${highlight(p.name, t)}<span class="${s.src} ${srcClass(p.cat)}">${meta.code}</span>${p.expired ? `<span class="${s.tagPast}">PAST</span>` : ""}</span>
             <span class="${s.sponsor}">${highlight(p.sponsor, t)}</span>
             <span class="${s.deadlineInline}">${due
-              ? `<span class="${s.dueInline}">${fmtDue(due)} · ${relDue(daysUntil(due))}</span>` : ""
+              ? `<span class="${s.dueInline}">${due.status === "projected" ? "~" : ""}${fmtDue(due.on)} · ` +
+                `${KIND_PREFIX[due.kind] ? KIND_PREFIX[due.kind] + " · " : ""}${relDue(daysUntil(due.on))}</span>` : ""
             }${highlight(shortDeadline(p.deadline), t)}</span>
           </span>
           <span class="${s.dueCol} ${s.colWide}">${due
-            ? `<span class="${s.dueDate}">${fmtDue(due)}</span><span class="${s.dueRel}">${relDue(daysUntil(due))}</span>`
+            ? `<span class="${s.dueDate}">${due.status === "projected" ? "~" : ""}${fmtDue(due.on)}</span>` +
+              `<span class="${due.status === "verified" && !KIND_PREFIX[due.kind] ? s.dueRel : s.dueRelSoft}">` +
+              `${KIND_PREFIX[due.kind] ? KIND_PREFIX[due.kind] + " · " : ""}` +
+              `${ACTIONABLE_KIND[due.kind] ? ACTIONABLE_KIND[due.kind] + " · " : ""}` +
+              `${relDue(daysUntil(due.on))}</span>`
             : `<span class="${s.dueNone}">—</span>`}</span>
           <span class="${s.award}">${fmtUSD(AWARD_MAX_USD[p.name])}</span>
           <span class="${s.metaCol} ${s.colWide}">${highlight((p.focus || []).map(f => FOCUS_LABELS[f]).join(" · "), t)}</span>
