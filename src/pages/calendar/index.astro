@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Rail from "../../components/Rail.astro";
+import ViewToggle from "../../components/ViewToggle.astro";
 import { LAST_UPDATED } from "../../data/programs.mjs";
 import { SITE_URL, CONTACT_EMAIL } from "../../data/site.mjs";
 import {
@@ -57,7 +58,7 @@ const jsonLd = {
     />
 
     <main class={`${a.doc} ${a.docWide} ${c.page}`}>
-      <p class={a.crumb}><a href="/">← Funding index</a></p>
+      <ViewToggle view="calendar" />
       <h1>Funding deadline calendar</h1>
 
       <p class={c.lede}>

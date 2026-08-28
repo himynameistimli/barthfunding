@@ -1,0 +1,59 @@
+// Index ⇄ calendar view switch. Two views over the same dataset, so this reads
+// as one segmented control rather than two nav links.
+@use "tokens" as t;
+@use "mixins" as m;
+
+.viewToggle {
+  display: inline-flex;
+  border: 1px solid var(--ink);
+  background: var(--surface);
+
+  @media (max-width: t.$bp-stack) {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.viewOpt {
+  @include m.label(10px, .12em);
+  @include m.focus-ring(-2px);
+  display: block;
+  padding: 8px 15px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border: none;
+  border-right: 1px solid var(--ink);
+  white-space: nowrap;
+
+  &:last-child { border-right: none; }
+
+  &:hover {
+    background: var(--hover);
+    color: var(--accent);
+  }
+
+  @media (max-width: t.$bp-stack) {
+    flex: 1;
+    text-align: center;
+    padding: 9px 8px;
+  }
+}
+
+// aria-current marks the view you are already on, so it is not a link to press.
+.viewOptOn {
+  background: var(--ink);
+  color: var(--surface);
+  cursor: default;
+
+  &:hover {
+    background: var(--ink);
+    color: var(--surface);
+  }
+}
+
+// Placement above the index's sticky table header.
+.viewBar {
+  padding: 16px 28px 14px;
+
+  @media (max-width: t.$bp-narrow) { padding: 14px 16px 12px; }
+}

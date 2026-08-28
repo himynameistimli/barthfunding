@@ -1,0 +1,20 @@
+---
+// Switch between the two views of the same dataset. `view` is "index" | "calendar".
+import s from "../styles/app.module.scss";
+
+const { view } = Astro.props;
+
+const VIEWS = [
+  { key: "index", href: "/", label: "Funding index" },
+  { key: "calendar", href: "/calendar/", label: "Deadline calendar" }
+];
+---
+<div class={s.viewToggle} role="group" aria-label="View">
+  {VIEWS.map(v => (
+    v.key === view ? (
+      <span class={`${s.viewOpt} ${s.viewOptOn}`} aria-current="page">{v.label}</span>
+    ) : (
+      <a class={s.viewOpt} href={v.href}>{v.label}</a>
+    )
+  ))}
+</div>

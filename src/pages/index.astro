@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
+import ViewToggle from "../components/ViewToggle.astro";
 import s from "../styles/app.module.scss";
 import { PROGRAMS, AWARD_MAX_USD, CAT_LABELS, TYPE_LABELS, FOCUS_LABELS } from "../data/programs.mjs";
 import { SITE_URL, SITE_NAME } from "../data/site.mjs";
@@ -50,6 +51,7 @@ const jsonLd = [
     <Rail headline={headlineTotal} showFilters={true} />
 
     <main style="min-width: 0;">
+      <div class={s.viewBar}><ViewToggle view="index" /></div>
       <div class={s.tblHead}>
         <button id="sort-name" type="button">Program <span class="arrow"></span></button>
         <button id="sort-award" class={s.taR} type="button">Award<span class={s.colWide}> max</span> <span class="arrow"></span></button>
