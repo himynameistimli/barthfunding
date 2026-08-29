@@ -66,6 +66,7 @@ const stripTags = html => html.replace(/<script[\s\S]*?<\/script>/gi, " ")
 
 const programs = data.programs.filter(p => includeAll || !p.expired);
 const deadLinks = [];
+const blockedLinks = [];
 const closureHits = [];
 const passedDeadlines = [];
 const now = new Date();
@@ -76,9 +77,19 @@ for (const p of programs) {
 
   for (const l of p.links || []) {
     const r = await fetchPage(l.url);
-    // 403/429 are usually bot-blocking on live pages, not death.
-    if (r.status !== 200 && ![403, 429].includes(r.status)) {
-      deadLinks.push({ name: p.name, url: l.url, status: r.status || r.error });
+    // A WAF answering a non-browser client is not a broken link. Sucuri returns
+    // 307, Cloudflare-style protection returns 403/429, and some hosts send 422
+    // or 451. TLS failures mean we could not look, not that the page is gone.
+    // Keeping these apart matters: mixed in, they bury the real 404s.
+    const BLOCKED = [401, 403, 405, 406, 407, 418, 422, 429, 451];
+    const isRedirect = r.status >= 300 && r.status < 400;
+    const isTlsOrNetwork = r.status === 0;
+    if (r.status !== 200) {
+      if (BLOCKED.includes(r.status) || isRedirect || isTlsOrNetwork) {
+        blockedLinks.push({ name: p.name, url: l.url, status: r.status || r.error });
+      } else {
+        deadLinks.push({ name: p.name, url: l.url, status: r.status || r.error });
+      }
     }
     if (r.text) {
       const body = stripTags(r.text);
@@ -95,12 +106,15 @@ const section = (title, rows, fmt) => {
 };
 
 console.log(`Funding index check — ${programs.length} programs (${data.lastUpdated} data)`);
-section("Dead or unreachable links", deadLinks, r => `${r.name}: ${r.url} [${r.status}]`);
+section("Dead links — page is gone", deadLinks, r => `${r.name}: ${r.url} [${r.status}]`);
+section("Could not verify — bot protection, redirect, or TLS (usually fine)", blockedLinks,
+  r => `${r.name}: ${r.url} [${r.status}]`);
 section("Closure language on page — verify by reading", closureHits,
   r => `${r.name}: ${r.url} — "${r.phrases.join('", "')}"`);
 section("Deadline has passed — needs a new cycle or expired:true", passedDeadlines,
   r => `${r.name}: ${r.deadline}`);
 
 const total = deadLinks.length + closureHits.length + passedDeadlines.length;
-console.log(`\n${total} item(s) need review.`);
+console.log(`\n${total} item(s) need review` +
+  (blockedLinks.length ? `, plus ${blockedLinks.length} unverifiable (not counted).` : "."));
 process.exit(total ? 1 : 0);

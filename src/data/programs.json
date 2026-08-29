@@ -2873,7 +2873,7 @@
       "sponsor": "Charles H. Hood Foundation",
       "cat": "general",
       "amount": "$200,000 over 2 years",
-      "deadline": "Next opportunity posted September 2026",
+      "deadline": "Closed — funder says to check back September 2026 for the next opportunity",
       "desc": "Hypothesis-driven basic, clinical, public-health, or epidemiological research on child health, aimed at junior investigators. The award includes 10% indirects.",
       "eligibility": "Geographically restricted to nonprofit academic, medical, and research institutions in the six New England states. Applicants must be within 5 years (PhD) or 7 years (physician-scientist) of completing training. Open application — no nomination needed.",
       "apply": "Direct application via the foundation's site. No cycle is currently open — the foundation posts its next funding opportunity (with a new two-step concept-paper process) in September 2026.",
@@ -2897,10 +2897,13 @@
       "dates": [
         {
           "on": "2026-09-01",
-          "label": "Next opportunity expected to post",
+          "label": "Next funding opportunity information expected",
           "kind": "opens",
-          "status": "projected",
-          "precision": "month"
+          "status": "verified",
+          "checked": "2026-08-28",
+          "source": "https://charleshoodfoundation.org/research-grants/",
+          "precision": "month",
+          "note": "The foundation's own page says “Please check back in September 2026 for information on our next funding opportunity.” Dates, amounts, and eligibility for that cycle are not yet published."
         }
       ],
       "bths": "Early-career Barth syndrome projects in pediatric cardiomyopathy, neutropenia, or metabolism qualify under the child-health scope."
@@ -3793,17 +3796,22 @@
       "cat": "nonprofit",
       "awardType": "cash",
       "amount": "Up to $7,500 per 12-month grant",
-      "deadline": "Open while funded",
-      "desc": "Covers prescription copays or Medicare Part B premiums for cardiomyopathy patients on Medicare. More than 90 cardiomyopathy medications are covered, including ACE inhibitors, beta blockers, and anticoagulants.",
+      "deadline": "CLOSED to new patients (insufficient funding) — reopens only when refunded",
+      "desc": "A copay fund covering prescription copays or Medicare Part B premiums for cardiomyopathy patients on Medicare, up to $7,500, for household income up to 500% of the federal poverty level. More than 100 cardiomyopathy medications are covered, including beta blockers, ACE inhibitors, diuretics, anticoagulants, Entresto, Vyndaqel, and Corlanor. As of Aug 28, 2026 the fund is temporarily closed to new patients for lack of funding; existing grantees keep their benefits through their 12-month cycle. HealthWell funds reopen without notice when refunded, so it is worth re-checking rather than writing off.",
       "eligibility": "Medicare beneficiaries with cardiomyopathy; income at or below 500% of the federal poverty level, adjusted for household size and cost of living; treatment in the US.",
       "apply": "Apply online or call (800) 675-8416.",
       "links": [
         {
-          "label": "Cardiomyopathy Medicare fund",
+          "label": "Cardiomyopathy Medicare Access fund (currently closed)",
           "url": "https://www.healthwellfoundation.org/fund/cardiomyopathy-medicare-access/"
+        },
+        {
+          "label": "HealthWell — all open funds",
+          "url": "https://www.healthwellfoundation.org/funds/"
         }
       ],
-      "bths": "Mainly relevant to adult Barth syndrome patients on Medicare, for example through SSDI. HealthWell has no mitochondrial-disease-specific fund, and its General Travel Fund (up to $500) requires a prior HealthWell grant and was reported temporarily closed to new patients."
+      "bths": "Relevant to adult Barth syndrome patients on Medicare, for example through SSDI, since cardiomyopathy is the qualifying condition. HealthWell has no mitochondrial-disease-specific fund, and its General Travel Fund (up to $500) requires a prior HealthWell grant and was also reported closed to new patients.",
+      "expired": true
     },
     {
       "tags": [
