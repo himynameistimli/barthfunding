@@ -107,40 +107,15 @@ const jsonLd = {
         </p>
       </section>
 
-      <section class={c.legendSec}>
-        <h2>How to read this</h2>
-        <div class={c.legendGrid}>
-          <p class={c.legendItem}>
-            <strong>Verified ({verified})</strong>
-            Read directly off the funder's own page on {LAST_UPDATED}. The calendar entry
-            records which page, so you can check our work.
-          </p>
-          <p class={c.legendItem}>
-            <strong>Unconfirmed ({unconfirmed})</strong>
-            A real published date that we have not confirmed at the source — either the
-            funder's own page was unreachable and we are relying on others reporting it, or
-            the date came from an earlier pass of this index and has not been re-checked.
-          </p>
-          <p class={c.legendItem}>
-            <strong>Projected ({projected})</strong>
-            Inferred from the program's past cycles. The funder has not published this date.
-            Treat it as a prompt to go and check, never as a deadline.
-          </p>
-          <p class={c.legendItem}>
-            <strong>NIH dates</strong>
-            Standing receipt dates, already shifted off weekends and federal holidays to the
-            next business day, as NIH policy requires.
-          </p>
-        </div>
+      <footer class={c.pageFoot}>
         <p class={a.note}>
-          A program can appear under more than one audience when it genuinely serves both.
-          Dates move, and calls are cancelled without notice — confirm on the funder's own
+          Dates move and calls are cancelled without notice — confirm on the funder's own
           site before you rely on anything here. Corrections go to{" "}
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> or the{" "}
           <a href="/suggest-update/">suggest an update</a> page.
         </p>
         <p class={a.docFoot}>Deadline data last verified {LAST_UPDATED}.</p>
-      </section>
+      </footer>
     </main>
   </div>
 </Base>

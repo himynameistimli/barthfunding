@@ -346,32 +346,6 @@
 }
 
 // --- how to read ------------------------------------------------------------------
-.legendSec {
-  border-top: 1px solid var(--line);
-  margin-top: 46px;
-  padding-top: 16px;
-}
-
-.legendGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
-  margin-top: 10px;
-}
-
-.legendItem {
-  font-size: 13px;
-  line-height: 1.55;
-  color: var(--ink-soft);
-
-  strong {
-    display: block;
-    color: var(--ink);
-    margin-bottom: 2px;
-  }
-}
-
-
 // --- month grid --------------------------------------------------------------
 .monthView { margin-top: 22px; }
 
@@ -432,15 +406,23 @@
 .weekHead {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
+  // Must match .monthGrid exactly: the grid's 1px gaps take 6px out of the row,
+  // so without the same gap the columns here are ~0.9px wider each and the day
+  // names drift off their columns. The padding has to match .day too, or every
+  // date sits 2px left of its own heading.
+  gap: 1px;
   border: 1px solid var(--ink);
   border-bottom: none;
-  background: var(--surface);
+  background: var(--line-soft);
 
   span {
     @include m.label(9px, .1em);
     color: var(--ink-faint);
-    padding: 6px 8px;
+    padding: 6px;
     text-align: left;
+    background: var(--surface);
+
+    @media (max-width: t.$bp-stack) { padding: 5px 4px; }
   }
 }
 
@@ -535,4 +517,10 @@
   font-size: 14px;
   color: var(--ink-faint);
   margin: 12px 0 0;
+}
+
+.pageFoot {
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
+  padding-top: 16px;
 }
