@@ -16,7 +16,13 @@
   .monthTitle {
     border-top: none;
     padding-top: 0;
+    // `.doc h2` also sets `margin: 30px 0 8px`, and out-specifies a bare class,
+    // so the margin has to be reset here too or the heading floats off the top
+    // of its box.
+    margin-top: 0;
   }
+
+  .boxHead { margin-bottom: 6px; }
 
   .monthTitle {
     text-transform: none;
@@ -33,11 +39,10 @@
 
 // --- subscribe panel --------------------------------------------------------
 // Heading inside a bordered box: the document rule above it is redundant there.
+// Heading inside a bordered box. The border/padding/margin resets that fight
+// `.doc h2` live in the `.page` block above, which out-specifies it.
 .boxHead {
   @include m.label(11px);
-  border-top: none;
-  padding-top: 0;
-  margin: 0 0 6px;
 }
 
 .subNote {
