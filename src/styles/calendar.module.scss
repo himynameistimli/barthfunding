@@ -12,21 +12,29 @@
   // .doc draws a rule above every h2. Inside a bordered box, or beside the
   // month navigation, that reads as a stray line — these opt out. Nested so the
   // selector out-specifies `.doc h2`.
+  // `.doc h2` sets border-top, padding-top, margin and the whole label mixin
+  // (10px uppercase, wide tracking) at (0,1,1), which beats a bare class. Every
+  // property that has to override it lives here rather than in the standalone
+  // rules below, where it would silently do nothing.
   .boxHead,
   .monthTitle {
     border-top: none;
     padding-top: 0;
-    // `.doc h2` also sets `margin: 30px 0 8px`, and out-specifies a bare class,
-    // so the margin has to be reset here too or the heading floats off the top
-    // of its box.
     margin-top: 0;
   }
 
   .boxHead { margin-bottom: 6px; }
 
   .monthTitle {
-    text-transform: none;
+    font-size: 20px;
+    font-weight: 700;
     letter-spacing: -.015em;
+    text-transform: none;
+    text-align: center;
+    margin-bottom: 0;
+    // Wide enough for the longest label ("September 2026") so the arrows do not
+    // shift as the month changes.
+    min-width: 196px;
   }
 }
 
@@ -362,12 +370,10 @@
   margin-bottom: 12px;
 }
 
+// Sizing and alignment live in the `.page` block above — they have to
+// out-specify `.doc h2`.
 .monthTitle {
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: -.015em;
-  margin: 0;
-  min-width: 168px;
+  flex: none;
 }
 
 .monthNav {
@@ -524,8 +530,12 @@
   margin: 12px 0 0;
 }
 
-.pageFoot {
+// Nested under .page so `p { max-width: 78ch }` there does not keep the notice
+// to a reading measure — it is a full-width caveat, not prose.
+.page .pageFoot {
   border-top: 1px solid var(--line);
   margin-top: 40px;
   padding-top: 16px;
+
+  p { max-width: none; }
 }
