@@ -13,17 +13,6 @@ import { SITE_NAME } from "../../data/site.mjs";
 
 const AUD_KEYS = new Set(["researchers", "orgs", "patients"]);
 
-/** Everything the index can search over, lowercased once per program. */
-function haystack(p: any) {
-  return [
-    p.name, p.sponsor, p.desc, p.bths, p.eligibility, p.apply, p.amount, p.deadline,
-    (p.tags || []).join(" "),
-    CAT_LABELS[p.cat] || "",
-    TYPE_LABELS[p.awardType] || "",
-    (p.focus || []).map((f: string) => FOCUS_LABELS[f]).join(" ")
-  ].join(" ").toLowerCase();
-}
-
 export async function GET({ url }: { url: URL }) {
   const q = url.searchParams;
   const aud = q.get("aud");
@@ -42,7 +31,7 @@ export async function GET({ url }: { url: URL }) {
     if (type && p.awardType !== type) return false;
     if (focus && !(p.focus || []).includes(focus)) return false;
     if (terms.length) {
-      const hay = haystack(p);
+      const hay = p.hay;
       if (!terms.every(t => hay.includes(t))) return false;
     }
     return true;

@@ -88,20 +88,11 @@ const jsonLd = [
       return out;
     }
 
-    const hay = p => [p.name, p.sponsor, p.desc, p.bths, p.eligibility, p.apply, p.amount, p.deadline,
-      (p.tags || []).join(" "), CAT_LABELS[p.cat] || "", TYPE_LABELS[p.awardType] || "",
-      (p.focus || []).map(f => FOCUS_LABELS[f]).join(" ")].join(" ").toLowerCase();
+    const hay = p => p.hay;
 
-    const audPass = (p, a) => {
-      if (!a) return true;
-      const tags = p.tags || [];
-      const isOrg = tags.includes("for organizations");
-      const isPatient = tags.includes("for patients");
-      if (a === "orgs") return isOrg;
-      if (a === "patients") return isPatient;
-      // researchers: explicitly tagged, or not aimed at orgs/patients specifically
-      return tags.includes("for researchers") || (!isOrg && !isPatient);
-    };
+    // Audience and the search haystack are derived in programs.mjs so the index
+    // and the calendar cannot disagree about them.
+    const audPass = (p, a) => !a || p.auds.includes(a);
 
     // Today is decided in the browser: the site is statically built, so a stale
     // build must never report a past deadline as the next one.
@@ -364,23 +355,6 @@ const jsonLd = [
         renderDrawer();
       }
     });
-
-    /* ---------- mobile filter slide-over ---------- */
-    const filterGroups = document.getElementById("filter-groups");
-    const filterScrim = document.getElementById("filter-scrim");
-    const filtersToggle = document.getElementById("filters-toggle");
-    const closeFilters = () => {
-      filterGroups.classList.remove(s.open);
-      filterScrim.classList.remove(s.open);
-      filtersToggle.setAttribute("aria-expanded", "false");
-    };
-    filtersToggle?.addEventListener("click", () => {
-      filterGroups.classList.add(s.open);
-      filterScrim.classList.add(s.open);
-      filtersToggle.setAttribute("aria-expanded", "true");
-    });
-    filterScrim?.addEventListener("click", closeFilters);
-    document.getElementById("filters-close")?.addEventListener("click", closeFilters);
 
     render();
     renderDrawer();

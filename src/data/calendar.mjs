@@ -27,15 +27,9 @@ export const AUDIENCES = [
 
 export const AUD_LABEL = Object.fromEntries(AUDIENCES.map(a => [a.key, a.label]));
 
-// Mirrors the index page's audience filter exactly. A program with no audience
-// tag is treated as aimed at researchers, which is the index's default.
+// Audience is derived in programs.mjs so every page agrees on it.
 export function audiencesOf(p) {
-  const tags = p.tags || [];
-  const out = [];
-  if (tags.includes("for organizations")) out.push("orgs");
-  if (tags.includes("for patients")) out.push("patients");
-  if (tags.includes("for researchers") || !out.length) out.push("researchers");
-  return out;
+  return p.auds;
 }
 
 export const KIND_LABEL = {

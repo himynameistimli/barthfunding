@@ -8,6 +8,20 @@
   max-width: none;
 
   p { max-width: 78ch; }
+
+  // .doc draws a rule above every h2. Inside a bordered box, or beside the
+  // month navigation, that reads as a stray line — these opt out. Nested so the
+  // selector out-specifies `.doc h2`.
+  .boxHead,
+  .monthTitle {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .monthTitle {
+    text-transform: none;
+    letter-spacing: -.015em;
+  }
 }
 
 .lede {
@@ -27,6 +41,14 @@
 
 .subHead {
   @include m.label(11px);
+  margin: 0 0 6px;
+}
+
+// Heading inside a bordered box: the document rule above it is redundant there.
+.boxHead {
+  @include m.label(11px);
+  border-top: none;
+  padding-top: 0;
   margin: 0 0 6px;
 }
 
@@ -93,6 +115,23 @@
 
   &:hover { border-color: var(--accent); color: var(--accent); }
 }
+
+.addBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.legendNote {
+  @include m.mono(10px);
+  color: var(--faint);
+}
+
+.listView { margin-top: 22px; }
 
 .subHint {
   font-size: 12.5px;
@@ -477,7 +516,9 @@
 .legend {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
+  margin-bottom: 10px;
 }
 
 .legendKey {

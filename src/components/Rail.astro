@@ -13,6 +13,8 @@ const {
   showFilters = false,
   view
 } = Astro.props;
+// On the calendar the on-page subscribe row already reflects the filter.
+const showSubscribe = showFilters && view !== "calendar";
 ---
 <aside class={s.rail}>
   <div>
@@ -39,10 +41,12 @@ const {
         <button class={s.filtersToggle} id="filters-toggle" type="button" aria-controls="filter-groups" aria-expanded="false">Filters</button>
       </div>
       <button class={s.filterScrim} id="filter-scrim" aria-label="Close filters" type="button"></button>
-      <a class={s.railSub} id="rail-sub" href="/calendar/">
-        <span class={s.railSubHead}>Subscribe to this view</span>
-        <span class={s.railSubN} id="rail-sub-n"></span>
-      </a>
+      {showSubscribe && (
+        <a class={s.railSub} id="rail-sub" href="/calendar/">
+          <span class={s.railSubHead}>Subscribe to this view</span>
+          <span class={s.railSubN} id="rail-sub-n"></span>
+        </a>
+      )}
       <div class={s.filterGroups} id="filter-groups">
         <button class={s.filtersClose} id="filters-close" type="button">Done ✕</button>
         <div>
@@ -74,3 +78,26 @@ const {
     <a class={s.railFootLink} href="/suggest-update/">Suggest an edit</a>
   </div>
 </aside>
+
+{showFilters && (
+  <script define:vars={{ s }}>
+    // The mobile filter slide-over belongs to the rail, so any page that asks
+    // for filters gets it. It used to live in the index's script, which is why
+    // the calendar's drawer would not open.
+    const groups = document.getElementById("filter-groups");
+    const scrim = document.getElementById("filter-scrim");
+    const toggle = document.getElementById("filters-toggle");
+    const close = () => {
+      groups.classList.remove(s.open);
+      scrim.classList.remove(s.open);
+      toggle.setAttribute("aria-expanded", "false");
+    };
+    toggle?.addEventListener("click", () => {
+      groups.classList.add(s.open);
+      scrim.classList.add(s.open);
+      toggle.setAttribute("aria-expanded", "true");
+    });
+    scrim?.addEventListener("click", close);
+    document.getElementById("filters-close")?.addEventListener("click", close);
+  </script>
+)}

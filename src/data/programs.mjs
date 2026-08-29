@@ -45,6 +45,30 @@ export function slugify(name) {
 
 for (const p of PROGRAMS) p.slug = slugify(p.name);
 
+// Audience is derived once, here, and read everywhere else. It used to be
+// re-implemented per page, which is how the index and the calendar could have
+// silently disagreed about who a program is for.
+export const AUDIENCE_KEYS = ["researchers", "orgs", "patients"];
+for (const p of PROGRAMS) {
+  const tags = p.tags || [];
+  const out = [];
+  if (tags.includes("for organizations")) out.push("orgs");
+  if (tags.includes("for patients")) out.push("patients");
+  if (tags.includes("for researchers") || !out.length) out.push("researchers");
+  p.auds = out;
+}
+
+// Everything the search box looks at, lowercased once at build time.
+for (const p of PROGRAMS) {
+  p.hay = [
+    p.name, p.sponsor, p.desc, p.bths, p.eligibility, p.apply, p.amount, p.deadline,
+    (p.tags || []).join(" "),
+    CAT_LABELS[p.cat] || "",
+    TYPE_LABELS[p.awardType] || "",
+    (p.focus || []).map(f => FOCUS_LABELS[f]).join(" ")
+  ].join(" ").toLowerCase();
+}
+
 const slugs = PROGRAMS.map(p => p.slug);
 const dupes = slugs.filter((s, i) => slugs.indexOf(s) !== i);
 if (dupes.length) throw new Error("Duplicate slugs: " + dupes.join(", "));

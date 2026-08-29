@@ -1,62 +1,22 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Rail from "../../components/Rail.astro";
-import { LAST_UPDATED } from "../../data/programs.mjs";
-import { SITE_URL, CONTACT_EMAIL } from "../../data/site.mjs";
 import {
-  AUDIENCES, ENTRIES, entriesFor, rollingFor, groupByMonth,
-  formatDate, formatTime, KIND_LABEL, isSoft
-} from "../../data/calendar.mjs";
+  PROGRAMS, LAST_UPDATED, CAT_LABELS, TYPE_LABELS, FOCUS_LABELS
+} from "../../data/programs.mjs";
+import { SITE_URL, CONTACT_EMAIL } from "../../data/site.mjs";
+import { ENTRIES } from "../../data/calendar.mjs";
 import a from "../../styles/app.module.scss";
 import c from "../../styles/calendar.module.scss";
 
+// Counts for the legend and the rail note describe the whole dataset; the
+// filtered numbers are computed in the browser as the filter changes.
 const verified = ENTRIES.filter(e => e.status === "verified").length;
 const unconfirmed = ENTRIES.filter(e => e.status === "unconfirmed").length;
 const projected = ENTRIES.filter(e => e.status === "projected").length;
-const in2027 = ENTRIES.filter(e => e.year === 2027).length;
 const withDates = new Set(ENTRIES.map(e => e.slug)).size;
 // webcal:// hands the feed to the OS calendar handler, so it wants a bare host.
 const SITE_HOST = SITE_URL.replace(/^https?:\/\//, "");
-
-const sections = AUDIENCES.map(aud => {
-  const entries = entriesFor(aud.key);
-  return {
-    ...aud,
-    entries,
-    months: groupByMonth(entries),
-    rolling: rollingFor(aud.key),
-    feed: `${SITE_URL}/calendar/${aud.key}.ics`
-  };
-});
-
-const FEEDS = [
-  { key: "all", label: "Everything", name: "Barth funding deadlines", n: ENTRIES.length },
-  ...AUDIENCES.map(x => ({
-    key: x.key,
-    label: x.label,
-    name: `Barth funding — ${x.label.toLowerCase()}`,
-    n: entriesFor(x.key).length
-  }))
-];
-
-// Only entries you act on; decisions and award starts are context, not tasks.
-const actionable = ENTRIES.filter(e => !isSoft(e));
-
-// The month grid is rendered client-side from this. Audience drives the colour;
-// the narrowest one wins so a program serving two shows as the more specific.
-const AUD_RANK = ["patients", "orgs", "researchers"];
-const calEntries = ENTRIES.map(e => ({
-  on: e.on,
-  program: e.program,
-  slug: e.slug,
-  label: e.label,
-  kind: e.kind,
-  status: e.status,
-  precision: e.precision,
-  soft: isSoft(e),
-  aud: AUD_RANK.find(a => e.audiences.includes(a)) || "researchers",
-  auds: e.audiences
-}));
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -77,6 +37,7 @@ const jsonLd = {
     <Rail
       headline={`${ENTRIES.length} dated entries`}
       view="calendar"
+      showFilters={true}
       headlineNote={`Across ${withDates} programs — ${verified} read off the funder's own page, ${unconfirmed} published but unconfirmed, ${projected} projected from past cycles.`}
     />
 
@@ -84,71 +45,9 @@ const jsonLd = {
       <h1>Funding deadline calendar</h1>
 
       <p class={c.lede}>
-        Every tracked deadline, letter of intent, opening date, and decision, in order and
-        split by who it is for. {in2027} of {ENTRIES.length} fall in 2027.
+        Every tracked deadline, letter of intent, opening date, and decision. Filter on the
+        left and the calendar, the subscription link, and what to do next all follow.
       </p>
-
-      <section class={c.subscribe}>
-        <h2 class={c.subHead}>Subscribe</h2>
-        <p class={c.subNote}>
-          Pick a list, then your calendar. The subscription updates itself as we correct
-          dates, and every deadline brings its own reminders.
-        </p>
-
-        <div class={c.feedPick} role="group" aria-label="Which list">
-          {FEEDS.map((f, i) => (
-            <button
-              class={c.chip}
-              type="button"
-              data-feed={f.key}
-              data-name={f.name}
-              aria-pressed={i === 0 ? "true" : "false"}
-            >
-              <span>{f.label}</span><span class={c.chipN}>{f.n}</span>
-            </button>
-          ))}
-        </div>
-
-        <div class={c.addRow}>
-          <span class={c.ctrlLabel}>Add to</span>
-          <a class={c.addBtn} id="add-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
-          <a class={c.addBtn} id="add-apple" href="#">Apple Calendar</a>
-          <a class={c.addBtn} id="add-outlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
-          <a class={c.addBtn} id="add-m365" href="#" target="_blank" rel="noopener">Microsoft 365</a>
-          <a class={c.addBtnAlt} id="add-download" href="#" download>Download .ics</a>
-          <button class={c.addBtnAlt} type="button" id="add-copy">Copy link</button>
-        </div>
-
-        <p class={c.subHint} aria-live="polite" id="copy-status">
-          Google and Outlook open in a new tab and ask you to confirm. Apple Calendar opens
-          the app on your Mac or iPhone. Anything else — copy the link and add it as a
-          calendar “from URL”.
-        </p>
-      </section>
-
-      <section class={c.actNow} id="act-now">
-        <h2 class={c.subHead}>What to do next</h2>
-        <p class={c.subNote} id="act-intro">The soonest dates you can still act on.</p>
-        <ul class={c.actList} id="act-list"></ul>
-        <p class={c.empty} id="act-empty" hidden>
-          Nothing in the next stretch. Scroll on for what is coming later.
-        </p>
-      </section>
-
-      <div class={c.controls}>
-        <span class={c.ctrlLabel}>View</span>
-        <button class={c.chip} type="button" data-view="month" aria-pressed="true">Month</button>
-        <button class={c.chip} type="button" data-view="list" aria-pressed="false">List</button>
-        <span class={c.ctrlDivider}></span>
-        <span class={c.ctrlLabel} data-list-only>Show</span>
-        <button class={c.chip} type="button" data-year="all" aria-pressed="true" data-list-only>All</button>
-        <button class={c.chip} type="button" data-year="2026" aria-pressed="false" data-list-only>Rest of 2026</button>
-        <button class={c.chip} type="button" data-year="2027" aria-pressed="false" data-list-only>2027</button>
-        <button class={c.chip} type="button" data-year="2028" aria-pressed="false" data-list-only>2028+</button>
-        <span class={c.spacer}></span>
-        <button class={c.chip} type="button" id="toggle-past" aria-pressed="false" data-list-only>Include past dates</button>
-        <button class={c.chip} type="button" id="toggle-verified" aria-pressed="false">Verified dates only</button>
-      </div>
 
       <section class={c.monthView} id="month-view">
         <div class={c.monthBar}>
@@ -157,11 +56,14 @@ const jsonLd = {
           <button class={c.monthNav} type="button" id="month-next" aria-label="Next month">›</button>
           <button class={c.chip} type="button" id="month-today">Today</button>
           <span class={c.spacer}></span>
-          <span class={c.legend}>
-            <span class={`${c.legendKey} ${c.audResearchers}`}>Researchers</span>
-            <span class={`${c.legendKey} ${c.audOrgs}`}>Advocacy orgs</span>
-            <span class={`${c.legendKey} ${c.audPatients}`}>Patients &amp; families</span>
-          </span>
+          <button class={c.chip} type="button" data-view="month" aria-pressed="true">Month</button>
+          <button class={c.chip} type="button" data-view="list" aria-pressed="false">List</button>
+        </div>
+        <div class={c.legend}>
+          <span class={`${c.legendKey} ${c.audResearchers}`}>Researchers</span>
+          <span class={`${c.legendKey} ${c.audOrgs}`}>Advocacy orgs</span>
+          <span class={`${c.legendKey} ${c.audPatients}`}>Patients &amp; families</span>
+          <span class={c.legendNote}>Outlined = not confirmed at the funder</span>
         </div>
         <div class={c.weekHead} aria-hidden="true">
           <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
@@ -171,87 +73,33 @@ const jsonLd = {
         <p class={c.monthEmpty} id="month-empty" hidden>Nothing scheduled this month.</p>
       </section>
 
-      <div id="list-view" hidden>
-      {sections.map(sec => (
-        <section class={c.audSection} id={sec.key}>
-          <div class={c.audHead}>
-            <h2 class={c.audTitle}>{sec.label}</h2>
-            <span class={c.audCount}>
-              <span data-count-for={sec.key}>{sec.entries.length}</span> dated ·{" "}
-              <a class={c.audSub} href={`/calendar/${sec.key}.ics`}>subscribe .ics</a>
-            </span>
-          </div>
-          <p class={c.audBlurb}>{sec.blurb}</p>
+      <section class={c.listView} id="list-view" hidden>
+        <div id="list-body"></div>
+        <p class={c.monthEmpty} id="list-empty" hidden>No dates match this filter.</p>
+      </section>
 
-          {sec.months.map(mon => (
-            <>
-              <h3 class={c.monthHead} data-month={mon.key}>{mon.label}</h3>
-              {mon.entries.map(e => (
-                <article
-                  class={c.entry}
-                  data-on={e.on}
-                  data-year={e.year}
-                  data-status={e.status}
-                  data-soft={isSoft(e) ? "1" : "0"}
-                  data-aud={sec.key}
-                  data-program={e.program}
-                  data-label={e.label}
-                  data-href={`/grants/${e.slug}/`}
-                  data-when={formatDate(e)}
-                >
-                  <div class={c.when}>
-                    {formatDate(e)}
-                    {formatTime(e) && <span class={c.whenTime}>{formatTime(e)}</span>}
-                    <span class={c.days} data-days></span>
-                  </div>
-                  <div class={c.body}>
-                    <p class={c.prog}><a href={`/grants/${e.slug}/`}>{e.program}</a></p>
-                    <p class={c.what}>{e.label}</p>
-                    {e.note && <p class={c.note}>{e.note}</p>}
-                  </div>
-                  <div class={c.flags}>
-                    <span class={`${c.tag} ${c.tagKind}`}>{KIND_LABEL[e.kind]}</span>
-                    {e.expired && <span class={`${c.tag} ${c.tagWatch}`}>Watch</span>}
-                    <span
-                      class={`${c.tag} ${
-                        e.status === "verified" ? c.tagVerified
-                        : e.status === "unconfirmed" ? c.tagUnconfirmed
-                        : c.tagProjected
-                      }`}
-                      title={e.status === "verified" ? `Confirmed on ${e.source} on ${e.checked}` : undefined}
-                    >
-                      {e.status === "verified" ? "Verified"
-                        : e.status === "unconfirmed" ? "Unconfirmed" : "Projected"}
-                    </span>
-                  </div>
-                </article>
-              ))}
-            </>
-          ))}
+      <section class={c.addBar}>
+        <span class={c.ctrlLabel}>Add these dates to</span>
+        <a class={c.addBtn} id="add-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+        <a class={c.addBtn} id="add-apple" href="#">Apple Calendar</a>
+        <a class={c.addBtn} id="add-outlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
+        <a class={c.addBtn} id="add-m365" href="#" target="_blank" rel="noopener">Microsoft 365</a>
+        <a class={c.addBtnAlt} id="add-download" href="#" download>Download .ics</a>
+        <button class={c.addBtnAlt} type="button" id="add-copy">Copy link</button>
+      </section>
+      <p class={c.subHint} aria-live="polite" id="copy-status">
+        Subscribing keeps up to date on its own and brings reminders. The link follows your
+        filter, so you can subscribe to just the slice you care about.
+      </p>
 
-          {sec.rolling.length > 0 && (
-            <div class={c.rolling}>
-              <h3 class={c.subHead}>
-                No deadline to track — {sec.rolling.length} rolling {sec.rolling.length === 1 ? "program" : "programs"}
-              </h3>
-              <p class={c.subNote}>
-                {sec.key === "patients"
-                  ? "Nearly all family assistance runs on rolling intake: there is no date to diarise, you apply at the point of need. These are the ones to know about before you need them."
-                  : "These accept applications year-round or on request, so they never appear on a calendar. Worth a look when you are between deadlines."}
-              </p>
-              <ul class={c.rollingList}>
-                {sec.rolling.map(p => (
-                  <li class={c.rollingItem}>
-                    <a href={`/grants/${p.slug}/`}>{p.name}</a>
-                    <span>{p.deadline}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </section>
-      ))}
-      </div>
+      <section class={c.actNow} id="act-now">
+        <h2 class={c.boxHead}>What to do next</h2>
+        <p class={c.subNote}>The soonest dates in this filter that you can still act on.</p>
+        <ul class={c.actList} id="act-list"></ul>
+        <p class={c.empty} id="act-empty" hidden>
+          Nothing actionable in this filter. Widen it, or scroll the calendar forward.
+        </p>
+      </section>
 
       <section class={c.legendSec}>
         <h2>How to read this</h2>
@@ -273,11 +121,6 @@ const jsonLd = {
             Treat it as a prompt to go and check, never as a deadline.
           </p>
           <p class={c.legendItem}>
-            <strong>Watch</strong>
-            The program has no open call right now. The date is our best guess at when it
-            reopens.
-          </p>
-          <p class={c.legendItem}>
             <strong>NIH dates</strong>
             Standing receipt dates, already shifted off weekends and federal holidays to the
             next business day, as NIH policy requires.
@@ -296,129 +139,306 @@ const jsonLd = {
   </div>
 </Base>
 
-<script define:vars={{ c, SITE_URL, SITE_HOST, calEntries, actionable: actionable.map(e => ({
-  on: e.on, program: e.program, label: e.label, slug: e.slug,
-  status: e.status, when: formatDate(e), precision: e.precision
-})) }}>
-  // The site is statically built, so "today" has to be decided in the browser —
-  // otherwise a stale build would show past deadlines as upcoming.
+<script define:vars={{ c, s: a, SITE_URL, SITE_HOST, PROGRAMS, CAT_LABELS, TYPE_LABELS, FOCUS_LABELS }}>
+  // One filter state drives the grid, the list, the subscribe link, and the
+  // what-to-do-next box. The rail markup and filter semantics match the index;
+  // audience membership and the search haystack are derived in programs.mjs so
+  // the two pages cannot disagree.
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  // Build the ISO day from local parts: toISOString() converts to UTC and would
-  // report yesterday for anyone east of Greenwich.
   const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}` +
     `-${String(d.getDate()).padStart(2, "0")}`;
   const todayISO = iso(today);
   const esc = str => String(str ?? "").replace(/[&<>"']/g, ch =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+
+  const MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+  const MON = MONTH_NAMES.map(m => m.slice(0, 3));
+  const KIND_LABEL = { deadline: "Deadline", loi: "Letter of intent", opens: "Opens",
+    closes: "Closes", decision: "Decision", start: "Award start", window: "Window" };
+  const SOFT = new Set(["decision", "start", "opens", "window"]);
+  const AUD_CLASS = { researchers: c.audResearchers, orgs: c.audOrgs, patients: c.audPatients };
+  const AUD_WORD = { researchers: "researchers", orgs: "advocacy orgs", patients: "patients & families" };
+  const AUD_RANK = ["patients", "orgs", "researchers"];
+
   const dayDiff = on => {
     const [y, m, d] = on.split("-").map(Number);
     return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(
       today.getFullYear(), today.getMonth(), today.getDate())) / 86400000);
   };
-
   const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
   const relative = n => {
     if (n === 0) return "today";
     if (n < 0) return `${plural(-n, "day")} ago`;
     if (n === 1) return "tomorrow";
     if (n < 45) return `in ${plural(n, "day")}`;
-    const months = Math.round(n / 30.4);
-    return `in ${plural(months, "month")}`;
+    return `in ${plural(Math.round(n / 30.4), "month")}`;
+  };
+  const fmtDate = e => {
+    const [y, m, d] = e.on.split("-");
+    return e.precision === "month"
+      ? `${MONTH_NAMES[Number(m) - 1]} ${y}`
+      : `${MON[Number(m) - 1]} ${Number(d)}, ${y}`;
   };
 
-  // --- subscribe targets ----------------------------------------------------
-  // webcal:// only works when an app is registered for that protocol, so the
-  // browser-based calendars need their own add-by-URL endpoints instead.
+  // --- filter state, mirrored into the URL so a filtered view is shareable ---
+  const params = new URLSearchParams(location.search);
+  const state = {
+    q: params.get("q") || "",
+    cat: params.get("cat") || "all",
+    aud: params.get("aud") || null,
+    type: params.get("type") || null,
+    focus: params.get("focus") || null,
+    showPast: params.get("past") === "1"
+  };
+
+  const audPass = (p, a) => !a || p.auds.includes(a);
+  const terms = () => state.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+
+  function pool(opts = {}) {
+    const t = terms();
+    return PROGRAMS.filter(p => {
+      if (p.expired && !state.showPast && !opts.ignorePast) return false;
+      if (!opts.ignoreCat && state.cat !== "all" && p.cat !== state.cat) return false;
+      if (!opts.ignoreAud && !audPass(p, state.aud)) return false;
+      if (!opts.ignoreType && state.type && p.awardType !== state.type) return false;
+      if (!opts.ignoreFocus && state.focus && !(p.focus || []).includes(state.focus)) return false;
+      return t.every(x => p.hay.includes(x));
+    });
+  }
+
+  /** Flatten the filtered programs into dated entries. */
+  function entriesOf(programs) {
+    const out = [];
+    for (const p of programs) {
+      for (const d of p.dates || []) {
+        out.push({
+          ...d,
+          kind: d.kind || "deadline",
+          precision: d.precision || "day",
+          program: p.name,
+          slug: p.slug,
+          auds: p.auds,
+          aud: AUD_RANK.find(x => p.auds.includes(x)) || "researchers",
+          soft: SOFT.has(d.kind || "deadline")
+        });
+      }
+    }
+    out.sort((x, y) => (x.on < y.on ? -1 : x.on > y.on ? 1 : x.program.localeCompare(y.program)));
+    return out;
+  }
+
+  let entries = [];
+
+  // --- rail ------------------------------------------------------------------
+  function renderRail() {
+    const catBase = pool({ ignoreCat: true });
+    const cats = [["all", "All sources"], ["government", "Government"], ["nonprofit", "Foundations"],
+      ["corporate", "Corporate"], ["general", "General biomedical"]];
+    const dated = list => list.filter(p => (p.dates || []).length).length;
+
+    document.getElementById("cat-filters").innerHTML = cats.map(([key, label]) => `
+      <button class="${s.railBtn}" data-cat="${key}" aria-pressed="${state.cat === key}" type="button">
+        <span>${label}</span><span class="${s.n}">${dated(catBase.filter(p => key === "all" || p.cat === key))}</span>
+      </button>`).join("");
+
+    const audBase = pool({ ignoreAud: true });
+    const auds = [["", "Everyone"], ["researchers", "Researchers"], ["orgs", "Advocacy orgs"],
+      ["patients", "Patients & families"]];
+    document.getElementById("aud-filters").innerHTML = auds.map(([key, label]) => `
+      <button class="${s.railBtn}" data-aud="${key}" aria-pressed="${(state.aud || "") === key}" type="button">
+        <span>${label}</span><span class="${s.n}">${dated(audBase.filter(p => audPass(p, key || null)))}</span>
+      </button>`).join("");
+
+    const typeBase = pool({ ignoreType: true });
+    document.getElementById("type-filters").innerHTML = Object.entries(TYPE_LABELS).map(([key, label]) => `
+      <button class="${s.railBtn}" data-type="${key}" aria-pressed="${state.type === key}" type="button">
+        <span>${label}</span><span class="${s.n}">${dated(typeBase.filter(p => p.awardType === key))}</span>
+      </button>`).join("");
+
+    const focusBase = pool({ ignoreFocus: true });
+    document.getElementById("focus-filters").innerHTML = Object.entries(FOCUS_LABELS).map(([key, label]) => `
+      <button class="${s.railBtn}" data-focus="${key}" aria-pressed="${state.focus === key}" type="button">
+        <span>${label}</span><span class="${s.n}">${dated(focusBase.filter(p => (p.focus || []).includes(key)))}</span>
+      </button>`).join("");
+
+    document.getElementById("status-filters").innerHTML = `
+      <button class="${s.railBtn}" data-past="1" aria-pressed="${state.showPast}" type="button">
+        <span>Include past programs</span><span class="${s.n}">${PROGRAMS.filter(p => p.expired).length}</span>
+      </button>`;
+
+    const active = (state.cat !== "all" ? 1 : 0) + (state.aud ? 1 : 0) + (state.type ? 1 : 0)
+      + (state.focus ? 1 : 0) + (state.showPast ? 1 : 0);
+    const ft = document.getElementById("filters-toggle");
+    if (ft) ft.textContent = active ? `Filters · ${active}` : "Filters";
+
+    document.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { state.cat = b.dataset.cat; render(); });
+    document.querySelectorAll("[data-aud]").forEach(b => b.onclick = () => { state.aud = b.dataset.aud || null; render(); });
+    document.querySelectorAll("[data-type]").forEach(b => b.onclick = () => { state.type = state.type === b.dataset.type ? null : b.dataset.type; render(); });
+    document.querySelectorAll("[data-focus]").forEach(b => b.onclick = () => { state.focus = state.focus === b.dataset.focus ? null : b.dataset.focus; render(); });
+    document.querySelector("[data-past]").onclick = () => { state.showPast = !state.showPast; render(); };
+  }
+
+  // --- month grid ------------------------------------------------------------
+  const gridEl = document.getElementById("month-grid");
+  const titleEl = document.getElementById("month-title");
+  const monthEmpty = document.getElementById("month-empty");
+  const monthKeyOf = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+  let cursor = monthKeyOf(today);
+
+  function chipHTML(e) {
+    const cls = [c.chipEvent, AUD_CLASS[e.aud] || "", e.status !== "verified" ? c.chipTentative : ""]
+      .filter(Boolean).join(" ");
+    const title = `${e.program} — ${e.label}` +
+      (e.status !== "verified" ? ` (${e.status})` : "") +
+      `\nFor: ${e.auds.map(x => AUD_WORD[x]).join(", ")}`;
+    return `<a class="${cls}" href="/grants/${e.slug}/" title="${esc(title)}">` +
+      `<span class="${c.chipDot}"></span>${esc(e.program)}</a>`;
+  }
+
+  function renderMonth() {
+    const [y, m] = cursor.split("-").map(Number);
+    titleEl.textContent = `${MONTH_NAMES[m - 1]} ${y}`;
+    const byDay = new Map();
+    for (const e of entries) {
+      if (!byDay.has(e.on)) byDay.set(e.on, []);
+      byDay.get(e.on).push(e);
+    }
+    const daysInMonth = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    const lead = new Date(Date.UTC(y, m - 1, 1)).getUTCDay();
+    const cells = [];
+    for (let i = 0; i < lead; i++) cells.push(null);
+    for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+    while (cells.length % 7 !== 0) cells.push(null);
+
+    let shown = 0;
+    gridEl.innerHTML = cells.map(d => {
+      if (d === null) return `<div class="${c.day} ${c.dayBlank}"></div>`;
+      const on = `${cursor}-${String(d).padStart(2, "0")}`;
+      const items = byDay.get(on) || [];
+      shown += items.length;
+      const cls = [c.day, on === todayISO ? c.dayToday : "", on < todayISO ? c.dayPast : ""]
+        .filter(Boolean).join(" ");
+      return `<div class="${cls}"><span class="${c.dayNum}">${d}</span>` +
+        `<div class="${c.dayItems}">${items.map(chipHTML).join("")}</div></div>`;
+    }).join("");
+    monthEmpty.hidden = shown > 0;
+  }
+
+  function shiftMonth(delta) {
+    const [y, m] = cursor.split("-").map(Number);
+    cursor = monthKeyOf(new Date(y, m - 1 + delta, 1));
+    renderMonth();
+  }
+  document.getElementById("month-prev").onclick = () => shiftMonth(-1);
+  document.getElementById("month-next").onclick = () => shiftMonth(1);
+  document.getElementById("month-today").onclick = () => { cursor = monthKeyOf(today); renderMonth(); };
+
+  // --- list ------------------------------------------------------------------
+  const listBody = document.getElementById("list-body");
+  const listEmpty = document.getElementById("list-empty");
+
+  function renderList() {
+    const future = entries.filter(e => e.on >= todayISO);
+    listEmpty.hidden = future.length > 0;
+    const groups = new Map();
+    for (const e of future) {
+      const k = e.on.slice(0, 7);
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(e);
+    }
+    listBody.innerHTML = [...groups.entries()].map(([k, items]) => {
+      const [y, m] = k.split("-");
+      return `<h3 class="${c.monthHead}">${MONTH_NAMES[Number(m) - 1]} ${y}</h3>` +
+        items.map(e => {
+          const statusCls = e.status === "verified" ? c.tagVerified
+            : e.status === "unconfirmed" ? c.tagUnconfirmed : c.tagProjected;
+          const statusWord = e.status === "verified" ? "Verified"
+            : e.status === "unconfirmed" ? "Unconfirmed" : "Projected";
+          return `<article class="${c.entry}">
+            <div class="${c.when}">${esc(fmtDate(e))}
+              <span class="${c.days}">${relative(dayDiff(e.on))}</span></div>
+            <div class="${c.body}">
+              <p class="${c.prog}"><a href="/grants/${e.slug}/">${esc(e.program)}</a></p>
+              <p class="${c.what}">${esc(e.label)}</p>
+              ${e.note ? `<p class="${c.note}">${esc(e.note)}</p>` : ""}
+            </div>
+            <div class="${c.flags}">
+              <span class="${c.tag} ${c.tagKind}">${KIND_LABEL[e.kind]}</span>
+              <span class="${c.tag} ${statusCls}">${statusWord}</span>
+            </div>
+          </article>`;
+        }).join("");
+    }).join("");
+  }
+
+  // --- what to do next -------------------------------------------------------
+  const actList = document.getElementById("act-list");
+  const actEmpty = document.getElementById("act-empty");
+
+  function renderActNow() {
+    const upcoming = entries.filter(e => !e.soft && e.on >= todayISO).slice(0, 8);
+    actEmpty.hidden = upcoming.length > 0;
+    actList.innerHTML = upcoming.map(e => {
+      const n = dayDiff(e.on);
+      const mark = e.status === "verified" ? "" : ` (${e.status})`;
+      return `<li class="${c.actItem}">
+        <span class="${c.actDays} ${n <= 21 ? c.actSoon : ""}">${relative(n)}</span>
+        <span><a href="/grants/${e.slug}/">${esc(e.program)}</a> — ${esc(e.label)}${mark}
+          <span class="${c.actWhen}">${esc(fmtDate(e))}</span></span>
+      </li>`;
+    }).join("");
+  }
+
+  // --- subscribe -------------------------------------------------------------
   const copyStatus = document.getElementById("copy-status");
   const statusDefault = copyStatus.textContent;
   const copyBtn = document.getElementById("add-copy");
   const copyDefault = copyBtn.textContent;
 
-  let feed = "all";
-  let feedName = document.querySelector("[data-feed]").dataset.name;
-
-  // A filter carried over from the index becomes an extra, preselected option,
-  // served by the on-demand /calendar/feed.ics route.
-  const FILTER_KEYS = ["aud", "cat", "type", "focus", "q", "past"];
-  const incoming = new URLSearchParams(location.search);
-  const filterQS = new URLSearchParams();
-  for (const k of FILTER_KEYS) {
-    const v = incoming.get(k);
-    if (v) filterQS.set(k, v);
-  }
-  let filterPath = "";
-  if ([...filterQS].length) {
-    filterPath = `/calendar/feed.ics?${filterQS.toString()}`;
-    const pick = document.querySelector("[class*='feedPick'], [data-feed]").parentElement;
-    const btn = document.createElement("button");
-    btn.className = document.querySelector("[data-feed]").className;
-    btn.type = "button";
-    btn.dataset.feed = "filter";
-    btn.dataset.name = "Barth funding — filtered";
-    btn.setAttribute("aria-pressed", "true");
-    const label = document.createElement("span");
-    label.textContent = "From your filter";
-    btn.append(label);
-    pick.prepend(btn);
-    for (const b of pick.querySelectorAll("[data-feed]")) {
-      if (b !== btn) b.setAttribute("aria-pressed", "false");
-    }
-    feed = "filter";
-    feedName = btn.dataset.name;
+  function filterQS() {
+    const qs = new URLSearchParams();
+    if (state.aud) qs.set("aud", state.aud);
+    if (state.cat !== "all") qs.set("cat", state.cat);
+    if (state.type) qs.set("type", state.type);
+    if (state.focus) qs.set("focus", state.focus);
+    if (state.q.trim()) qs.set("q", state.q.trim());
+    if (state.showPast) qs.set("past", "1");
+    return qs;
   }
 
-  function feedUrls() {
-    const path = feed === "filter" ? filterPath : `/calendar/${feed}.ics`;
+  function feedPath() {
+    const qs = filterQS().toString();
+    // With no filter the prebuilt static feed is cheaper than the function.
+    return qs ? `/calendar/feed.ics?${qs}` : "/calendar/all.ics";
+  }
+
+  function syncSubscribe() {
+    const path = feedPath();
     const https = `${SITE_URL}${path}`;
     const webcal = `webcal://${SITE_HOST}${path}`;
-    return {
-      https,
-      webcal,
-      // Google takes the feed as `cid`; the webcal form is what it expects.
-      google: `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}`,
-      // Same add-by-URL route, but personal and work/school accounts live on
-      // different hosts — one button would fail for half of Outlook users.
-      outlook:
-        "https://outlook.live.com/calendar/0/addfromweb?url=" +
-        encodeURIComponent(https) + "&name=" + encodeURIComponent(feedName),
-      m365:
-        "https://outlook.office.com/calendar/0/addfromweb?url=" +
-        encodeURIComponent(https) + "&name=" + encodeURIComponent(feedName)
-    };
-  }
-
-  function syncTargets() {
-    const u = feedUrls();
-    document.getElementById("add-google").href = u.google;
-    document.getElementById("add-apple").href = u.webcal;
-    document.getElementById("add-outlook").href = u.outlook;
-    document.getElementById("add-m365").href = u.m365;
+    const name = "Barth funding deadlines";
+    document.getElementById("add-google").href =
+      `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}`;
+    document.getElementById("add-apple").href = webcal;
+    document.getElementById("add-outlook").href =
+      "https://outlook.live.com/calendar/0/addfromweb?url=" +
+      encodeURIComponent(https) + "&name=" + encodeURIComponent(name);
+    document.getElementById("add-m365").href =
+      "https://outlook.office.com/calendar/0/addfromweb?url=" +
+      encodeURIComponent(https) + "&name=" + encodeURIComponent(name);
     const dl = document.getElementById("add-download");
-    dl.href = u.https;
-    dl.setAttribute("download", `barth-funding-${feed === "filter" ? "filtered" : feed}.ics`);
+    dl.href = https;
+    dl.setAttribute("download", "barth-funding.ics");
+    copyBtn.dataset.url = https;
   }
-
-  for (const btn of document.querySelectorAll("[data-feed]")) {
-    btn.addEventListener("click", () => {
-      feed = btn.dataset.feed;
-      feedName = btn.dataset.name;
-      for (const b of document.querySelectorAll("[data-feed]")) {
-        b.setAttribute("aria-pressed", String(b === btn));
-      }
-      syncTargets();
-      copyBtn.textContent = copyDefault;
-      copyStatus.textContent = statusDefault;
-    });
-  }
-  syncTargets();
 
   async function copyText(text) {
     try {
       await navigator.clipboard.writeText(text);
       return true;
     } catch {
-      // Older browsers, and any context where the async clipboard is blocked.
       const ta = document.createElement("textarea");
       ta.value = text;
       ta.setAttribute("readonly", "");
@@ -434,236 +454,77 @@ const jsonLd = {
 
   let resetTimer;
   copyBtn.addEventListener("click", async () => {
-    const url = feedUrls().https;
+    const url = copyBtn.dataset.url;
     const ok = await copyText(url);
     clearTimeout(resetTimer);
-    copyBtn.textContent = ok ? "Copied \u2713" : "Select it below";
+    copyBtn.textContent = ok ? "Copied ✓" : "Select it below";
     copyStatus.textContent = "";
-
     if (ok) {
-      copyStatus.textContent =
-        `Copied ${url} — paste it into your calendar app as a new subscription.`;
+      copyStatus.textContent = `Copied ${url} — paste it into your calendar app as a new subscription.`;
     } else {
-      // Clipboard access can be blocked outright. Put the address on the page
-      // and select it, so the keyboard shortcut has something to act on.
+      // Clipboard access can be blocked outright; put the address on the page
+      // and select it so the keyboard shortcut has something to act on.
       copyStatus.append("Copy this address: ");
       const code = document.createElement("code");
       code.textContent = url;
       copyStatus.append(code);
-      const range = document.createRange();
-      range.selectNodeContents(code);
+      const r = document.createRange();
+      r.selectNodeContents(code);
       const sel = window.getSelection();
       sel.removeAllRanges();
-      sel.addRange(range);
+      sel.addRange(r);
     }
-
     resetTimer = setTimeout(() => {
       copyBtn.textContent = copyDefault;
       copyStatus.textContent = statusDefault;
     }, 8000);
   });
 
-  // --- "what to do next" ----------------------------------------------------
-  const upcoming = actionable
-    .filter(e => e.on >= todayISO)
-    .sort((a, b) => (a.on < b.on ? -1 : 1))
-    .slice(0, 8);
-
-  const list = document.getElementById("act-list");
-  const empty = document.getElementById("act-empty");
-  if (!upcoming.length) {
-    empty.hidden = false;
-  } else {
-    list.innerHTML = upcoming.map(e => {
-      const n = dayDiff(e.on);
-      const soon = n <= 21;
-      const mark = e.status === "projected" ? " (projected)" : "";
-      return `<li class="${c.actItem}">
-        <span class="${c.actDays} ${soon ? c.actSoon : ""}">${relative(n)}</span>
-        <span><a href="/grants/${e.slug}/">${e.program}</a> — ${e.label}${mark}
-          <span class="${c.actWhen}">${e.when}</span></span>
-      </li>`;
-    }).join("");
-  }
-
-  // --- per-row day counts ---------------------------------------------------
-  const rows = [...document.querySelectorAll("article[data-on]")];
-  for (const row of rows) {
-    const on = row.dataset.on;
-    const n = dayDiff(on);
-    const slot = row.querySelector("[data-days]");
-    if (slot) {
-      slot.textContent = relative(n);
-      if (n < 0) slot.classList.add(c.daysPast);
-    }
-    row.dataset.past = n < 0 ? "1" : "0";
-  }
-
-  // --- filters --------------------------------------------------------------
-  let year = "all";
-  let showPast = false;
-  let verifiedOnly = false;
-
-  function apply() {
-    for (const row of rows) {
-      const y = row.dataset.year;
-      const yearOk = year === "all"
-        || (year === "2028" ? Number(y) >= 2028 : y === year);
-      const pastOk = showPast || row.dataset.past === "0";
-      const statusOk = !verifiedOnly || row.dataset.status === "verified";
-      const show = yearOk && pastOk && statusOk;
-      row.hidden = !show;
-      row.classList.toggle(c.entryPast, row.dataset.past === "1");
-    }
-
-    // Hide month headings whose rows are all filtered out.
-    let visible = 0;
-    const counts = {};
-    for (const head of document.querySelectorAll("[data-month]")) {
-      let any = false;
-      let el = head.nextElementSibling;
-      while (el && !el.hasAttribute("data-month")) {
-        if (el.dataset.on && !el.hidden) {
-          any = true;
-          visible++;
-          counts[el.dataset.aud] = (counts[el.dataset.aud] || 0) + 1;
-        }
-        el = el.nextElementSibling;
-      }
-      head.hidden = !any;
-    }
-    for (const el of document.querySelectorAll("[data-count-for]")) {
-      el.textContent = counts[el.dataset.countFor] || 0;
-    }
-  }
-
-  document.querySelectorAll("[data-year]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      year = btn.dataset.year;
-      document.querySelectorAll("[data-year]").forEach(b =>
-        b.setAttribute("aria-pressed", String(b === btn)));
-      apply();
-    });
-  });
-
-  const pastBtn = document.getElementById("toggle-past");
-  pastBtn.addEventListener("click", () => {
-    showPast = !showPast;
-    pastBtn.setAttribute("aria-pressed", String(showPast));
-    apply();
-  });
-
-  const verBtn = document.getElementById("toggle-verified");
-  verBtn.addEventListener("click", () => {
-    verifiedOnly = !verifiedOnly;
-    verBtn.setAttribute("aria-pressed", String(verifiedOnly));
-    apply();
-    if (!monthView.hidden) renderMonth();
-  });
-
-  // --- month grid -----------------------------------------------------------
-  const AUD_CLASS = {
-    researchers: c.audResearchers,
-    orgs: c.audOrgs,
-    patients: c.audPatients
-  };
-  const MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
-
-  const byDay = new Map();
-  for (const e of calEntries) {
-    if (!byDay.has(e.on)) byDay.set(e.on, []);
-    byDay.get(e.on).push(e);
-  }
-
-  const gridEl = document.getElementById("month-grid");
-  const titleEl = document.getElementById("month-title");
-  const monthEmpty = document.getElementById("month-empty");
-
-  // Clamp navigation to the span we actually hold dates for.
-  const allDates = calEntries.map(e => e.on).sort();
-  const firstMonth = allDates[0].slice(0, 7);
-  const lastMonth = allDates[allDates.length - 1].slice(0, 7);
-  const monthKeyOf = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-  const clampMonth = k => (k < firstMonth ? firstMonth : k > lastMonth ? lastMonth : k);
-
-  let cursor = clampMonth(monthKeyOf(today));
-
-  function renderMonth() {
-    const [y, m] = cursor.split("-").map(Number);
-    titleEl.textContent = `${MONTH_NAMES[m - 1]} ${y}`;
-
-    const first = new Date(Date.UTC(y, m - 1, 1));
-    const daysInMonth = new Date(Date.UTC(y, m, 0)).getUTCDate();
-    const lead = first.getUTCDay();
-    const cells = [];
-    for (let i = 0; i < lead; i++) cells.push(null);
-    for (let d = 1; d <= daysInMonth; d++) cells.push(d);
-    while (cells.length % 7 !== 0) cells.push(null);
-
-    let shown = 0;
-    gridEl.innerHTML = cells.map(d => {
-      if (d === null) return `<div class="${c.day} ${c.dayBlank}"></div>`;
-      const iso = `${cursor}-${String(d).padStart(2, "0")}`;
-      const items = (byDay.get(iso) || []).filter(e => !verifiedOnly || e.status === "verified");
-      shown += items.length;
-      const isToday = iso === todayISO;
-      const past = iso < todayISO;
-      const chips = items.map(e => {
-        const cls = [c.chipEvent, AUD_CLASS[e.aud] || "", e.status !== "verified" ? c.chipTentative : ""]
-          .filter(Boolean).join(" ");
-        const title = `${e.program} — ${e.label}` +
-          (e.status !== "verified" ? ` (${e.status})` : "") +
-          `\nFor: ${e.auds.map(a => a === "orgs" ? "advocacy orgs"
-            : a === "patients" ? "patients & families" : "researchers").join(", ")}`;
-        return `<a class="${cls}" href="/grants/${e.slug}/" title="${esc(title)}">` +
-          `<span class="${c.chipDot}"></span>${esc(e.program)}</a>`;
-      }).join("");
-      return `<div class="${c.day}${isToday ? " " + c.dayToday : ""}${past ? " " + c.dayPast : ""}">
-        <span class="${c.dayNum}">${d}</span>
-        <div class="${c.dayItems}">${chips}</div>
-      </div>`;
-    }).join("");
-
-    monthEmpty.hidden = shown > 0;
-    document.getElementById("month-prev").disabled = cursor <= firstMonth;
-    document.getElementById("month-next").disabled = cursor >= lastMonth;
-  }
-
-  function shiftMonth(delta) {
-    const [y, m] = cursor.split("-").map(Number);
-    const d = new Date(Date.UTC(y, m - 1 + delta, 1));
-    cursor = clampMonth(monthKeyOf(new Date(d.getUTCFullYear(), d.getUTCMonth(), 1)));
-    renderMonth();
-  }
-
-  document.getElementById("month-prev").addEventListener("click", () => shiftMonth(-1));
-  document.getElementById("month-next").addEventListener("click", () => shiftMonth(1));
-  document.getElementById("month-today").addEventListener("click", () => {
-    cursor = clampMonth(monthKeyOf(today));
-    renderMonth();
-  });
-
-  // --- month / list switch ---------------------------------------------------
+  // --- view switch -----------------------------------------------------------
   const monthView = document.getElementById("month-view");
   const listView = document.getElementById("list-view");
-
+  let view = "month";
   function setView(v) {
-    const isMonth = v === "month";
-    monthView.hidden = !isMonth;
-    listView.hidden = isMonth;
-    for (const el of document.querySelectorAll("[data-list-only]")) {
-      el.hidden = isMonth;
-    }
+    view = v;
+    monthView.hidden = v !== "month";
+    listView.hidden = v !== "list";
     for (const b of document.querySelectorAll("[data-view]")) {
       b.setAttribute("aria-pressed", String(b.dataset.view === v));
     }
-    if (isMonth) renderMonth();
   }
   for (const b of document.querySelectorAll("[data-view]")) {
     b.addEventListener("click", () => setView(b.dataset.view));
   }
 
-  apply();
+  // --- render ----------------------------------------------------------------
+  const countEl = document.getElementById("count");
+  const qEl = document.getElementById("q");
+
+  function render() {
+    const programs = pool();
+    entries = entriesOf(programs);
+    const withDates = programs.filter(p => (p.dates || []).length).length;
+
+    if (countEl) {
+      countEl.textContent = `${entries.length} DATE${entries.length === 1 ? "" : "S"} · ` +
+        `${withDates} OF ${programs.length} PROGRAMS`;
+    }
+
+    renderMonth();
+    renderList();
+    renderActNow();
+    syncSubscribe();
+    renderRail();
+
+    const qs = filterQS().toString();
+    history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
+  }
+
+  if (qEl) {
+    qEl.value = state.q;
+    qEl.addEventListener("input", () => { state.q = qEl.value; render(); });
+  }
+
   setView("month");
+  render();
 </script>
