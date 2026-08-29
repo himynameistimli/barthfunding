@@ -92,6 +92,12 @@ const jsonLd = {
         filter, so you can subscribe to just the slice you care about.
       </p>
 
+      <section class={c.rolling} id="rolling" hidden>
+        <h2 class={c.boxHead}>No date to track</h2>
+        <p class={c.subNote} id="rolling-note"></p>
+        <ul class={c.rollingList} id="rolling-list"></ul>
+      </section>
+
       <section class={c.actNow} id="act-now">
         <h2 class={c.boxHead}>What to do next</h2>
         <p class={c.subNote}>The soonest dates in this filter that you can still act on.</p>
@@ -175,6 +181,16 @@ const jsonLd = {
     if (n < 45) return `in ${plural(n, "day")}`;
     return `in ${plural(Math.round(n / 30.4), "month")}`;
   };
+  const TZ_ABBR = { "America/New_York": "ET", "America/Toronto": "ET",
+    "America/Chicago": "CT", "America/Los_Angeles": "PT" };
+  const fmtTime = e => {
+    if (!e.time || e.precision === "month") return "";
+    const [hh, mm] = e.time.split(":").map(Number);
+    const h12 = hh % 12 || 12;
+    const clock = mm ? `${h12}:${String(mm).padStart(2, "0")}` : `${h12}`;
+    const zone = e.tz === "local" ? "local time" : TZ_ABBR[e.tz] || e.tz;
+    return `${clock} ${hh >= 12 ? "PM" : "AM"} ${zone}`;
+  };
   const fmtDate = e => {
     const [y, m, d] = e.on.split("-");
     return e.precision === "month"
@@ -221,6 +237,7 @@ const jsonLd = {
           slug: p.slug,
           auds: p.auds,
           aud: AUD_RANK.find(x => p.auds.includes(x)) || "researchers",
+          expired: !!p.expired,
           soft: SOFT.has(d.kind || "deadline")
         });
       }
@@ -358,6 +375,7 @@ const jsonLd = {
             : e.status === "unconfirmed" ? "Unconfirmed" : "Projected";
           return `<article class="${c.entry}">
             <div class="${c.when}">${esc(fmtDate(e))}
+              ${fmtTime(e) ? `<span class="${c.whenTime}">${esc(fmtTime(e))}</span>` : ""}
               <span class="${c.days}">${relative(dayDiff(e.on))}</span></div>
             <div class="${c.body}">
               <p class="${c.prog}"><a href="/grants/${e.slug}/">${esc(e.program)}</a></p>
@@ -366,6 +384,7 @@ const jsonLd = {
             </div>
             <div class="${c.flags}">
               <span class="${c.tag} ${c.tagKind}">${KIND_LABEL[e.kind]}</span>
+              ${e.expired ? `<span class="${c.tag} ${c.tagWatch}">Watch</span>` : ""}
               <span class="${c.tag} ${statusCls}">${statusWord}</span>
             </div>
           </article>`;
@@ -389,6 +408,25 @@ const jsonLd = {
           <span class="${c.actWhen}">${esc(fmtDate(e))}</span></span>
       </li>`;
     }).join("");
+  }
+
+  // --- programs in this filter with no dated entry ---------------------------
+  const rollingBox = document.getElementById("rolling");
+  const rollingNote = document.getElementById("rolling-note");
+  const rollingList = document.getElementById("rolling-list");
+
+  function renderRolling(programs) {
+    const none = programs.filter(p => !(p.dates || []).length);
+    rollingBox.hidden = none.length === 0;
+    if (!none.length) return;
+    rollingNote.textContent =
+      `${none.length} program${none.length === 1 ? "" : "s"} in this filter ` +
+      `${none.length === 1 ? "has" : "have"} no dated deadline — rolling intake, ` +
+      `or a window the funder has not announced. Nothing to diarise, so they never ` +
+      `appear on the calendar above.`;
+    rollingList.innerHTML = none.map(p => `<li class="${c.rollingItem}">
+      <a href="/grants/${p.slug}/">${esc(p.name)}</a>
+      <span>${esc(p.deadline || "")}</span></li>`).join("");
   }
 
   // --- subscribe -------------------------------------------------------------
@@ -513,6 +551,7 @@ const jsonLd = {
     renderMonth();
     renderList();
     renderActNow();
+    renderRolling(programs);
     syncSubscribe();
     renderRail();
 

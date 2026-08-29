@@ -32,18 +32,6 @@
 }
 
 // --- subscribe panel --------------------------------------------------------
-.subscribe {
-  border: 1px solid var(--ink);
-  background: var(--surface);
-  padding: 18px 20px 16px;
-  margin: 22px 0 30px;
-}
-
-.subHead {
-  @include m.label(11px);
-  margin: 0 0 6px;
-}
-
 // Heading inside a bordered box: the document rule above it is redundant there.
 .boxHead {
   @include m.label(11px);
@@ -62,26 +50,6 @@
 
 // Primary action: webcal:// hands the feed to the OS calendar handler.
 // Secondary, for calendars that cannot take a webcal:// handoff.
-.feedPick {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 16px;
-}
-
-.chipN {
-  @include m.mono(10px);
-  margin-left: 6px;
-  opacity: .65;
-}
-
-.addRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
 // Primary targets: each calendar's own add-by-URL route.
 .addBtn {
   @include m.label(9.5px, .1em);
@@ -203,51 +171,6 @@
 }
 
 // --- audience sections ------------------------------------------------------
-.audSection {
-  margin: 0 0 12px;
-  scroll-margin-top: 12px;
-}
-
-.audHead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  border-top: 2px solid var(--ink);
-  padding-top: 10px;
-  margin: 44px 0 0;
-}
-
-.audTitle {
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -.015em;
-  margin: 0;
-}
-
-.audCount {
-  @include m.mono(11px);
-  color: var(--ink-faint);
-}
-
-.audBlurb {
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  margin: 8px 0 4px;
-}
-
-.audSub {
-  @include m.mono(11px);
-  color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
-  white-space: nowrap;
-
-  &:hover { color: var(--ink); }
-}
-
 // --- ledger -----------------------------------------------------------------
 .monthHead {
   @include m.label(10px);
@@ -273,10 +196,6 @@
   }
 }
 
-.entryPast {
-  opacity: .42;
-}
-
 .when {
   @include m.mono(12.5px);
   color: var(--ink);
@@ -297,11 +216,6 @@
   @include m.mono(10.5px);
   font-weight: 700;
   color: var(--accent);
-}
-
-.daysPast {
-  color: var(--faint);
-  font-weight: 400;
 }
 
 .body { min-width: 0; }
@@ -373,21 +287,6 @@
 }
 
 // --- controls ---------------------------------------------------------------
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin: 18px 0 4px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--line);
-  position: sticky;
-  top: 0;
-  background: var(--paper);
-  z-index: 5;
-  padding-top: 12px;
-}
-
 .ctrlLabel {
   @include m.label(10px);
   color: var(--ink-faint);
@@ -504,13 +403,6 @@
 
   &:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
   &:disabled { opacity: .3; cursor: default; }
-}
-
-.ctrlDivider {
-  width: 1px;
-  align-self: stretch;
-  background: var(--line);
-  margin: 0 2px;
 }
 
 .legend {
